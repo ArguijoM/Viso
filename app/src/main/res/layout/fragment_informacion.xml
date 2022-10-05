@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary01"
+    tools:context=".ui.informacion.InformacionFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingRight="@dimen/text_01"
+        android:paddingStart="@dimen/text_01"
+        android:paddingTop="@dimen/text_03"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/text_03"
+            android:paddingLeft="@dimen/text_03"
+            android:paddingRight="@dimen/text_03"
+            android:background="@drawable/customborder3"
+            android:id="@+id/info_item01"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_eye"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="@color/white"
+                android:fontFamily="@font/autour_one"
+                android:paddingLeft="@dimen/text_02"
+                android:textSize="@dimen/text_03"
+                android:text="@string/informacion_item01"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/text_03"
+            android:paddingLeft="@dimen/text_03"
+            android:paddingRight="@dimen/text_03"
+            android:background="@drawable/customborder3"
+            android:id="@+id/info_item02"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_pencil"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="@color/white"
+                android:fontFamily="@font/autour_one"
+                android:paddingLeft="@dimen/text_02"
+                android:textSize="@dimen/text_03"
+                android:text="@string/informacion_item02"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/customborder3"
+            android:gravity="center"
+            android:paddingLeft="@dimen/text_03"
+            android:paddingTop="@dimen/text_03"
+            android:id="@+id/info_item03"
+            android:paddingRight="@dimen/text_03">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_book" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/autour_one"
+                android:gravity="left"
+                android:paddingLeft="@dimen/text_02"
+                android:text="@string/informacion_item03"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_03" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/customborder3"
+            android:gravity="center"
+            android:paddingLeft="@dimen/text_03"
+            android:paddingTop="@dimen/text_03"
+            android:id="@+id/info_item04"
+            android:paddingRight="@dimen/text_03">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher_foreground" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/autour_one"
+                android:gravity="left"
+                android:paddingLeft="@dimen/text_02"
+                android:text="@string/informacion_item04"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_03" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

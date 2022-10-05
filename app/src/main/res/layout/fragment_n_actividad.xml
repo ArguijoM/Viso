@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/primary01"
+    tools:context=".ui.actividad.set.ActividadNFragment">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/primary01">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.Viso.AppBarOverlay">
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/cuenta_circle_top_padding"
+        android:textSize="@dimen/actividad_titulo02"
+        android:fontFamily="@font/autour_one"
+        android:textColor="@color/white"
+        android:text="Actividad"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/cuenta_circle_top_padding"
+        android:textSize="@dimen/actividad_titulo03"
+        android:fontFamily="@font/autour_one"
+        android:textColor="@color/white"
+        android:text="@string/actividad_subtitle"/>
+    <LinearLayout
+        android:layout_width="@dimen/actividad_container"
+        android:layout_height="@dimen/actividad_container"
+        android:background="@drawable/customborder"
+        android:layout_marginTop="@dimen/cuenta_circle_top_padding"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="@dimen/actividad_imagen"
+            android:layout_height="@dimen/actividad_imagen"
+            android:id="@+id/img_muestra"
+            android:layout_gravity="center"
+            android:src="@drawable/act_null">
+        </ImageView>
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/cuenta_circle_top_padding"
+        android:textSize="@dimen/actividad_titulo02"
+        android:fontFamily="@font/autour_one"
+        android:textColor="@color/white"
+        android:text="@string/actividad_listo"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/cuenta_circle_top_padding"
+        android:textSize="@dimen/actividad_titulo03"
+        android:fontFamily="@font/autour_one"
+        android:textColor="@color/white"
+        android:paddingBottom="@dimen/text_01"
+        android:text="@string/actividad_toma_foto"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/btn_foto"
+        android:text="@string/actividad_boton_foto"
+        android:layout_marginBottom="@dimen/text_01"
+        android:layout_gravity="center"/>
+</LinearLayout>
+</ScrollView>

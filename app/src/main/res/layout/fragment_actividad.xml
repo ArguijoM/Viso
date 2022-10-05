@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary01"
+    tools:context=".ui.actividad.ActividadFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="top">
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_1"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 01"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_1_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_3"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 03"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_3_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_5"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 05"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_5_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_7"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 07"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_9"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 09"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_9_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_7_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_11"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 11"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_11_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_13"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 13"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_13_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_15"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 15"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_15_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_17"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 17"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_17_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="top">
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_2"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 02"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_2_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_4"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 04"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_4_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_6"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 06"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:id="@+id/act_6_status"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_8"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 08"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_8_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_10"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 10"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_10_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_12"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 12"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_12_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_14"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 14"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_14_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_16"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 16"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_16_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:layout_height="@dimen/cuenta_circle_height"
+                android:id="@+id/act_18"
+                android:layout_gravity="center|top"
+                android:src="@drawable/circle_init" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_circle_top_padding"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:text="Actividad 18"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/act_18_status"
+                android:fontFamily="@font/autour_one"
+                android:paddingTop="@dimen/cuenta_text_top_padding"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:text="No realizada"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

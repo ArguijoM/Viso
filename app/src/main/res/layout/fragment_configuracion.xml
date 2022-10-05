@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary01"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.configuracion.ConfiguracionFragment">
+
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:id="@+id/progress_bar_config"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:max="100" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:paddingTop="@dimen/opciones_item_icon_opadding"
+        android:paddingBottom="@dimen/opciones_item_icon_opadding"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/opciones_item_icon"
+            android:layout_height="@dimen/opciones_item_icon"
+            android:paddingLeft="10dp"
+            android:src="@drawable/icons8_cloud"
+            android:layout_gravity="center_vertical" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:gravity="left|center"
+                android:textSize="@dimen/text_03"
+                android:paddingLeft="@dimen/opciones_item_icon_opadding"
+                android:text="@string/opciones_item01" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:id="@+id/opcion_01"
+                android:paddingStart="@dimen/topciones_item_padding_left"
+                android:gravity="left|center"
+                android:textSize="@dimen/text_02"
+                android:paddingLeft="@dimen/opciones_item_icon_opadding"
+                android:text="@string/configuracion_descripcion01" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:paddingBottom="@dimen/opciones_item_icon_opadding"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/opciones_item_icon"
+            android:layout_height="@dimen/opciones_item_icon"
+            android:paddingLeft="10dp"
+            android:src="@drawable/icons8_down_arrow"
+            android:layout_gravity="center_vertical" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_03"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/opciones_item_icon_opadding"
+                android:text="@string/opciones_item02" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:paddingStart="@dimen/topciones_item_padding_left"
+                android:id="@+id/opcion_02"
+                android:gravity="left|center"
+                android:textSize="@dimen/text_02"
+                android:paddingLeft="@dimen/opciones_item_icon_opadding"
+                android:text="@string/configuracion_descripcion02" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:paddingBottom="@dimen/opciones_item_icon_opadding"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/opciones_item_icon"
+            android:layout_height="@dimen/opciones_item_icon"
+            android:paddingLeft="10dp"
+            android:src="@drawable/icons8_paper"
+            android:layout_gravity="center_vertical" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_03"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/opciones_item_icon_opadding"
+                android:text="@string/opciones_item03" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:paddingStart="@dimen/topciones_item_padding_left"
+                android:gravity="left|center"
+                android:id="@+id/opcion_03"
+                android:textSize="@dimen/text_02"
+                android:paddingLeft="@dimen/opciones_item_icon_opadding"
+                android:text="@string/configuracion_descripcion03" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:paddingBottom="@dimen/opciones_item_icon_opadding"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/opciones_item_icon"
+            android:layout_height="@dimen/opciones_item_icon"
+            android:paddingLeft="10dp"
+            android:src="@drawable/icons8_trash"
+            android:layout_gravity="center_vertical" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:gravity="left|center"
+                android:textSize="@dimen/text_03"
+                android:paddingLeft="@dimen/opciones_item_icon_opadding"
+                android:text="@string/opciones_item04" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center"
+                android:paddingStart="@dimen/topciones_item_padding_left"
+                android:paddingLeft="@dimen/opciones_item_icon_opadding"
+                android:id="@+id/opcion_04"
+                android:text="@string/configuracion_descripcion04"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_02" />
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/img_prueba"/>
+
+</LinearLayout>

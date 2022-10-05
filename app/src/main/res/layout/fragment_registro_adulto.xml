@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/fragment_registro"
+    tools:context=".ui.cuenta.registro.adulto.CuentaRegistroAdultoFragment"
+    android:background="@color/primary01">
+    <LinearLayout
+        android:layout_width="@dimen/main_layout_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_title01"
+            android:textStyle="bold"
+            android:fontFamily="@font/autour_one"
+            android:text="¡Registro del Adulto!"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/register_logo_layout_height"
+            android:layout_gravity="center_horizontal"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:src="@drawable/gloves_heart" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_heigh"
+            android:id="@+id/nombre_adulto"
+            android:background="@drawable/roundededittext"
+            android:hint="Ingresa tu nombre"
+            android:paddingLeft="@dimen/edit_text_padding"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/layout_between01"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_heigh"
+            android:id="@+id/apellido_adulto"
+            android:background="@drawable/roundededittext"
+            android:hint="Ingresa tu apellido"
+            android:paddingLeft="@dimen/edit_text_padding"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/layout_between02"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_siguiente"
+            android:text="Siguiente"
+            android:background="@drawable/roundedbutton"/>
+    </LinearLayout>
+
+</LinearLayout>

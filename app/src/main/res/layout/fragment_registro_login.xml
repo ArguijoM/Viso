@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/primary01"
+    tools:context=".ui.cuenta.registro.adulto.CuentaRegistroLoginFragment">
+
+    <ProgressBar
+        android:id="@+id/progress_bar_login"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:max="100" />
+
+    <LinearLayout
+        android:layout_width="@dimen/main_layout_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="top"
+        android:paddingTop="@dimen/text_02"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/autour_one"
+            android:text="¡Crea una cuenta!"
+            android:textAlignment="center"
+            android:id="@+id/login_titulo"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_title01"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/register_logo_layout_height"
+            android:layout_gravity="top"
+            android:src="@drawable/gloves_03" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/layout_between01"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_heigh"
+            android:background="@drawable/roundededittext"
+            android:id="@+id/email"
+            android:hint="Ingrese un correo electrónico"
+            android:paddingLeft="@dimen/edit_text_padding"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/layout_between01"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_heigh"
+            android:background="@drawable/roundededittext"
+            android:hint="Ingrese una contraseña"
+            android:inputType="textPassword"
+            android:id="@+id/contrasena"
+            android:paddingLeft="@dimen/edit_text_padding"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/layout_between01"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_heigh"
+            android:background="@drawable/roundededittext"
+            android:hint="Repita la contraseña"
+            android:inputType="textPassword"
+            android:id="@+id/contrasena2"
+            android:paddingLeft="@dimen/edit_text_padding"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/layout_between02"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Siguiente"
+            android:id="@+id/btn_login"
+            android:background="@drawable/roundedbutton"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/text_01"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/actividad_padding_button_layout"
+            android:paddingBottom="@dimen/text_03"
+            android:gravity="center"
+            android:id="@+id/cuenta_exist"
+            android:textColor="@color/white"
+            android:text="@string/login_cuenta_exist" />
+    </LinearLayout>
+
+</LinearLayout>

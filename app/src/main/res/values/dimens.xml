@@ -1,0 +1,40 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">4dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <!-- Own dimen -->
+    <dimen name="edit_text_heigh">50dp</dimen>
+    <dimen name="edit_text_padding">10dp</dimen>
+    <dimen name="edit_text_padding_button">40dp</dimen>
+    <dimen name="main_layout_width">350dp</dimen>
+
+    <dimen name="text_title01">30dp</dimen>
+    <dimen name="text_01">10dp</dimen>
+    <dimen name="text_02">15dp</dimen>
+    <dimen name="text_03">19dp</dimen>
+    <dimen name="text_04">25dp</dimen>
+
+
+    <dimen name="layout_between01">20dp</dimen>
+    <dimen name="layout_between02">40dp</dimen>
+    <dimen name="opciones_item_icon">50dp</dimen>
+    <dimen name="opciones_item_icon_opadding">10dp</dimen>
+    <dimen name="topciones_item_padding_left">20dp</dimen>
+    <dimen name="register_logo_layout_height">213dp</dimen>
+    <dimen name="cuenta_circle_height">150dp</dimen>
+    <dimen name="cuenta_circle_top_padding">10dp</dimen>
+    <dimen name="cuenta_text_top_padding">5dp</dimen>
+    <dimen name="actividad_container">400dp</dimen>
+    <dimen name="actividad_container_confirm">350dp</dimen>
+    <dimen name="actividad_imagen">350dp</dimen>
+    <dimen name="actividad_imagen_confirm">300dp</dimen>
+    <dimen name="actividad_titulo00">20dp</dimen>
+    <dimen name="actividad_titulo01">30dp</dimen>
+    <dimen name="actividad_titulo02">25dp</dimen>
+    <dimen name="actividad_titulo03">20dp</dimen>
+    <dimen name="actividad_padding_button">40dp</dimen>
+    <dimen name="actividad_padding_button_layout">10dp</dimen>
+</resources>
