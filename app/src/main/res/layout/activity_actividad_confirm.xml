@@ -5,42 +5,36 @@
     android:background="@color/primary01"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.actividad.set.confirm.ActividadConfirmFragment">
-        <LinearLayout
-            android:layout_width="@dimen/actividad_container_confirm"
-            android:layout_weight="1"
-            android:layout_height="0dp"
-            android:background="@drawable/customborder"
-            android:gravity="center"
-            android:layout_gravity="center">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:id="@+id/img_muestra"
-                android:src="@drawable/act_null">
-            </ImageView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="@dimen/actividad_container_confirm"
-            android:layout_weight="1"
-            android:layout_height="0dp"
-            android:background="@drawable/customborder"
-            android:gravity="center"
-            android:layout_gravity="center">
-            <ProgressBar
-                style="@style/Widget.AppCompat.ProgressBar"
-                android:id="@+id/progress_bar_act"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:max="100" />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:id="@+id/img_tomada">
-            </ImageView>
-        </LinearLayout>
+    tools:context=".ui.actividad.set.confirm.ActividadConfirm">
+    <LinearLayout
+        android:layout_width="@dimen/actividad_container_confirm"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:background="@drawable/customborder"
+        android:gravity="center"
+        android:layout_gravity="center">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:id="@+id/img_muestra"
+            android:src="@drawable/act_null">
+        </ImageView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="@dimen/actividad_container_confirm"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:background="@drawable/customborder"
+        android:gravity="center"
+        android:layout_gravity="center">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:id="@+id/img_tomada">
+        </ImageView>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

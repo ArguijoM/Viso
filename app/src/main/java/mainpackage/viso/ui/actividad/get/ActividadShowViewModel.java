@@ -48,4 +48,8 @@ public class ActividadShowViewModel extends ViewModel {
         this.usuarioActual = usuarioActual;
     }
 
+    public int getActividadCalificacion(int id){
+        return this.actividades.get(id-1).getPuntuacion();
+    }
+
 }

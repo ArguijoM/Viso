@@ -1,7 +1,9 @@
 package mainpackage.viso.herramientas.objetos;
 
 import android.graphics.Bitmap;
+import android.util.Base64;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
 
 import mainpackage.viso.herramientas.Herramientas;
@@ -25,6 +27,15 @@ public class Actividad {
         this.puntuacion = 0;
         this.fecha = Calendar.getInstance().getTime().toString();
         this.imagen = Herramientas.loadImageFromStorageString(path,name);
+    }
+    public Actividad(int id,int calificacion,Bitmap image) {
+        this.id=id;
+        this.idServidor=0;
+        this.path="";
+        this.name ="";
+        this.puntuacion = calificacion;
+        this.fecha = Calendar.getInstance().getTime().toString();
+        this.imagen =crearImagenString(image);
     }
     public Actividad(int idServidor,int id,String imagen,String fecha,int puntuacion,int ninoId) {
         this.idServidor=idServidor;
@@ -98,5 +109,13 @@ public class Actividad {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public static String crearImagenString(Bitmap image){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        //image.recycle();
+        return android.util.Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 }

@@ -68,7 +68,7 @@ public class InicioFragment extends Fragment {
         pieChart.animateXY(1500, 1500);
         valoresX.add("Realizadas");
         valoresX.add("Faltantes");
-        int porcentaje= Math.round((realizadas * 100) / 26);
+        int porcentaje= Math.round((realizadas * 100) / Herramientas.TOTAL_ACT);
         valoresY.add(new Entry(porcentaje, 0));
         valoresY.add(new Entry(100-porcentaje, 1));
         colores.add(getResources().getColor(R.color.primary02));

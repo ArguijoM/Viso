@@ -27,7 +27,7 @@ public class ActividadShowFragment extends Fragment {
     private ImageView img_muestra,img_tomada;
     private FragmentActividadShowBinding binding;
     private ActividadShowViewModel actividadShowViewModel;
-    private TextView textView;
+    private TextView textView,calificacion;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         actividadShowViewModel = new ViewModelProvider(this).get(ActividadShowViewModel.class);
@@ -47,6 +47,9 @@ public class ActividadShowFragment extends Fragment {
         Log.i("ImagenString: ",actividadShowViewModel.getActividades().get(id-1).getImagen());
         img_tomada.setImageBitmap(actividadShowViewModel.getImagenActividad(id));
         textView = (TextView) root.findViewById(R.id.act_show_realizada);
+        calificacion = root.findViewById(R.id.textView_calif);
+        calificacion.setText(""+actividadShowViewModel.getActividadCalificacion(id));
+
         textView.setText(textView.getText()+" || "+act.get(id-1).getIdServidor());
         return root;
     }

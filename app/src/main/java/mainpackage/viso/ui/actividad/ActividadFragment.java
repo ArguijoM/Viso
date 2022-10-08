@@ -20,8 +20,11 @@ import mainpackage.viso.R;
 import mainpackage.viso.databinding.FragmentActividadBinding;
 import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
+import mainpackage.viso.herramientas.SoundsPlayer;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
+import mainpackage.viso.ui.actividad.get.ActividadShow;
 import mainpackage.viso.ui.actividad.get.ActividadShowFragment;
+import mainpackage.viso.ui.actividad.set.ActividadN;
 import mainpackage.viso.ui.actividad.set.ActividadNFragment;
 import mainpackage.viso.ui.cuenta.lista.CuentaListaFragment;
 
@@ -29,6 +32,7 @@ public class ActividadFragment extends Fragment implements View.OnClickListener 
 
     private ActividadViewModel actividadViewModel;
     private FragmentActividadBinding binding;
+    private SoundsPlayer sound;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,7 +40,7 @@ public class ActividadFragment extends Fragment implements View.OnClickListener 
 
         binding = FragmentActividadBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        sound = new SoundsPlayer(getContext());
         int total_act=0;
         int x=0; int y=0;
         UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
@@ -75,15 +79,10 @@ public class ActividadFragment extends Fragment implements View.OnClickListener 
             ((ImageView)root.findViewById(idImage)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("id",n);
-                    ActividadShowFragment fragment = new ActividadShowFragment();
-                    fragment.setArguments(bundle);
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.nav_host_fragment_content_main,fragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+                    sound.playTapSound();
+                    Intent intent = new Intent(getActivity(), ActividadShow.class);
+                    intent.putExtra("id",n);
+                    startActivity(intent);
                 }
             });
 
@@ -95,7 +94,14 @@ public class ActividadFragment extends Fragment implements View.OnClickListener 
             ((ImageView)root.findViewById(idImage)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Bundle bundle = new Bundle();
+                    sound.playTapSound();
+
+                    Intent intent = new Intent(getContext(), ActividadN.class);
+                    intent.putExtra("id", n);
+                    startActivity(intent);
+
+
+                    /*Bundle bundle = new Bundle();
                     bundle.putInt("id",n);
                     ActividadNFragment fragment = new ActividadNFragment();
                     fragment.setArguments(bundle);
@@ -103,7 +109,7 @@ public class ActividadFragment extends Fragment implements View.OnClickListener 
                     FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.nav_host_fragment_content_main,fragment);
                     fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+                    fragmentTransaction.commit();*/
                 }
             });
         }

@@ -252,7 +252,6 @@ public class Herramientas {
         catch (IOException e) {
             e.printStackTrace();
         }
-        Log.i("INSTANCIA: ","LARGO: "+aux.size()+" ANCHO: "+aux.get(0).length);
         return aux;
     }
 
@@ -266,20 +265,25 @@ public class Herramientas {
                 aux.add(prueba);
             }
             br.close();
+            Log.i("INSTANCIA LEIDA: ","Ancho: "+aux.get(0).length+" Alto: "+aux.size());
         }catch (IOException ex){
 
         }
         return aux;
     }
-    public static void generarInstancia(Bitmap image, int act) {
+    public static String generarInstancia(Bitmap img, int act) {
+        int resourceId = Herramientas.mainActivity.getResources().getIdentifier("act_" + act, "raw", Herramientas.mainActivity.getPackageName());
+        ArrayList<String[]> instancia = getActivityInstance(resourceId);
+        Bitmap image = Bitmap.createScaledBitmap(img,instancia.get(0).length,instancia.size(),false);
+        UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(mainActivity);
+        String name = usuarioActual.getNombre()+"_act_"+act+".txt";
         try {
-            UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(mainActivity);
-            String name = usuarioActual.getNombre()+"_act_"+act+".txt";
             OutputStreamWriter file = new OutputStreamWriter(mainActivity.openFileOutput(name, Context.MODE_PRIVATE));
-            for (int i = 0; i < image.getWidth(); i++) {
+
+            for (int i = 0; i < image.getHeight(); i++) {
                 String line = "";
-                for (int j = 0; j < image.getHeight(); j++) {
-                    if (image.getPixel(i, j) < (-1)) {
+                for (int j = 0; j < image.getWidth(); j++) {
+                    if (image.getPixel(j, i) < (-1)) {
                         line += "1 ";
                     } else {
                         line += "0 ";
@@ -291,6 +295,37 @@ public class Herramientas {
         } catch(Exception ex) {
             ex.printStackTrace();
         }
+        return name;
+    }
+    public static int calificar(ArrayList<String[]> instancia, int act){
+        int resourceId = Herramientas.mainActivity.getResources().getIdentifier("act_" + act, "raw", Herramientas.mainActivity.getPackageName());
+        ArrayList<String[]> actividad = getActivityInstance(resourceId);
+        int sum = 0;
+        for (int b = 0; b <instancia.get(0).length; b++) {
+            for (int a = 0; a < instancia.size(); a++) {
+                if (String.valueOf(instancia.get(a)[b]).equals("1") && String.valueOf(actividad.get(a)[b]).equals("1") ) {
+                    sum++;
+                }else if(String.valueOf(instancia.get(a)[b]).equals("0") && String.valueOf(instancia.get(a)[b]).equals("0") ){
+                    sum++;
+                }
+            }
+        }
+
+        Log.i("CALIFICACION"," "+sum);
+        return sum;
+    }
+    public static Bitmap recrearCuadrante(ArrayList<String[]> aux) {
+        Bitmap img = Bitmap.createBitmap(aux.get(0).length, aux.size(), Bitmap.Config.RGB_565);
+        for (int i = 0; i < img.getWidth(); i++) {
+            for (int j = 0; j < img.getHeight(); j++) {
+                if (Integer.parseInt(String.valueOf(aux.get(j)[i])) == 1) {
+                    img.setPixel(i, j, 0xff000000);
+                } else {
+                    img.setPixel(i, j, 0xffffffff);
+                }
+            }
+        }
+        return img;
     }
 
 }
