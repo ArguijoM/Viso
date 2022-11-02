@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.commit();
         }
         Herramientas.mainActivity = this;
-//        usuarioActual.setActividades(new ArrayList<>());
-//        SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarioActual);
-//        SharedPreferencesHelper.updateUsuario(Herramientas.mainActivity,usuarioActual);
+        //usuarioActual.setActividades(new ArrayList<>());
+        //SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarioActual);
+        //SharedPreferencesHelper.updateUsuario(Herramientas.mainActivity,usuarioActual);
     }
 
     @Override

@@ -98,23 +98,26 @@ public class ActividadConfirm extends AppCompatActivity implements View.OnClickL
         Bitmap bm = Herramientas.recrearCuadrante(instancia);
         int resourceId = Herramientas.mainActivity.getResources().getIdentifier("act_" + id, "raw", Herramientas.mainActivity.getPackageName());
         Bitmap bm2 = Herramientas.recrearCuadrante(Herramientas.getActivityInstance(resourceId));
+        Log.i("Imagen Tomada","Ancho: "+bm.getWidth()+" Alto: "+bm.getHeight());
         img_tomada.setImageBitmap(bm);
         img_muestra.setImageBitmap(bm2);
+        Log.i("Imagen de muestra","Ancho: "+bm2.getWidth()+" Alto: "+bm2.getHeight());
+
         Actividad act = new Actividad(id, calif,bm);
         usuarioActual.setActividad(act);
         SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarioActual);
         SharedPreferencesHelper.updateUsuario(Herramientas.mainActivity,usuarioActual);
         sound.playDoneSound();
-        Intent intent = new Intent(ActividadConfirm.this, ActividadDone.class);
-        startActivity(intent);
-/*        new Handler().postDelayed(new Runnable() {
+        //Intent intent = new Intent(ActividadConfirm.this, ActividadDone.class);
+        //startActivity(intent);
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(ActividadConfirm.this, ActividadDone.class);
                 startActivity(intent);
 
             }
-            },3000);*/
+            },5000);
 
         /*String path = Herramientas.saveToInternalStorage(bitmap,name);
         Actividad act = new Actividad(id, path, name);

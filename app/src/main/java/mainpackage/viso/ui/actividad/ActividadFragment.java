@@ -24,6 +24,7 @@ import mainpackage.viso.herramientas.SoundsPlayer;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
 import mainpackage.viso.ui.actividad.get.ActividadShow;
 import mainpackage.viso.ui.actividad.get.ActividadShowFragment;
+import mainpackage.viso.ui.actividad.instruccion.Instruccion;
 import mainpackage.viso.ui.actividad.set.ActividadN;
 import mainpackage.viso.ui.actividad.set.ActividadNFragment;
 import mainpackage.viso.ui.cuenta.lista.CuentaListaFragment;
@@ -96,9 +97,16 @@ public class ActividadFragment extends Fragment implements View.OnClickListener 
                 public void onClick(View v) {
                     sound.playTapSound();
 
-                    Intent intent = new Intent(getContext(), ActividadN.class);
-                    intent.putExtra("id", n);
-                    startActivity(intent);
+                    UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
+                    if(usuarioActual.getActividades().size()<4){
+                        Intent intent = new Intent(getActivity(), Instruccion.class);
+                        intent.putExtra("id",n);
+                        startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(getActivity(), ActividadN.class);
+                        intent.putExtra("id", n);
+                        startActivity(intent);
+                    }
 
 
                     /*Bundle bundle = new Bundle();

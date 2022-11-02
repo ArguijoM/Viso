@@ -9,11 +9,13 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 
 import mainpackage.viso.herramientas.Herramientas;
+import mainpackage.viso.herramientas.SQLiteHelper;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
 
 public class CuentaRegistroNinoViewModel extends ViewModel {
     private ArrayList<UsuarioNino> usuarios = null;
+
 
     public CuentaRegistroNinoViewModel() {
         this.usuarios = SharedPreferencesHelper.getUsuarios(Herramientas.mainActivity);

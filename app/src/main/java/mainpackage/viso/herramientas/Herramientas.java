@@ -197,6 +197,7 @@ public class Herramientas {
 //**********************************************************************************************************
 
         Bitmap img = Bitmap.createBitmap(image, x1, y1, (x2-x1), (y2-y1));
+        img = Bitmap.createScaledBitmap(img,image.getWidth(),image.getHeight(),false);
 
         return img;
     }
@@ -272,18 +273,15 @@ public class Herramientas {
         return aux;
     }
     public static String generarInstancia(Bitmap img, int act) {
-        int resourceId = Herramientas.mainActivity.getResources().getIdentifier("act_" + act, "raw", Herramientas.mainActivity.getPackageName());
-        ArrayList<String[]> instancia = getActivityInstance(resourceId);
-        Bitmap image = Bitmap.createScaledBitmap(img,instancia.get(0).length,instancia.size(),false);
         UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(mainActivity);
         String name = usuarioActual.getNombre()+"_act_"+act+".txt";
         try {
             OutputStreamWriter file = new OutputStreamWriter(mainActivity.openFileOutput(name, Context.MODE_PRIVATE));
 
-            for (int i = 0; i < image.getHeight(); i++) {
+            for (int i = 0; i < img.getHeight(); i++) {
                 String line = "";
-                for (int j = 0; j < image.getWidth(); j++) {
-                    if (image.getPixel(j, i) < (-1)) {
+                for (int j = 0; j < img.getWidth(); j++) {
+                    if (img.getPixel(j, i) < (-1)) {
                         line += "1 ";
                     } else {
                         line += "0 ";

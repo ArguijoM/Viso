@@ -33,11 +33,11 @@ public class ActividadDone extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_done);
         getSupportActionBar().hide();
-        done = findViewById(R.id.done_circle);
+        //done = findViewById(R.id.done_circle);
         text_done = findViewById(R.id.done_text);
         Animation animation=AnimationUtils.loadAnimation(this,R.anim.bounce);
         Animation animation2=AnimationUtils.loadAnimation(this,R.anim.bounce);
-        done.startAnimation(animation);
+        //done.startAnimation(animation);
         text_done.startAnimation(animation2);
         sound =new SoundsPlayer(this);
         sound.playDoneSound();

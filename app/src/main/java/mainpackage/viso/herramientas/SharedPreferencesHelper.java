@@ -15,8 +15,10 @@ import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
 
 public class SharedPreferencesHelper {
+    private SQLiteHelper myDB;
     public static ArrayList<UsuarioNino> getUsuarios(Activity act){
         //Obtener usuarios guardados en SharedPreferencesHelper
+        //myDB = new SQLiteHelper(Herramientas.mainActivity.getBaseContext());
         ArrayList<UsuarioNino> usuarios=null;
         SharedPreferences mPrefs = act.getPreferences(Context.MODE_PRIVATE);
         String json = mPrefs.getString("usuarios", "");

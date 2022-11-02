@@ -8,20 +8,21 @@
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".ui.actividad.SplashScreen">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="@dimen/text_03"
+        android:text="Generando imagen..."
+        android:id="@+id/generando_textview"
+        android:fontFamily="@font/autour_one"
         android:textColor="@color/white"
-        android:textSize="35dp"
-        android:text="Generando imagen..."/>
+        android:textSize="30dp" />
 
-    <ImageView
-        android:layout_width="341dp"
-        android:layout_height="280dp"
-        android:layout_gravity="center"
-        android:id="@+id/loading"
-        android:src="@drawable/gloves_heart_2" />
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="252dp"
+        android:layout_height="310dp"
+        android:src="@drawable/gif_loading" />
 
 </LinearLayout>

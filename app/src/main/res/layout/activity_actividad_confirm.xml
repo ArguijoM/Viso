@@ -17,6 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:background="@drawable/outline"
+            android:foreground="@drawable/cross"
             android:id="@+id/img_muestra"
             android:src="@drawable/act_null">
         </ImageView>
@@ -31,7 +33,10 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:foreground="@drawable/cross"
+            android:background="@drawable/outline"
             android:layout_gravity="center"
+            android:src="@drawable/act_null"
             android:id="@+id/img_tomada">
         </ImageView>
     </LinearLayout>
@@ -68,7 +73,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:id="@+id/btn_act_ok"
-                android:src="@drawable/icons8_happyface"
+                android:src="@drawable/icons8_happyface2"
                 android:gravity="left">
             </ImageView>
         </LinearLayout>
@@ -82,7 +87,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:id="@+id/btn_act_not"
-                android:src="@drawable/icons8_sadface"
+                android:src="@drawable/icons8_sadface2"
                 android:gravity="left">
             </ImageView>
         </LinearLayout>

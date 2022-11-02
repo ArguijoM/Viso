@@ -16,6 +16,9 @@
     <dimen name="text_02">15dp</dimen>
     <dimen name="text_03">19dp</dimen>
     <dimen name="text_04">25dp</dimen>
+    <dimen name="text_05">30dp</dimen>
+    <dimen name="text_06">35dp</dimen>
+    <dimen name="text_07">40dp</dimen>
 
 
     <dimen name="layout_between01">20dp</dimen>

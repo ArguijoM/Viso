@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Console;
@@ -26,6 +27,7 @@ public class SplashScreen extends AppCompatActivity {
     private int id;
     private String currentPhotoPath;
     private ImageView loading;
+    private TextView generando;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,24 +39,24 @@ public class SplashScreen extends AppCompatActivity {
             this.id = intent.getIntExtra("id",0);
             this.currentPhotoPath = intent.getStringExtra("img");
         }
-        loading = findViewById(R.id.loading);
-        Animation animation= AnimationUtils.loadAnimation(this,R.anim.fadeout);
-        loading.startAnimation(animation);
+        generando = findViewById(R.id.generando_textview);
+        Animation animation= AnimationUtils.loadAnimation(this,R.anim.bounce);
+        generando.startAnimation(animation);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                loading.startAnimation(animation);
+                //loading.startAnimation(animation);
                 BitmapFactory.Options bmOptions = new BitmapFactory.Options();
                 Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath,bmOptions);
-                Log.i("PATH",currentPhotoPath);
+                //Log.i("PATH",currentPhotoPath);
                // Log.i("IMAGEN","Ancho"+bitmap.getWidth()+" ALTO: "+bitmap.getHeight());
                 Matrix matrix = new Matrix();
                 matrix.postRotate(90);
                 Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
                 int resourceId = getResources().getIdentifier("act_" + id, "raw", getPackageName());
                 ArrayList<String[]> instancia = Herramientas.getActivityInstance(resourceId);
-                Bitmap btm_reduce = Bitmap.createScaledBitmap(rotatedBitmap,rotatedBitmap.getWidth()/4,rotatedBitmap.getHeight()/4,false);
-                Log.i("IMAGEN","Ancho: "+btm_reduce.getWidth()+" Alto: "+btm_reduce.getHeight());
+                Bitmap btm_reduce = Bitmap.createScaledBitmap(rotatedBitmap,instancia.get(0).length,instancia.size(),false);
+                //Log.i("IMAGEN","Ancho: "+btm_reduce.getWidth()+" Alto: "+btm_reduce.getHeight());
                 Bitmap btm_bw = Herramientas.blanco_y_negro(btm_reduce);
                 Bitmap btm_new = Herramientas.recortarImagen(btm_bw);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();

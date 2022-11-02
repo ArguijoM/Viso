@@ -25,21 +25,25 @@
         <entry key="..\:/Users/Manuel/AndroidStudioProjects/Viso/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2125" />
         <entry key="..\:/Users/Manuel/AndroidStudioProjects/Viso/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2125" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/drawable/circlebutton.xml" value="0.2125" />
+        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/drawable/cross.xml" value="0.2125" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/drawable/customborder.xml" value="0.2125" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/drawable/customborder2.xml" value="0.8535714285714285" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/drawable/customborder3.xml" value="0.2125" />
+        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/drawable/outline.xml" value="0.2125" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/drawable/roundedbuttom2.xml" value="0.2125" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/drawable/roundedbutton.xml" value="0.2125" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/drawable/splash_screen.xml" value="0.2125" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/actividad_item.xml" value="0.1" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_actividad.xml" value="0.16" />
-        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_actividad_confirm.xml" value="0.1" />
-        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_actividad_done.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_actividad_confirm.xml" value="0.22" />
+        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_actividad_done.xml" value="0.25" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_actividad_n.xml" value="0.17" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_actividad_show.xml" value="0.19635416666666666" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_inicio.xml" value="0.1693840579710145" />
+        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_instruccion.xml" value="0.25" />
+        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_instruccion2.xml" value="0.19635416666666666" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_main.xml" value="0.1947463768115942" />
-        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_splash_screen.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_splash_screen.xml" value="0.22" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/app_bar_main.xml" value="0.1947463768115942" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/content_main.xml" value="0.1947463768115942" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/cuenta_item.xml" value="0.19635416666666666" />
@@ -53,6 +57,10 @@
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_informacion.xml" value="0.22" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_informativa.xml" value="0.25" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_inicio.xml" value="0.1947463768115942" />
+        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_instruccion.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_instruccion2.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_instruccion3.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_instruccion4.xml" value="0.19635416666666666" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_lista_cuentas.xml" value="0.1331521739130435" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_loading.xml" value="0.19635416666666666" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_login.xml" value="0.21" />

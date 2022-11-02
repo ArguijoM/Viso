@@ -19,11 +19,9 @@
         android:textSize="@dimen/text_04"
         android:text="¡ACTIVIDAD REALIZADA!"/>
 
-    <ImageView
-        android:layout_width="165dp"
-        android:layout_height="194dp"
-        android:layout_gravity="center"
-        android:id="@+id/done_circle"
-        android:src="@drawable/circle_done" />
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="273dp"
+        android:layout_height="298dp"
+        android:src="@drawable/gif_check" />
 
   </LinearLayout>
