@@ -44,6 +44,7 @@
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_instruccion2.xml" value="0.19635416666666666" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_main.xml" value="0.1947463768115942" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_splash_screen.xml" value="0.22" />
+        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/activity_splash_screen_borrado.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/app_bar_main.xml" value="0.1947463768115942" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/content_main.xml" value="0.1947463768115942" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/cuenta_item.xml" value="0.19635416666666666" />
@@ -52,6 +53,7 @@
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_actividad_confirm.xml" value="0.17" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_actividad_show.xml" value="0.15172101449275363" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_aviso_1.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_borrar.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_configuracion.xml" value="0.2" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_cuenta.xml" value="0.25" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/fragment_informacion.xml" value="0.22" />
@@ -76,6 +78,7 @@
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/layout/register.xml" value="0.19635416666666666" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/menu/activity_main_drawer.xml" value="0.19635416666666666" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/menu/main.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Manuel/Documents/Viso/app/src/main/res/xml/file_paths.xml" value="0.19635416666666666" />
       </map>
     </option>

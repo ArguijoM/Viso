@@ -8,26 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+
+import java.util.ArrayList;
 
 import mainpackage.viso.R;
 import mainpackage.viso.databinding.FragmentActividadBinding;
 import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
 import mainpackage.viso.herramientas.SoundsPlayer;
+import mainpackage.viso.herramientas.objetos.Actividad;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
 import mainpackage.viso.ui.actividad.get.ActividadShow;
-import mainpackage.viso.ui.actividad.get.ActividadShowFragment;
 import mainpackage.viso.ui.actividad.instruccion.Instruccion;
 import mainpackage.viso.ui.actividad.set.ActividadN;
-import mainpackage.viso.ui.actividad.set.ActividadNFragment;
-import mainpackage.viso.ui.cuenta.lista.CuentaListaFragment;
 
 public class ActividadFragment extends Fragment implements View.OnClickListener {
 
@@ -45,17 +42,18 @@ public class ActividadFragment extends Fragment implements View.OnClickListener 
         int total_act=0;
         int x=0; int y=0;
         UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
-        if(usuarioActual.getActividades()==null) {
+        ArrayList<Actividad> actividades = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
+        if(actividades==null) {
             setActividadStatus(root, 1, "Siguiente");
             for(x=2;x<=8;x++){
                 setActividadStatus(root, x, "No realizado");
             }
         }else{
-            total_act = usuarioActual.getActividades().size();
+            total_act = actividades.size();
             for (x = 0; x <= total_act; x++) {
                 setActividadStatus(root, x+1, "Realizado");
             }
-            for(y=(usuarioActual.getActividades().size())+1;y<=8;y++){
+            for(y=(actividades.size())+1;y<=8;y++){
                 setActividadStatus(root, y, "No realizado");
             }
             if(x< Herramientas.TOTAL_ACT){
@@ -98,7 +96,8 @@ public class ActividadFragment extends Fragment implements View.OnClickListener 
                     sound.playTapSound();
 
                     UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
-                    if(usuarioActual.getActividades().size()<4){
+                    ArrayList<Actividad> actividades = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
+                    if(actividades.size()<2){
                         Intent intent = new Intent(getActivity(), Instruccion.class);
                         intent.putExtra("id",n);
                         startActivity(intent);

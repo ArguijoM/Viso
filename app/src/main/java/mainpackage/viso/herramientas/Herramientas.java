@@ -13,6 +13,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
@@ -47,42 +49,6 @@ public class Herramientas {
     public static int TOTAL_ACT = 18;
     public static Activity mainActivity;
 
-    public static String saveToInternalStorage(Bitmap bitmapImage, String name){
-        ContextWrapper cw = new ContextWrapper(mainActivity.getBaseContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("visoActivities", Context.MODE_PRIVATE);
-        // Create imageDir
-        File mypath=new File(directory,name);
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return directory.getAbsolutePath();
-    }
-
-    public static Bitmap loadImageFromStorage(String path,String name) {
-        Bitmap b = null;
-        try {
-            File f=new File(path, name);
-             b = BitmapFactory.decodeStream(new FileInputStream(f));
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        return b;
-    }
     public static String loadImageFromStorageString(String path,String name) {
         Bitmap b = null;
 
@@ -123,17 +89,18 @@ public class Herramientas {
     public static Bitmap recortarImagen(Bitmap image){
         int aux = 0;
         int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+        Bitmap newImage = copyImage(image);
 //*********************************----------IZQUIERDA--------------******************************
         for (int i = 0; i < image.getWidth(); i++) {//ANCHO
             for (int j = 0; j < image.getHeight(); j++) {//ALTO
                 if (image.getPixel(i,j) < (-1) && aux < 1) {
-                 //  if (!verify(image, i, j)) {
+                   if (!verify(image, i, j)) {
                         aux++;
                         x1 = i;
                        // image = draw(image,i,j);
                         Log.i("Punto: ","PUNTO1: Aqui: ANCHO(" + i + ") || ALTO(" + j + ")");
                         //System.out.println("PUNTO1: Aqui: ANCHO(" + i + ") || ALTO(" + j + ")");
-                  //  }
+                    }
                 }
             }
         }
@@ -144,14 +111,14 @@ public class Herramientas {
         for (int i = 0; i < image.getHeight(); i++) {//ALTO
             for (int j = 0; j < image.getWidth(); j++) {//ANCHO
                 if (image.getPixel(j, i) < (-1) && aux < 1) {
-             //       if (!verify(image, j, i)) {
+                    if (!verify(image, j, i)) {
                         aux++;
                    // image = draw(image,j,i);
 
                     Log.i("Punto: ","PUNTO 2 :Aqui " + j + " || " + i);
                         // System.out.println("PUNTO 2 :Aqui " + j + " || " + i);
                         y1 = i;
-               //     }
+                    }
                 }
             }
         }
@@ -163,14 +130,14 @@ public class Herramientas {
             for (int j = (image.getHeight() - 1); j >= 0; j--) {//ALTO
                 //System.out.println("X: " + i + " || Y: " + j + " RGB: " + image.getRGB(i, j));
                 if (image.getPixel(i, j) < (-1) && aux < 1) {
-             //       if (!verify(image, i, j)) {
+                    if (!verify(image, i, j)) {
                         aux++;
                         x2 = i;
                     //image = draw(image,i,j);
 
                     Log.i("Punto: ","PUNTO 3: Aqui: ANCHO(" + i + ") || ALTO(" + j + ")");
                         //System.out.println("PUNTO 3: Aqui: ANCHO(" + i + ") || ALTO(" + j + ")");
-             //       }
+                    }
                 }
             }
         }
@@ -181,7 +148,7 @@ public class Herramientas {
             for (int j = (image.getWidth() - 1); j >= 0; j--) {//ANCHO
                 // System.out.println("X: " + i + " || Y: " + j + " RGB: " + image.getRGB(i, j));
                 if (image.getPixel(j, i) < (-1) && aux < 1) {
-         //           if (!verify(image, j, i)) {
+                    if (!verify(image, j, i)) {
                         aux++;
                         y2 = i;
                     //image = draw(image,j,i);
@@ -189,7 +156,7 @@ public class Herramientas {
                     Log.i("Punto: ","PUNTO4: Aqui: ANCHO(" + j + ") || ALTO(" + i + ")");
                         //System.out.println("PUNTO4: Aqui: ANCHO(" + j + ") || ALTO(" + i + ")");
                         break;
-           //         }
+                    }
                 }
             }
         }
@@ -197,13 +164,13 @@ public class Herramientas {
 //**********************************************************************************************************
 
         Bitmap img = Bitmap.createBitmap(image, x1, y1, (x2-x1), (y2-y1));
-        img = Bitmap.createScaledBitmap(img,image.getWidth(),image.getHeight(),false);
+        img = Bitmap.createScaledBitmap(img,newImage.getWidth(),newImage.getHeight(),false);
 
         return img;
     }
 
     public static boolean verify(Bitmap image, int x, int y) {
-        int aux = 10;
+        int aux = 4;
         int count = 0;
         try {
             for (int i = x - aux; i <= x + aux; i++) {
@@ -216,94 +183,33 @@ public class Herramientas {
         } catch (Exception e) {
 
         }
-        if (count <= 150) {//ES UN PUNTO
+        if (count <= 5) {//ES UN PUNTO
             return true;
         } else {
             return false;
         }
     }
-    public static Bitmap draw(Bitmap image, int x, int y) {
-        int aux = 5;
-        int count = 0;
-        try {
-            for (int i = x - aux; i <= x + aux; i++) {
-                for (int j = y - aux; j <= y + aux; j++) {
-                    image.setPixel( i, j, 0xff000000 );
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("" + count);
-        return image;
-    }
 
-    public static ArrayList<String[]> getActivityInstance(int n){
-        ArrayList<String[]> aux = new ArrayList<String[]>();
-        try {
-            InputStream is = mainActivity.getResources().openRawResource(n);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] prueba = line.split(" ");
-                aux.add(prueba);
-            }
-            is.close();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        return aux;
-    }
+    public static int calificar(Bitmap img, int act){
+        int resourceId1 = mainActivity.getResources().getIdentifier("act_" + act, "raw", Herramientas.mainActivity.getPackageName());
+        Drawable drawable1 =mainActivity.getResources().getDrawable(resourceId1);
+        int resourceId2 = mainActivity.getResources().getIdentifier("act_" + act, "drawable", Herramientas.mainActivity.getPackageName());
+        Drawable drawable2 =mainActivity.getResources().getDrawable(resourceId2);
 
-    public static ArrayList<String[]> leerInstancia(String name) {
-        ArrayList<String[]> aux = new ArrayList<String[]>();
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(mainActivity.openFileInput(name)));
-            String readLine = null;
-            while ((readLine = br.readLine()) != null) {
-                String[] prueba = readLine.split(" ");
-                aux.add(prueba);
-            }
-            br.close();
-            Log.i("INSTANCIA LEIDA: ","Ancho: "+aux.get(0).length+" Alto: "+aux.size());
-        }catch (IOException ex){
+        Bitmap imgMask = Bitmap.createScaledBitmap(((BitmapDrawable) drawable1).getBitmap(),img.getWidth(),img.getHeight(),false);
+        Bitmap imgOrigin  = Bitmap.createScaledBitmap(((BitmapDrawable) drawable2).getBitmap(),img.getWidth(),img.getHeight(),false);
 
-        }
-        return aux;
-    }
-    public static String generarInstancia(Bitmap img, int act) {
-        UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(mainActivity);
-        String name = usuarioActual.getNombre()+"_act_"+act+".txt";
-        try {
-            OutputStreamWriter file = new OutputStreamWriter(mainActivity.openFileOutput(name, Context.MODE_PRIVATE));
+        Log.i("IMG TOMADA: ","ANCHO: "+img.getWidth()+" ALTO: "+img.getHeight());
+        Log.i("IMG ORIGINAL: ","ANCHO: "+imgOrigin.getWidth()+" ALTO: "+imgOrigin.getHeight());
+        Log.i("IMG MASK: ","ANCHO: "+imgMask.getWidth()+" ALTO: "+imgMask.getHeight());
 
-            for (int i = 0; i < img.getHeight(); i++) {
-                String line = "";
-                for (int j = 0; j < img.getWidth(); j++) {
-                    if (img.getPixel(j, i) < (-1)) {
-                        line += "1 ";
-                    } else {
-                        line += "0 ";
-                    }
-                }
-                file.write(line + "\n");
-            }
-            file.close();
-        } catch(Exception ex) {
-            ex.printStackTrace();
-        }
-        return name;
-    }
-    public static int calificar(ArrayList<String[]> instancia, int act){
-        int resourceId = Herramientas.mainActivity.getResources().getIdentifier("act_" + act, "raw", Herramientas.mainActivity.getPackageName());
-        ArrayList<String[]> actividad = getActivityInstance(resourceId);
         int sum = 0;
-        for (int b = 0; b <instancia.get(0).length; b++) {
-            for (int a = 0; a < instancia.size(); a++) {
-                if (String.valueOf(instancia.get(a)[b]).equals("1") && String.valueOf(actividad.get(a)[b]).equals("1") ) {
+        for (int a = 0; a <imgOrigin.getWidth(); a++) {
+            for (int b = 0; b < imgOrigin.getHeight(); b++) {
+                if (img.getPixel(a,b) <(-1) && imgMask.getPixel(a,b)<(-1)) {
                     sum++;
-                }else if(String.valueOf(instancia.get(a)[b]).equals("0") && String.valueOf(instancia.get(a)[b]).equals("0") ){
+                }
+                if(img.getPixel(a,b)==(-1) && imgOrigin.getPixel(a,b)==(-1)){
                     sum++;
                 }
             }
@@ -312,18 +218,46 @@ public class Herramientas {
         Log.i("CALIFICACION"," "+sum);
         return sum;
     }
-    public static Bitmap recrearCuadrante(ArrayList<String[]> aux) {
-        Bitmap img = Bitmap.createBitmap(aux.get(0).length, aux.size(), Bitmap.Config.RGB_565);
-        for (int i = 0; i < img.getWidth(); i++) {
-            for (int j = 0; j < img.getHeight(); j++) {
-                if (Integer.parseInt(String.valueOf(aux.get(j)[i])) == 1) {
-                    img.setPixel(i, j, 0xff000000);
-                } else {
-                    img.setPixel(i, j, 0xffffffff);
-                }
-            }
+    public static int getHeight(int id){
+        switch (id){
+            case 1:
+                return 537;
+            case 2:
+                return 541;
+            case 3:
+                return 538;
+            case 4:
+                return 541;
+            case 5:
+                return 535;
+            case 6:
+                return 521;
+            case 7:
+                return 617;
+            case 8:
+                return 517;
+            case 9:
+                return 502;
+            case 10:
+                return 508;
+            case 11:
+                return 224;
+            case 12:
+                return 364;
+            case 13:
+                return 456;
+            case 14:
+                return 530;
+            case 15:
+                return 666;
+            case 16:
+                return 630;
+            case 17:
+                return 264;
+            case 18:
+                return 524;
         }
-        return img;
+        return 0;
     }
 
 }

@@ -37,20 +37,8 @@ public class CuentaRegistroNinoViewModel extends ViewModel {
     }
 
     public void setUsuario(UsuarioNino usuario, Activity activity){
-        ArrayList<UsuarioNino> usuarios;
-        usuarios = SharedPreferencesHelper.getUsuarios(activity);
-        if(usuarios==null){
-            usuarios = new ArrayList<UsuarioNino>();
-            usuario.setIdLocal(1);
-            usuarios.add(usuario);
-            SharedPreferencesHelper.setUsuarios(activity,usuarios);
-            SharedPreferencesHelper.setUsuarioActual(activity,usuario);
-        }else{
-            usuarios.add(usuario);
-            usuario.setIdLocal(usuarios.size());
-            SharedPreferencesHelper.setUsuarios(activity,usuarios);
-            SharedPreferencesHelper.setUsuarioActual(activity,usuario);
-        }
+        SharedPreferencesHelper.setUsuario(usuario);
+        SharedPreferencesHelper.setUsuarioActual(activity,usuario);
     }
     public int boyCount(){
         int boy=1;

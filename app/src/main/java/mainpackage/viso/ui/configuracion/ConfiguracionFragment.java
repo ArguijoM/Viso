@@ -66,6 +66,7 @@ import mainpackage.viso.herramientas.VolleyCallBack;
 import mainpackage.viso.herramientas.objetos.Actividad;
 import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
+import mainpackage.viso.ui.configuracion.borrar.BorrarFragment;
 import mainpackage.viso.ui.inicio.InicioFragment;
 
 
@@ -124,15 +125,19 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                                     db.readNino(new VolleyCallBack() {
                                         @Override
                                         public void onSuccess(String result) {
-                                            ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios(Herramientas.mainActivity);
+                                            ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios();
+                                            Log.i("USUARIOS CONIFG::",""+users.size());
                                             for(int i=0; i<users.size();i++) {
                                                 db.readActividad(new VolleyCallBack() {
                                                     @Override
                                                     public void onSuccess(String result) {
                                                         progressBar.setVisibility(View.GONE);
                                                         Toast.makeText(getContext(),"Copia de seguridad generada",Toast.LENGTH_SHORT).show();
+                                                        ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios();
+                                                        SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,users.get(0));
+
                                                     }
-                                                },users.get(i).getIdServidor());
+                                                },users.get(i));
                                             }
                                         }
                                     }, usuario.getIdServidor());
@@ -166,7 +171,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                                         db.foundNino(new VolleyCallBack() {
                                             @Override
                                             public void onSuccess(String result) {
-                                                ArrayList<UsuarioNino> usuarios= SharedPreferencesHelper.getUsuarios(Herramientas.mainActivity);
+                                                ArrayList<UsuarioNino> usuarios= SharedPreferencesHelper.getUsuarios();
                                                 for(int i=0;i<usuarios.size();i++) {
                                                     db.foundActividad(new VolleyCallBack() {
                                                         @Override
@@ -228,10 +233,12 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                 alerta3.show();
                 break;
             case R.id.opcion_04:
-                ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios(Herramientas.mainActivity);
-                for(int i=0;i<users.size();i++){
-                    Log.i("ID_SERVER:",""+users.get(i).getIdServidor());
-                }
+                BorrarFragment fragment = new BorrarFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
                 break;
         }
     }
@@ -257,7 +264,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             documento.add(apellido);
             Paragraph edad = new Paragraph("Edad: "+usuarioActual.getEdad()).setBold().setFontSize(14);
             documento.add(edad);
-            ArrayList<Actividad> actividades = usuarioActual.getActividades();
+            ArrayList<Actividad> actividades = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
             int i=0;
             while(i<=Herramientas.TOTAL_ACT) {
                 Table tabla = new Table(2);

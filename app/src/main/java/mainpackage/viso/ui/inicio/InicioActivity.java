@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import mainpackage.viso.R;
 import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
+import mainpackage.viso.herramientas.objetos.Actividad;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
 
 public class InicioActivity extends AppCompatActivity {
@@ -31,13 +32,14 @@ public class InicioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inicio);
 
         UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
+        ArrayList<Actividad> actividades = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
         if(usuarioActual== null){
             this.realizadas=0;
             ((TextView)findViewById(R.id.nombre_usuario)).setText("¡Hola Error!");
-        }else if(usuarioActual.getActividades()==null){
+        }else if(actividades==null){
             this.realizadas=99;
         }else{
-            this.realizadas=usuarioActual.getActividades().size();
+            this.realizadas=actividades.size();
             ((TextView)findViewById(R.id.nombre_usuario)).setText("¡Hola "+ usuarioActual.getNombre()+"!");
 
         }

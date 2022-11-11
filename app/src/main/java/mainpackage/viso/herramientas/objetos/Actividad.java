@@ -9,51 +9,51 @@ import java.util.Calendar;
 import mainpackage.viso.herramientas.Herramientas;
 
 public class Actividad {
-    private int id;
+    private int idLocal;
     private int idServidor;
     private int ninoId;
+    private int ninoIdLocal;
     private String path;
     private String name;
-    private int puntuacion;
+    private int calificacion;
     private String fecha;
     private String imagen;
 
-
     public Actividad(int id,String path,String name) {
-        this.id=id;
+        this.idLocal =id;
         this.idServidor=0;
         this.path=path;
         this.name =name;
-        this.puntuacion = 0;
+        this.calificacion = 0;
         this.fecha = Calendar.getInstance().getTime().toString();
         this.imagen = Herramientas.loadImageFromStorageString(path,name);
     }
-    public Actividad(int id,int calificacion,Bitmap image) {
-        this.id=id;
-        this.idServidor=0;
-        this.path="";
-        this.name ="";
-        this.puntuacion = calificacion;
-        this.fecha = Calendar.getInstance().getTime().toString();
-        this.imagen =crearImagenString(image);
-    }
-    public Actividad(int idServidor,int id,String imagen,String fecha,int puntuacion,int ninoId) {
+    public Actividad(int id,int idServidor,int ninoId, int ninoIdLocal,String imagen,int puntuacion,String fecha) {
         this.idServidor=idServidor;
-        this.id=id;
+        this.idLocal =id;
         this.ninoId=ninoId;
+        this.ninoIdLocal = ninoIdLocal;
         this.path="";
         this.name = "";
-        this.puntuacion = puntuacion;
+        this.calificacion = puntuacion;
         this.fecha = fecha;
         this.imagen = imagen;
     }
 
-    public int getId() {
-        return id;
+    public int getNinoIdLocal() {
+        return ninoIdLocal;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNinoIdLocal(int ninoIdLocal) {
+        this.ninoIdLocal = ninoIdLocal;
+    }
+
+    public int getIdLocal() {
+        return idLocal;
+    }
+
+    public void setIdLocal(int idLocal) {
+        this.idLocal = idLocal;
     }
 
     public int getIdServidor() {
@@ -71,16 +71,16 @@ public class Actividad {
         return this.imagen;
     }
 
-    public int getPuntuacion() {
-        return puntuacion;
+    public int getCalificacion() {
+        return calificacion;
     }
 
     public String getFecha() {
         return fecha;
     }
 
-    public void setPuntuacion(int puntuacion) {
-        this.puntuacion = puntuacion;
+    public void setCalificacion(int calificacion) {
+        this.calificacion = calificacion;
     }
 
     public void setFecha(String fecha) {

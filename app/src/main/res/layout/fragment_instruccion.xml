@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="@dimen/text_03"
+    android:gravity="center"
     android:background="@color/primary01"
     tools:context=".ui.actividad.instruccion.InstruccionFragment">
 
@@ -24,19 +25,18 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_weight="1"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_height="0dp">
+        android:layout_height="wrap_content">
         <pl.droidsonroids.gif.GifImageView
             android:layout_width="200dp"
             android:layout_height="150dp"
-            android:layout_gravity="left"
+            android:layout_gravity="center"
             android:src="@drawable/gif_sun"/>
         <pl.droidsonroids.gif.GifImageView
             android:layout_width="200dp"
             android:layout_height="150dp"
-            android:layout_gravity="right"
+            android:layout_gravity="center"
             android:src="@drawable/gif_drawing"/>
     </LinearLayout>
 </LinearLayout>

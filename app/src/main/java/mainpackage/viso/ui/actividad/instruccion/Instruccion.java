@@ -11,7 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import mainpackage.viso.MainActivity;
 import mainpackage.viso.R;
+import mainpackage.viso.herramientas.SoundsPlayer;
 import mainpackage.viso.ui.actividad.get.ActividadShow;
 import mainpackage.viso.ui.actividad.set.ActividadN;
 
@@ -19,6 +21,7 @@ public class Instruccion extends AppCompatActivity {
     private  Button btn;
     private Fragment instruccion,instruccion2,instruccion3,instruccion4;
     private FragmentTransaction transaction;
+    private SoundsPlayer sound;
     private int count = 0;
     private int id;
 
@@ -32,6 +35,7 @@ public class Instruccion extends AppCompatActivity {
         }
         btn = findViewById(R.id.btn_siguiente);
         btn.setEnabled(false);
+        sound =new SoundsPlayer(this);
 
         instruccion = new InstruccionFragment();
         instruccion2 = new InstruccionFragment2();
@@ -50,6 +54,7 @@ public class Instruccion extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sound.playTapSound();
                 count++;
                 transaction = getSupportFragmentManager().beginTransaction();
                 btn.setEnabled(false);
@@ -81,16 +86,22 @@ public class Instruccion extends AppCompatActivity {
                             }
                         },2000);
                         break;
-                    default:
+                    case 4:
                         Intent intent = new Intent(Instruccion.this, ActividadN.class);
                         intent.putExtra("id",id);
                         startActivity(intent);
+                        break;
+                    default:
                         break;
                 }
                 transaction.commit();
                 transaction.addToBackStack(null);
             }
         });
+
+    }
+    @Override
+    public void onBackPressed() {
 
     }
 }

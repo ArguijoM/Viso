@@ -2,10 +2,19 @@ package mainpackage.viso.herramientas.objetos;
 
 public class UsuarioAdulto {
     int idServidor;
+    int idLocal;
     String nombre;
     String apellido;
     String email;
     String contrasena;
+    public UsuarioAdulto(int idLocal, int idServidor, String nombre, String apellido, String email, String contrasena) {
+        this.idLocal = idLocal;
+        this.idServidor = idServidor;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.contrasena = contrasena;
+    }
 
     public UsuarioAdulto(String nombre, String apellido) {
         this.idServidor=0;
@@ -62,4 +71,12 @@ public class UsuarioAdulto {
     public void setIdServidor(int idServidor) {
         this.idServidor = idServidor;
     }
+    public int getIdLocal() {
+        return idLocal;
+    }
+
+    public void setIdLocal(int idLocal) {
+        this.idLocal = idLocal;
+    }
+
 }

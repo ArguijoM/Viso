@@ -42,7 +42,7 @@ public class CuentaListaFragment extends Fragment {
         View root = binding.getRoot();
 
         lista = (ListView)root.findViewById(R.id.lista_usuarios);
-        usuarios = SharedPreferencesHelper.getUsuarios(Herramientas.mainActivity);
+        usuarios = SharedPreferencesHelper.getUsuarios();
 
         CuentaAdaptador adaptador = new CuentaAdaptador(getContext(),usuarios,R.layout.cuenta_item);
         lista.setAdapter(adaptador);
@@ -51,6 +51,7 @@ public class CuentaListaFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("id",usuarios.get(position).getIdLocal());
+                SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarios.get(position));
                 CuentaFragment fragment = new CuentaFragment();
                 fragment.setArguments(bundle);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

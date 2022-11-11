@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Viso">
         <activity
+            android:name=".ui.configuracion.borrar.SplashScreenBorrado"
+            android:exported="false" />
+        <activity
             android:name=".ui.actividad.instruccion.Instruccion"
             android:exported="false" />
         <activity

@@ -22,9 +22,11 @@ import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SQLiteHelper;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
 import mainpackage.viso.herramientas.objetos.Actividad;
+import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
 import mainpackage.viso.ui.cuenta.registro.adulto.CuentaRegistroAdultoFragment;
 import mainpackage.viso.ui.cuenta.registro.adulto.CuentaRegistroLoginFragment;
+import mainpackage.viso.ui.cuenta.registro.nino.CuentaRegistroNinoFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,16 +52,25 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(this);
-        if(usuarioActual==null){
+        Herramientas.mainActivity = this;
+        UsuarioAdulto usuarioAdulto = SharedPreferencesHelper.getUsuarioAdulto(this);
+        UsuarioNino usuarioActual=null;
+        if(usuarioAdulto==null){
             CuentaRegistroLoginFragment fragment = new CuentaRegistroLoginFragment();
             FragmentManager fragmentManager = this.getSupportFragmentManager();
             FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.nav_host_fragment_content_main,fragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
+        }else if((usuarioActual= SharedPreferencesHelper.getUsuarioActual(this))==null){
+            CuentaRegistroNinoFragment fragment= new CuentaRegistroNinoFragment();
+            FragmentManager fragmentManager = this.getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.nav_host_fragment_content_main,fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         }
-        Herramientas.mainActivity = this;
+        //this.deleteDatabase("Viso.db");
         //usuarioActual.setActividades(new ArrayList<>());
         //SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarioActual);
         //SharedPreferencesHelper.updateUsuario(Herramientas.mainActivity,usuarioActual);
@@ -77,5 +88,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
     }
 }

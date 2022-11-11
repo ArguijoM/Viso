@@ -41,7 +41,6 @@ public class ActividadDone extends AppCompatActivity {
         text_done.startAnimation(animation2);
         sound =new SoundsPlayer(this);
         sound.playDoneSound();
-        sound.playDoneSound();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -51,4 +50,9 @@ public class ActividadDone extends AppCompatActivity {
         },3000);
 
     }
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
+
 }

@@ -6,6 +6,7 @@ import androidx.core.content.FileProvider;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -16,22 +17,26 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import mainpackage.viso.MainActivity;
 import mainpackage.viso.R;
 import mainpackage.viso.herramientas.DatabaseHelper;
 import mainpackage.viso.herramientas.Herramientas;
+import mainpackage.viso.herramientas.SQLiteHelper;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
 import mainpackage.viso.herramientas.SoundsPlayer;
 import mainpackage.viso.herramientas.VolleyCallBack;
@@ -51,6 +56,8 @@ public class ActividadConfirm extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_confirm);
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         sound = new SoundsPlayer(this);
         Intent intent = getIntent();
@@ -90,23 +97,23 @@ public class ActividadConfirm extends AppCompatActivity implements View.OnClickL
 
     private void guardarFoto(){
         UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
-        String name = "usuario_"+usuarioActual.getNombre()+"_actividad_"+id+".jpg";
+        Log.i("CURENT USER ACT",usuarioActual.getNombre());
         BitmapDrawable drawable = (BitmapDrawable) img_tomada.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
-        ArrayList<String[]> instancia=Herramientas.leerInstancia(Herramientas.generarInstancia(bitmap,id));
-        int calif=Herramientas.calificar(instancia,id);
-        Bitmap bm = Herramientas.recrearCuadrante(instancia);
-        int resourceId = Herramientas.mainActivity.getResources().getIdentifier("act_" + id, "raw", Herramientas.mainActivity.getPackageName());
-        Bitmap bm2 = Herramientas.recrearCuadrante(Herramientas.getActivityInstance(resourceId));
-        Log.i("Imagen Tomada","Ancho: "+bm.getWidth()+" Alto: "+bm.getHeight());
-        img_tomada.setImageBitmap(bm);
-        img_muestra.setImageBitmap(bm2);
-        Log.i("Imagen de muestra","Ancho: "+bm2.getWidth()+" Alto: "+bm2.getHeight());
+        bitmap = Bitmap.createScaledBitmap(bitmap,500,Herramientas.getHeight(id),false);
+        Log.i("IMAGEN FINAL","ANCHO "+bitmap.getWidth()+" ALTO "+bitmap.getHeight());
+        int calif=Herramientas.calificar(bitmap,id);
+        //Bitmap bm = Herramientas.recrearCuadrante(instancia);
+        //int resourceId = Herramientas.mainActivity.getResources().getIdentifier("act_" + id, "raw", Herramientas.mainActivity.getPackageName());
+        //Bitmap bm2 = Herramientas.recrearCuadrante(Herramientas.getActivityInstance(resourceId));
+        //Log.i("Imagen Tomada","Ancho: "+bm.getWidth()+" Alto: "+bm.getHeight());
 
-        Actividad act = new Actividad(id, calif,bm);
-        usuarioActual.setActividad(act);
-        SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarioActual);
-        SharedPreferencesHelper.updateUsuario(Herramientas.mainActivity,usuarioActual);
+        //img_tomada.setImageBitmap(bm);
+        //img_muestra.setImageBitmap(bm2);
+        //Log.i("Imagen de muestra","Ancho: "+bm2.getWidth()+" Alto: "+bm2.getHeight());
+
+        Actividad act = new Actividad(id,0,usuarioActual.getIdServidor(),usuarioActual.getIdLocal(),crearImagenString(bitmap),calif, Calendar.getInstance().getTime().toString());
+        SharedPreferencesHelper.addActividad(act);
         sound.playDoneSound();
         //Intent intent = new Intent(ActividadConfirm.this, ActividadDone.class);
         //startActivity(intent);
@@ -130,5 +137,17 @@ public class ActividadConfirm extends AppCompatActivity implements View.OnClickL
         fragmentTransaction.replace(R.id.nav_host_fragment_content_main,fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();*/
+    }
+    public static String crearImagenString(Bitmap image){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        //image.recycle();
+        return android.util.Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

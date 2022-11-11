@@ -1,8 +1,9 @@
 package mainpackage.viso.herramientas.objetos;
 
-import android.graphics.Bitmap;
-
 import java.util.ArrayList;
+
+import mainpackage.viso.herramientas.Herramientas;
+import mainpackage.viso.herramientas.SQLiteHelper;
 
 public class UsuarioNino {
     int idServidor;
@@ -10,7 +11,6 @@ public class UsuarioNino {
     int idAdulto;
     String nombre;
     String apellido;
-    ArrayList<Actividad> actividades;
     String profile;
     int edad;
 
@@ -29,7 +29,6 @@ public class UsuarioNino {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
-        this.actividades = new ArrayList<Actividad>();
     }
     public UsuarioNino(int id,String nombre, String apellido, int edad, int usuarioAdulto) {
         this.idServidor = id;
@@ -38,7 +37,6 @@ public class UsuarioNino {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
-        this.actividades = new ArrayList<Actividad>();
     }
     public UsuarioNino(int id,String perfil,String nombre, String apellido, int edad, int usuarioAdulto) {
         this.idServidor = id;
@@ -48,7 +46,15 @@ public class UsuarioNino {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
-        this.actividades = new ArrayList<Actividad>();
+    }
+    public UsuarioNino(int id,int idServidor,String nombre, String apellido, int edad, int usuarioAdulto, String perfil) {
+        this.idLocal = id;
+        this.idServidor = idServidor;
+        this.profile = perfil;
+        this.idAdulto = usuarioAdulto;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
     }
 
     public int getIdLocal() {
@@ -59,17 +65,7 @@ public class UsuarioNino {
         this.idLocal = idLocal;
     }
 
-    public void setActividad(Actividad act){
-        this.actividades.add(act);
-    }
 
-    public ArrayList<Actividad> getActividades() {
-        return actividades;
-    }
-
-    public void setActividades(ArrayList<Actividad> actividades) {
-        this.actividades = actividades;
-    }
 
     public int getIdServidor() {
         return idServidor;
@@ -109,10 +105,6 @@ public class UsuarioNino {
 
     public int getIdAdulto() {
         return idAdulto;
-    }
-
-    public void replaceActivityIdServer(int pos,int idServidor){
-        this.actividades.get(pos).setIdServidor(idServidor);
     }
 
 }

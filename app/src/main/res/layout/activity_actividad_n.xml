@@ -26,6 +26,7 @@
             android:textSize="@dimen/actividad_titulo02"
             android:fontFamily="@font/autour_one"
             android:textColor="@color/white"
+            android:id="@+id/actividad_n"
             android:text="Actividad"/>
         <TextView
             android:layout_width="match_parent"

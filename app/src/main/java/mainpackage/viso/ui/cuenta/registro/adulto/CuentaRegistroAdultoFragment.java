@@ -36,7 +36,7 @@ public class CuentaRegistroAdultoFragment extends Fragment {
 
         binding = FragmentRegistroAdultoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        getActivity().onBackPressed();
         Bundle bundle = this.getArguments();
         if(bundle!=null){
             email = bundle.getString("email");
@@ -53,7 +53,9 @@ public class CuentaRegistroAdultoFragment extends Fragment {
                     UsuarioAdulto usuarioAdulto = new UsuarioAdulto(nombreAdulto, apellidoAdulto);
                     usuarioAdulto.setEmail(email);
                     usuarioAdulto.setContrasena(contrasena);
-                    SharedPreferencesHelper.setUsuarioAdulto(Herramientas.mainActivity, usuarioAdulto);
+                    SharedPreferencesHelper.setUsuarioAdulto(usuarioAdulto);
+                    UsuarioAdulto usuarioAdulto2 = SharedPreferencesHelper.getUsuarioAdulto(usuarioAdulto.getNombre());
+                    SharedPreferencesHelper.setUsuarioAdulto(Herramientas.mainActivity,usuarioAdulto2);
                     if (!SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity).getEmail().equals("")) {
                         CuentaRegistroNinoFragment fragment = new CuentaRegistroNinoFragment();
                         fragment.setArguments(bundle);
@@ -77,4 +79,6 @@ public class CuentaRegistroAdultoFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
 }

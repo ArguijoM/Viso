@@ -14,10 +14,12 @@ public class CuentaViewModel extends ViewModel {
     private UsuarioNino usuarioActual;
     private UsuarioAdulto usuarioAdulto;
     private ArrayList<UsuarioNino> usuarios;
+    private ArrayList<Actividad> actividades;
     public CuentaViewModel() {
         this.usuarioActual= SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
         this.usuarioAdulto = SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity);
         this.usuarios = SharedPreferencesHelper.getUsuarios(Herramientas.mainActivity);
+        this.actividades = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
     }
 
     public int getUsuariosSize() {
@@ -39,13 +41,21 @@ public class CuentaViewModel extends ViewModel {
         return usuarioActual;
     }
     public ArrayList<Actividad> getActividades(){
-        return this.usuarioActual.getActividades();
+        return actividades;
     }
     public String getActividadName(int id){
-        return usuarioActual.getActividades().get((id-1)).getName();
+        return actividades.get((id-1)).getName();
     }
     public String getActividadPath(int id){
-        return usuarioActual.getActividades().get((id-1)).getPath();
+        return actividades.get((id-1)).getPath();
+    }
+    public String getPerfil(){
+        String[] aux = (this.usuarioActual.getProfile()).split(" Y ");
+        return aux[0];
+    }
+    public String getPerfilId(){
+        String[] aux = (this.usuarioActual.getProfile()).split(" Y ");
+        return aux[1];
     }
 
     public void setUsuarioActual(UsuarioNino usuarioActual) {

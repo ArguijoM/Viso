@@ -41,11 +41,11 @@ public class InicioFragment extends Fragment {
         if(InicioViewModel.getUsuarioActual()== null){
             InicioViewModel.setRealizadas(0);
             ((TextView)root.findViewById(R.id.nombre_usuario)).setText("¡Hola Error!");
-        }else if(InicioViewModel.getUsuarioActual().getActividades()==null){
+        }else if(InicioViewModel.getActividades()==null){
             InicioViewModel.setRealizadas(99);
         }else{
-            InicioViewModel.setRealizadas(InicioViewModel.getUsuarioActual().getActividades().size());
-            ((TextView)root.findViewById(R.id.nombre_usuario)).setText("¡Hola "+ InicioViewModel.getUsuarioActual().getNombre()+"!");
+            InicioViewModel.setRealizadas(InicioViewModel.getActividades().size());
+            ((TextView)root.findViewById(R.id.nombre_usuario)).setText("¡Hola "+ InicioViewModel.getUsuarioActual().getNombre()+"! "+InicioViewModel.getUsuarioActual().getIdLocal());
 
         }
         pieChart = (PieChart)root.findViewById(R.id.GraficaPie);

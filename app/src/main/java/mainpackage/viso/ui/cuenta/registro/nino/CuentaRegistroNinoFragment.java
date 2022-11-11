@@ -37,6 +37,7 @@ public class CuentaRegistroNinoFragment extends Fragment implements View.OnClick
     private Button btn_siguiente;
     private ImageView imageViewBoy, imageViewGirl;
     private LinearLayout layoutboy,layoutgirl;
+    private ArrayList<UsuarioNino> usuarios;
     private int auxboy=0,auxgirl=0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -50,13 +51,13 @@ public class CuentaRegistroNinoFragment extends Fragment implements View.OnClick
         (imageViewBoy = (ImageView)root.findViewById(R.id.user_image_boy)).setOnClickListener(this);
         (imageViewGirl=(ImageView)root.findViewById(R.id.user_image_girl)).setOnClickListener(this);
 
-
-        if(cuentaRegistroshowViewModel.getUsuarios()!=null || cuentaRegistroshowViewModel.getUsuariosSize()<6) {
-            String uriboy = "@drawable/ic_boy"+cuentaRegistroshowViewModel.boyCount();
+        this.usuarios = SharedPreferencesHelper.getUsuarios();
+        if(usuarios!=null) {
+            String uriboy = "@drawable/ic_boy"+boyCount();
             int imageResourceboy = getResources().getIdentifier(uriboy, null, getActivity().getPackageName());
             Drawable drawableboy = getResources().getDrawable(imageResourceboy);
             imageViewBoy.setImageDrawable(drawableboy);
-            String urigirl = "@drawable/ic_girl"+cuentaRegistroshowViewModel.girlCount();
+            String urigirl = "@drawable/ic_girl"+girlCount();
             int imageResourcegirl = getResources().getIdentifier(urigirl, null, getActivity().getPackageName());
             Drawable drawablegirl = getResources().getDrawable(imageResourcegirl);
             imageViewGirl.setImageDrawable(drawablegirl);
@@ -77,12 +78,16 @@ public class CuentaRegistroNinoFragment extends Fragment implements View.OnClick
                     if(!nombreNino.equals("") && !apellidoNino.equals("") && !edad.equals("")) {
                         UsuarioNino usuarioNino = new UsuarioNino(nombreNino, apellidoNino, Integer.parseInt(String.valueOf(edad)));
                         if(auxboy==1){
-                            usuarioNino.setProfile("H Y "+cuentaRegistroshowViewModel.boyCount());
+                            usuarioNino.setProfile("H Y "+boyCount());
                         }else{
-                            usuarioNino.setProfile("M Y "+cuentaRegistroshowViewModel.girlCount());
+                            usuarioNino.setProfile("M Y "+girlCount());
                         }
-                        cuentaRegistroshowViewModel.setUsuario(usuarioNino, getActivity());
-                        SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarioNino);
+                        UsuarioAdulto usuarioAdulto = SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity);
+                        usuarioNino.setIdAdulto(usuarioAdulto.getIdLocal());
+
+                        SharedPreferencesHelper.setUsuario(usuarioNino);
+                        UsuarioNino usuarioNino2 = SharedPreferencesHelper.getUsuario(usuarioNino.getNombre());
+                        SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarioNino2);
                         toMain();
                     }else {
                         Toast.makeText(getContext(),"Ingrese la información solicitada",Toast.LENGTH_LONG).show();
@@ -122,5 +127,35 @@ public class CuentaRegistroNinoFragment extends Fragment implements View.OnClick
                 this.layoutgirl.setBackgroundResource(R.drawable.customborder3);
                 break;
         }
+    }
+    public int boyCount(){
+        int boy=1;
+        if(usuarios==null){
+            return 1;
+        }else {
+            for (int i = 0; i < usuarios.size(); i++) {
+                String aux = usuarios.get(i).getProfile();
+                String[] array = aux.split(" Y ");
+                if (array[0].equals("H")) {
+                    boy++;
+                }
+            }
+        }
+        return boy;
+    }
+    public int girlCount(){
+        int girl=1;
+        if(usuarios==null){
+            return 1;
+        }else {
+            for (int i = 0; i < usuarios.size(); i++) {
+                String aux = usuarios.get(i).getProfile();
+                String[] array = aux.split(" Y ");
+                if (array[0].equals("M")) {
+                    girl++;
+                }
+            }
+        }
+        return girl;
     }
 }

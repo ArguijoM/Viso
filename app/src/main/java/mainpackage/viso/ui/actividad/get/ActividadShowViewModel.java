@@ -19,20 +19,20 @@ public class ActividadShowViewModel extends ViewModel {
 
     public ActividadShowViewModel() {
         this.usuarioActual= SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
-        this.actividades = usuarioActual.getActividades();
+        this.actividades = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
     }
 
     public UsuarioNino getUsuarioActual() {
         return usuarioActual;
     }
     public ArrayList<Actividad> getActividades(){
-        return this.usuarioActual.getActividades();
+        return this.actividades;
     }
     public String getActividadName(int id){
-        return usuarioActual.getActividades().get((id-1)).getName();
+        return actividades.get((id-1)).getName();
     }
     public String getActividadPath(int id){
-        return usuarioActual.getActividades().get((id-1)).getPath();
+        return actividades.get((id-1)).getPath();
     }
     public Bitmap getImagenActividad(int id){
         if((id-1)>=0){
@@ -49,7 +49,7 @@ public class ActividadShowViewModel extends ViewModel {
     }
 
     public int getActividadCalificacion(int id){
-        return this.actividades.get(id-1).getPuntuacion();
+        return this.actividades.get(id-1).getCalificacion();
     }
 
 }

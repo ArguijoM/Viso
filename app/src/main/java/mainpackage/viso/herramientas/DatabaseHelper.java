@@ -2,11 +2,9 @@ package mainpackage.viso.herramientas;
 
 
 import android.content.Context;
-import android.database.Cursor;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -20,11 +18,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Handler;
 
 import mainpackage.viso.herramientas.objetos.Actividad;
 import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
@@ -59,22 +55,21 @@ public class DatabaseHelper {
                     public void onResponse(String response) {
                         if(!response.isEmpty()){
                             try {
-                                Log.i("Respuesta de servidor",response);
+                                Log.i("Respuest de servidor AU",response);
                                 JSONObject jsonObject = new JSONObject(response);
                                 JSONArray json = jsonObject.getJSONArray("estado");
                                 JSONObject obj = json.getJSONObject(0);
-                                Log.i("Mensaje de servidor",obj.getString("mensaje"));
+                                Log.i("Mensaje de servidor AU",obj.getString("mensaje"));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                             readUsuario(new VolleyCallBack() {
                                 @Override
                                 public void onSuccess(String result) {
-
                                 }
                             }, user);
                         }else{
-                            Log.i("Respuesta de servidor","No hay respuesta");
+                            Log.i("Respuest de servidor AU","No hay respuesta");
                         }
                         volleyCallBack.onSuccess(response);
                     }
@@ -82,7 +77,7 @@ public class DatabaseHelper {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.i("ERROR: Respuesta: ",error.toString());
+                        Log.i("ERROR: Respuesta AU: ",error.toString());
                         volleyCallBack.onSuccess(error.toString());
                     }
                 }){
@@ -107,7 +102,7 @@ public class DatabaseHelper {
                     public void onResponse(String response) {
                         if(!response.isEmpty()){
                             try {
-                                Log.i("Respuesta de servidor",response);
+                                Log.i("Respuest de servidor AN",response);
                                 JSONObject jsonObject = new JSONObject(response);
                                 JSONArray json = jsonObject.getJSONArray("estado");
                                 JSONObject obj = json.getJSONObject(0);
@@ -123,7 +118,7 @@ public class DatabaseHelper {
                                 }
                             }, usuarioAdulto.getIdServidor());
                         }else{
-                            Log.i("Respuesta de servidor","No hay respuesta");
+                            Log.i("Respuest de servidor AD","No hay respuesta");
                         }
                         volleyCallBack.onSuccess(response);
                     }
@@ -131,7 +126,7 @@ public class DatabaseHelper {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.i("ERROR: Respuesta: ",error.toString());
+                        Log.i("ERROR: Respuesta AD: ",error.toString());
                         volleyCallBack.onSuccess(error.toString());
                     }
                 }){
@@ -148,7 +143,7 @@ public class DatabaseHelper {
         };
         requestQueue.add(request);
     }
-    public void addActividad(final VolleyCallBack volleyCallBack,Actividad act,int ninoID){
+    public void addActividad(final VolleyCallBack volleyCallBack,Actividad act,UsuarioNino nino){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 ADD_ACTIVIDAD_URL,
@@ -167,7 +162,7 @@ public class DatabaseHelper {
                                     public void onSuccess(String result) {
 
                                     }
-                                }, ninoID);
+                                }, nino);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -180,7 +175,7 @@ public class DatabaseHelper {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.i("ERROR: Respuesta: ",error.toString());
+                        Log.i("ERROR: Respuesta AA: ",error.toString());
                         volleyCallBack.onSuccess(error.toString());
                     }
                 }){
@@ -188,10 +183,11 @@ public class DatabaseHelper {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> parametros = new HashMap<String,String>();
                 parametros.put("modelo",act.getImagen());
-                parametros.put("local_id", String.valueOf(act.getId()));
-                parametros.put("fecha", "21_12_2022");
-                parametros.put("calificacion", String.valueOf(act.getPuntuacion()));
-                parametros.put("nino_id", String.valueOf(ninoID));
+                parametros.put("local_id", String.valueOf(act.getIdLocal()));
+                parametros.put("fecha", act.getFecha());
+                parametros.put("calificacion", String.valueOf(act.getCalificacion()));
+                parametros.put("nino_id", String.valueOf(nino.getIdServidor()));
+                parametros.put("nino_id_local", String.valueOf(nino.getIdLocal()));
                 return parametros;
             }
         };
@@ -224,14 +220,14 @@ public class DatabaseHelper {
                             SharedPreferencesHelper.setUsuarioAdulto(Herramientas.mainActivity,usuario);
                         }
                         UsuarioAdulto usuario = SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity);
-                        ArrayList<UsuarioNino>usuarioNinos = SharedPreferencesHelper.getUsuarios(Herramientas.mainActivity);
+                        ArrayList<UsuarioNino>usuarioNinos = SharedPreferencesHelper.getUsuarios();
                         for(int j=0;j<usuarioNinos.size();j++){
                             usuarioNinos.get(j).setIdAdulto(usuario.getIdServidor());
-                            SharedPreferencesHelper.updateUsuario(Herramientas.mainActivity,usuarioNinos.get(j));
                         }
+                        SharedPreferencesHelper.updateUsuario(usuarioNinos);
 
                     }else{
-                        Log.i("Mensaje de servidor",obj.getString("mensaje"));
+                        Log.i("Mensaje de servidor RU",obj.getString("mensaje"));
                         addUsuario(user, new VolleyCallBack() {
                             @Override
                             public void onSuccess(String result) {
@@ -321,7 +317,7 @@ public class DatabaseHelper {
                 READ_NINO_URL,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i("Respuesta de servidor",response);
+                Log.i("Respuest de servidor RN",response);
                 ArrayList<UsuarioNino> usuarios = new ArrayList<>();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -340,23 +336,25 @@ public class DatabaseHelper {
                             int usuario_id= object.getInt("usuario_id");
                             usuarios.add(new UsuarioNino(id,perfil,nombre,apellido,edad,usuario_id));
                         }
-                        ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios(Herramientas.mainActivity);
-                        for(int i=0; i<users.size();i++){
-                            for(int j=0;j<usuarios.size();j++) {
-                                if (users.get(i).getNombre().toString().equals(usuarios.get(j).getNombre().toString()) && users.get(i).getApellido().toString().equals(usuarios.get(j).getApellido().toString())){
-                                    users.get(i).setIdServidor(usuarios.get(j).getIdServidor());
-                                }
+                        SharedPreferencesHelper.updateUsuario(usuarios);
+                        ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios();
+                        for(int i=0;i<users.size();i++){
+                            if(users.get(i).getIdServidor()==0){
+                                addNino(new VolleyCallBack() {
+                                    @Override
+                                    public void onSuccess(String result) {
+
+                                    }
+                                },users.get(i));
                             }
                         }
-                        SharedPreferencesHelper.setUsuarios(Herramientas.mainActivity,users);
                     }else{
-                        Log.i("Mensaje de servidor", obj.getString("mensaje"));
-                        ArrayList<UsuarioNino> usuariosLocal = SharedPreferencesHelper.getUsuarios(Herramientas.mainActivity);
+                        Log.i("Mensaje de servidor RN", obj.getString("mensaje"));
+                        ArrayList<UsuarioNino> usuariosLocal = SharedPreferencesHelper.getUsuarios();
                         for(int i=0; i<usuariosLocal.size();i++){
                             addNino(new VolleyCallBack() {
                                 @Override
                                 public void onSuccess(String result) {
-
                                 }
                             }, usuariosLocal.get(i));
                         }
@@ -370,7 +368,7 @@ public class DatabaseHelper {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.i("Error de servidor",error.toString());
+                        Log.i("Error de servidor RN",error.toString());
                         volleyCallBack.onSuccess(error.toString());
                     }
                 }) {
@@ -410,7 +408,7 @@ public class DatabaseHelper {
                             aux.setIdLocal(i+1);
                             usuarios.add(aux);
                         }
-                        SharedPreferencesHelper.setUsuarios(Herramientas.mainActivity,usuarios);
+                        SharedPreferencesHelper.setUsuarios(usuarios);
                         SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarios.get(0));
                         callBack.onSuccess(response);
 
@@ -439,13 +437,13 @@ public class DatabaseHelper {
         requestQueue.add(request);
     }
 
-    public  void readActividad(final VolleyCallBack volleyCallBack,int idNino){
+    public  void readActividad(final VolleyCallBack volleyCallBack,UsuarioNino nino){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 READ_ACTIVIDAD_URL,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i("Respuesta de servidor",response);
+                Log.i("Respuest de servidor RA",response);
                 ArrayList<Actividad> actividades = new ArrayList<>();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -461,40 +459,41 @@ public class DatabaseHelper {
                             String fecha = object.getString("fecha");
                             int calificacion = object.getInt("calificacion");
                             int nino_id = object.getInt("nino_id");
-                            actividades.add(new Actividad(id,local_id, modelo, fecha, calificacion, nino_id));
+                            int nino_id_local = object.getInt("nino_id_local");
+                            actividades.add(new Actividad(local_id,id, nino_id,nino_id_local,modelo,calificacion,fecha));
                         }
-                        UsuarioNino aux = SharedPreferencesHelper.getUsuarioByIdServer(Herramientas.mainActivity,idNino);
-                        ArrayList<Actividad> acts = aux.getActividades();
-                        for(int i=0;i<acts.size();i++){
-                            for(int j=0;j<actividades.size();j++) {
-                                if (acts.get(i).getId() == actividades.get(j).getId()){
-                                    acts.get(i).setIdServidor(actividades.get(j).getIdServidor());
+                        ArrayList<Actividad> acts = SharedPreferencesHelper.getActividades(nino.getIdLocal());
+                        Log.i("ACTS EN READACT",""+acts.size());
+                        for(int i=0;i<actividades.size();i++){
+                            for(int j=0;j<acts.size();j++) {
+                                if (actividades.get(i).getIdLocal()==acts.get(j).getIdLocal()){
+                                    acts.get(j).setIdServidor(actividades.get(i).getIdServidor());
                                 }
                             }
                         }
-                        aux.setActividades(acts);
-                        SharedPreferencesHelper.setUsuario(Herramientas.mainActivity,aux);
-                        for(int i=0;i<acts.size();i++){
-                            if (acts.get(i).getIdServidor() == 0){
+                        SharedPreferencesHelper.updateActividades(nino.getIdLocal(),acts);
+
+                        ArrayList<Actividad> activities = SharedPreferencesHelper.getActividades(nino.getIdLocal());
+                        for(int x=0;x<activities.size();x++){
+                            if(activities.get(x).getIdServidor()==0){
+                                addActividad(new VolleyCallBack() {
+                                    @Override
+                                    public void onSuccess(String result) {
+                                    }
+                                },activities.get(x),nino);
+                            }
+                        }
+                    }else{
+                        ArrayList<Actividad> activities = SharedPreferencesHelper.getActividades(nino.getIdLocal());
+                        Log.i("TAM. ACTIVIDADES::",""+activities.size());
+                        for(int k=0;k<activities.size();k++) {
+                            Log.i("ACTIVIDAD::",""+activities.get(k).getIdLocal());
                                 addActividad(new VolleyCallBack() {
                                     @Override
                                     public void onSuccess(String result) {
 
                                     }
-                                }, acts.get(i), aux.getIdServidor());
-                            }
-                        }
-
-                    }else{
-                        UsuarioNino aux = SharedPreferencesHelper.getUsuarioByIdServer(Herramientas.mainActivity,idNino);
-                        ArrayList<Actividad> activities = aux.getActividades();
-                        for(int k=0;k<activities.size();k++) {
-                            addActividad(new VolleyCallBack() {
-                                @Override
-                                public void onSuccess(String result) {
-
-                                }
-                            }, activities.get(k), aux.getIdServidor());
+                                }, activities.get(k), nino);
                         }
 
                     }
@@ -514,7 +513,7 @@ public class DatabaseHelper {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("id", String.valueOf(idNino));
+                parametros.put("id", String.valueOf(nino.getIdServidor()));
                 return parametros;
             }
         };
@@ -545,13 +544,14 @@ public class DatabaseHelper {
                             String fecha = object.getString("fecha");
                             int calificacion = object.getInt("calificacion");
                             int nino_id = object.getInt("nino_id");
-                            Actividad aux = new Actividad(id,local_id,modelo,fecha,calificacion,nino_id);
+                            int nino_id_local = object.getInt("nino_id_local");
+
+                            Actividad aux = new Actividad(local_id,id, nino_id,nino_id_local,modelo,calificacion,fecha);
                             actividades.add(aux);
                         }
                         UsuarioNino aux = SharedPreferencesHelper.getUsuarioByIdServer(Herramientas.mainActivity,idNino);
-                        aux.setActividades(actividades);
-                        SharedPreferencesHelper.updateUsuariobyId(Herramientas.mainActivity,aux);
                         SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,aux);
+                        SharedPreferencesHelper.updateActividades(idNino,actividades);
                         callBack.onSuccess(response);
                     }else{
                         //Log.i("Mensaje de servidor ", obj.getString("mensaje"));
@@ -590,14 +590,14 @@ public class DatabaseHelper {
                 readNino(new VolleyCallBack() {
                     @Override
                     public void onSuccess(String result) {
-                        ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios(Herramientas.mainActivity);
+                        ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios();
                         for(int i=0; i<users.size();i++) {
                             readActividad(new VolleyCallBack() {
                                 @Override
                                 public void onSuccess(String result) {
                                     progressBar.setVisibility(View.GONE);
                                 }
-                            },users.get(i).getIdServidor());
+                            },users.get(i));
                         }
                     }
                 }, usuario.getIdServidor());
@@ -615,7 +615,7 @@ public class DatabaseHelper {
                 foundNino(new VolleyCallBack() {
                     @Override
                     public void onSuccess(String result) {
-                        ArrayList<UsuarioNino> usuarios= SharedPreferencesHelper.getUsuarios(Herramientas.mainActivity);
+                        ArrayList<UsuarioNino> usuarios= SharedPreferencesHelper.getUsuarios();
                         for(int i=0;i<usuarios.size();i++) {
                             foundActividad(new VolleyCallBack() {
                                 @Override

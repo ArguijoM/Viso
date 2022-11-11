@@ -40,4 +40,5 @@
     <dimen name="actividad_titulo03">20dp</dimen>
     <dimen name="actividad_padding_button">40dp</dimen>
     <dimen name="actividad_padding_button_layout">10dp</dimen>
+
 </resources>

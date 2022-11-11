@@ -98,9 +98,11 @@
     </string>
 
     <string name="instruccion">Asegúrate que la habitación esté bien iluminada</string>
-    <string name="instruccion2">Al tomar la foto que tu celular este verticalmente</string>
+    <string name="instruccion2">Usa tu celular verticalmente al tomar la foto</string>
     <string name="instruccion3">No puedes utilizar regla o compás</string>
     <string name="instruccion3_2">Únicamente tu lápiz</string>
+    <string name="instruccion4">Si la imágen no se ve bien</string>
+    <string name="instruccion4_2">inténtalo de nuevo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
