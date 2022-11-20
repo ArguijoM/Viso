@@ -8,12 +8,19 @@
     android:id="@+id/fragment_registro"
     tools:context=".ui.cuenta.registro.adulto.CuentaRegistroAdultoFragment2"
     android:background="@color/primary01">
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/registro_progessbar"/>
+
     <LinearLayout
         android:layout_width="@dimen/main_layout_width"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:gravity="center|top"
+        android:paddingTop="@dimen/text_03"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

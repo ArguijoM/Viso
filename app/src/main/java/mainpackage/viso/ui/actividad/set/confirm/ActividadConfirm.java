@@ -83,39 +83,11 @@ public class ActividadConfirm extends AppCompatActivity implements View.OnClickL
         bitmap = Bitmap.createScaledBitmap(bitmap,500,Herramientas.getHeight(id),false);
         Log.i("IMAGEN FINAL","ANCHO "+bitmap.getWidth()+" ALTO "+bitmap.getHeight());
         int calif=Herramientas.calificar(bitmap,id);
-        //Bitmap bm = Herramientas.recrearCuadrante(instancia);
-        //int resourceId = Herramientas.mainActivity.getResources().getIdentifier("act_" + id, "raw", Herramientas.mainActivity.getPackageName());
-        //Bitmap bm2 = Herramientas.recrearCuadrante(Herramientas.getActivityInstance(resourceId));
-        //Log.i("Imagen Tomada","Ancho: "+bm.getWidth()+" Alto: "+bm.getHeight());
-
-        //img_tomada.setImageBitmap(bm);
-        //img_muestra.setImageBitmap(bm2);
-        //Log.i("Imagen de muestra","Ancho: "+bm2.getWidth()+" Alto: "+bm2.getHeight());
-
         Actividad act = new Actividad(id,0,usuarioActual.getIdServidor(),usuarioActual.getIdLocal(),crearImagenString(bitmap),calif, Calendar.getInstance().getTime().toString());
         SharedPreferencesHelper.addActividad(act);
         sound.playDoneSound();
         Intent intent = new Intent(ActividadConfirm.this, ActividadDone.class);
         startActivity(intent);
-       /* new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(ActividadConfirm.this, ActividadDone.class);
-                startActivity(intent);
-            }
-            },5000);*/
-
-        /*String path = Herramientas.saveToInternalStorage(bitmap,name);
-        Actividad act = new Actividad(id, path, name);
-        usuarioActual.setActividad(act);
-        SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarioActual);
-        SharedPreferencesHelper.updateUsuario(Herramientas.mainActivity,usuarioActual);
-        ActividadFragment fragment = new ActividadFragment();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.nav_host_fragment_content_main,fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();*/
     }
     public static String crearImagenString(Bitmap image){
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

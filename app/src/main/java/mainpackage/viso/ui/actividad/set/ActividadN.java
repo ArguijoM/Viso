@@ -70,8 +70,6 @@ public class ActividadN extends AppCompatActivity {
         });
     }
     private void tomarFoto(){
-
-
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File photoFile = null;
         try {
@@ -88,8 +86,6 @@ public class ActividadN extends AppCompatActivity {
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             startActivityForResult(takePictureIntent, 1);
         }
-
-
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

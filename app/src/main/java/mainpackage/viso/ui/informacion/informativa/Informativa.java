@@ -119,6 +119,12 @@ public class Informativa extends AppCompatActivity {
             case 4:
                 opcion_title.setText(R.string.informacion_item04_titulo);
                 opcion_text.setText(R.string.informacion_item04_text01);
+                opcion_text2.setText(R.string.informacion_item04_text02);
+                opcion_image.setImageResource(R.drawable.vmi_table);
+                break;
+            case 5:
+                opcion_title.setText(R.string.informacion_item05_titulo);
+                opcion_text.setText(R.string.informacion_item05_text01);
                 opcion_image.setImageResource(R.drawable.ic_main_2);
                 break;
         }

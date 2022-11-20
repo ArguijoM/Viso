@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:id="@+id/info_item_title"
+                android:fontFamily="@font/autour_one"
                 android:textSize="@dimen/text_04"
                 android:textColor="@color/white"
                 android:text="@string/informacion_item01_titulo">

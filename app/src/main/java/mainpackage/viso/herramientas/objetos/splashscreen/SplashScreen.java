@@ -11,9 +11,11 @@ import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 
+import mainpackage.viso.MainActivity;
 import mainpackage.viso.R;
 import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.ui.actividad.set.confirm.ActividadConfirm;
@@ -40,29 +42,34 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                try {
+                    //loading.startAnimation(animation);
+                    BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+                    //DESCOMENTAR ESTO
+                    Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath,bmOptions);
 
+                    Matrix matrix = new Matrix();
+                    matrix.postRotate(90);
+                    Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
-                //loading.startAnimation(animation);
-                BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-                //DESCOMENTAR ESTO
-                Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath,bmOptions);
+                    Bitmap btm_reduce = Bitmap.createScaledBitmap(rotatedBitmap, 500, Herramientas.getHeight(id), false);
+                    Bitmap btm_bw = Herramientas.blanco_y_negro(btm_reduce);
+                    Bitmap btm_new = Herramientas.recortarImagen(btm_bw);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    btm_new.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byte[] byteArray = stream.toByteArray();
 
+                    Intent intent2 = new Intent(SplashScreen.this, ActividadConfirm.class);
+                    intent2.putExtra("id", id);
+                    intent2.putExtra("img", byteArray);
+                    startActivity(intent2);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),"Ha ocurrido un error, inténtelo de nuevo", Toast.LENGTH_LONG).show();
+                    Intent intent2 = new Intent(SplashScreen.this, MainActivity.class);
+                    startActivity(intent2);
+                }
 
-                Matrix matrix = new Matrix();
-                matrix.postRotate(90);
-                Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-
-                Bitmap btm_reduce = Bitmap.createScaledBitmap(rotatedBitmap, 500, Herramientas.getHeight(id), false);
-                Bitmap btm_bw = Herramientas.blanco_y_negro(btm_reduce);
-                Bitmap btm_new = Herramientas.recortarImagen(btm_bw);
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                btm_new.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
-
-                Intent intent2 = new Intent(SplashScreen.this, ActividadConfirm.class);
-                intent2.putExtra("id", id);
-                intent2.putExtra("img", byteArray);
-                startActivity(intent2);
 
             }
         },3000);

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import mainpackage.viso.R;
@@ -25,24 +26,25 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.ArrayList;
 
 import mainpackage.viso.databinding.FragmentRegistroNinoBinding;
+import mainpackage.viso.herramientas.DatabaseHelper;
 import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
+import mainpackage.viso.herramientas.VolleyCallBack;
 import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
 import mainpackage.viso.ui.inicio.InicioFragment;
 
 public class CuentaRegistroNinoFragment extends Fragment implements View.OnClickListener {
-    private CuentaRegistroNinoViewModel cuentaRegistroshowViewModel;
     private FragmentRegistroNinoBinding binding;
     private Button btn_siguiente;
     private ImageView imageViewBoy, imageViewGirl;
     private LinearLayout layoutboy,layoutgirl;
+    private ProgressBar progressBar;
     private ArrayList<UsuarioNino> usuarios;
     private int auxboy=0,auxgirl=0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        cuentaRegistroshowViewModel = new ViewModelProvider(this).get(CuentaRegistroNinoViewModel.class);
 
         binding = FragmentRegistroNinoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -50,7 +52,8 @@ public class CuentaRegistroNinoFragment extends Fragment implements View.OnClick
         (layoutgirl = (LinearLayout) root.findViewById(R.id.layout_girl)).setBackground(getResources().getDrawable(R.drawable.customborder2));
         (imageViewBoy = (ImageView)root.findViewById(R.id.user_image_boy)).setOnClickListener(this);
         (imageViewGirl=(ImageView)root.findViewById(R.id.user_image_girl)).setOnClickListener(this);
-
+        progressBar = (ProgressBar)root.findViewById(R.id.registro_nino_progessbar);
+        progressBar.setVisibility(View.GONE);
         this.usuarios = SharedPreferencesHelper.getUsuarios();
         if(usuarios!=null) {
             String uriboy = "@drawable/ic_boy"+boyCount();
@@ -83,12 +86,27 @@ public class CuentaRegistroNinoFragment extends Fragment implements View.OnClick
                             usuarioNino.setProfile("M Y "+girlCount());
                         }
                         UsuarioAdulto usuarioAdulto = SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity);
-                        usuarioNino.setIdAdulto(usuarioAdulto.getIdLocal());
+                        usuarioNino.setIdAdulto(usuarioAdulto.getIdServidor());
 
                         SharedPreferencesHelper.setUsuario(usuarioNino);
-                        UsuarioNino usuarioNino2 = SharedPreferencesHelper.getUsuario(usuarioNino.getNombre());
-                        SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarioNino2);
-                        toMain();
+                        SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarioNino);
+                        DatabaseHelper db = new DatabaseHelper(getContext(),progressBar);
+                        db.addNino(new VolleyCallBack() {
+                            @Override
+                            public void onSuccess(String result) {
+                                db.readNino(new VolleyCallBack() {
+                                    @Override
+                                    public void onSuccess(String result) {
+                                        if((SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity)).getIdServidor()!=0) {
+                                            progressBar.setVisibility(View.GONE);
+                                            toMain();
+                                        }
+                                    }
+                                },SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity).getIdServidor());
+
+                            }
+                        },usuarioNino);
+
                     }else {
                         Toast.makeText(getContext(),"Ingrese la información solicitada",Toast.LENGTH_LONG).show();
                     }

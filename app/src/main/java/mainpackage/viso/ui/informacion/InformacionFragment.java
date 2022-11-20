@@ -18,7 +18,7 @@ import mainpackage.viso.ui.informacion.informativa.Informativa;
 public class InformacionFragment extends Fragment implements View.OnClickListener {
 
     private FragmentInformacionBinding binding;
-    LinearLayout info_item01,info_item02,info_item03,info_item04;
+    LinearLayout info_item01,info_item02,info_item03,info_item04,info_item05;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -28,6 +28,8 @@ public class InformacionFragment extends Fragment implements View.OnClickListene
         (info_item02 = (LinearLayout) root.findViewById(R.id.info_item02)).setOnClickListener(this);
         (info_item03 = (LinearLayout) root.findViewById(R.id.info_item03)).setOnClickListener(this);
         (info_item04 = (LinearLayout) root.findViewById(R.id.info_item04)).setOnClickListener(this);
+        (info_item05 = (LinearLayout) root.findViewById(R.id.info_item05)).setOnClickListener(this);
+
 
 
         return root;
@@ -62,6 +64,11 @@ public class InformacionFragment extends Fragment implements View.OnClickListene
                 Intent intent4 = new Intent(getActivity(), Informativa.class);
                 intent4.putExtra("id", 4);
                 startActivity(intent4);
+                break;
+            case R.id.info_item05:
+                Intent intent5 = new Intent(getActivity(), Informativa.class);
+                intent5.putExtra("id", 5);
+                startActivity(intent5);
                 break;
         }
     }

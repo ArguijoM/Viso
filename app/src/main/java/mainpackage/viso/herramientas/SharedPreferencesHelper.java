@@ -351,9 +351,10 @@ public class SharedPreferencesHelper {
         );
     }
     public static void setUsuarioActual(Activity act, UsuarioNino usuarioActual){
+        UsuarioNino aux = getUsuario(usuarioActual.getNombre());
         SharedPreferences sharedPreferences = act.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor shardPreferencesEditor = sharedPreferences.edit();
-        String jsonUser = new Gson().toJson(usuarioActual);
+        String jsonUser = new Gson().toJson(aux);
         shardPreferencesEditor.putString("usuarioActual", jsonUser).commit();
     }
     public static void setUsuarioAdulto(Activity act, UsuarioAdulto usuarioAdulto){

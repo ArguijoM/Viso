@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -33,6 +34,7 @@ public class DatabaseHelper {
     private final static String READ_USUARIO_URL= "https://enviomailprueba.000webhostapp.com/crud/readUsuario.php";
     private final static String READ_NINO_URL= "https://enviomailprueba.000webhostapp.com/crud/readNino.php";
     private final static String READ_ACTIVIDAD_URL= "https://enviomailprueba.000webhostapp.com/crud/readActividad.php";
+
     private RequestQueue requestQueue;
     private SQLiteHelper myDB;
     private ProgressBar progressBar;
@@ -43,6 +45,7 @@ public class DatabaseHelper {
     }
 
     public void addUsuario(UsuarioAdulto user, final VolleyCallBack volleyCallBack){
+        progressBar.setVisibility(View.VISIBLE);
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 ADD_USUARIO_URL,
@@ -59,11 +62,6 @@ public class DatabaseHelper {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            readUsuario(new VolleyCallBack() {
-                                @Override
-                                public void onSuccess(String result) {
-                                }
-                            }, user);
                         }else{
                             Log.i("Respuest de servidor AU","No hay respuesta");
                         }
@@ -74,6 +72,7 @@ public class DatabaseHelper {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i("ERROR: Respuesta AU: ",error.toString());
+                        Toast.makeText(Herramientas.mainActivity,"Ocurrió un error, revise su conexión de internet",Toast.LENGTH_LONG).show();
                         volleyCallBack.onSuccess(error.toString());
                     }
                 }){
@@ -90,6 +89,7 @@ public class DatabaseHelper {
         requestQueue.add(request);
     }
     public void addNino(final VolleyCallBack volleyCallBack,UsuarioNino user){
+        progressBar.setVisibility(View.VISIBLE);
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 ADD_NINO_URL,
@@ -106,16 +106,10 @@ public class DatabaseHelper {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            UsuarioAdulto usuarioAdulto = SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity);
-                            readNino(new VolleyCallBack() {
-                                @Override
-                                public void onSuccess(String result) {
-
-                                }
-                            }, usuarioAdulto.getIdServidor());
                         }else{
                             Log.i("Respuest de servidor AD","No hay respuesta");
                         }
+
                         volleyCallBack.onSuccess(response);
                     }
                 },
@@ -123,6 +117,7 @@ public class DatabaseHelper {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i("ERROR: Respuesta AD: ",error.toString());
+                        Toast.makeText(Herramientas.mainActivity,"Ocurrió un error, revise su conexión de internet",Toast.LENGTH_LONG).show();
                         volleyCallBack.onSuccess(error.toString());
                     }
                 }){
@@ -190,6 +185,7 @@ public class DatabaseHelper {
         requestQueue.add(request);
     }
 
+
     public void readUsuario(final VolleyCallBack volleyCallBack,UsuarioAdulto user){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
@@ -215,21 +211,7 @@ public class DatabaseHelper {
                             usuario.setIdServidor(id);
                             SharedPreferencesHelper.setUsuarioAdulto(Herramientas.mainActivity,usuario);
                         }
-                        UsuarioAdulto usuario = SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity);
-                        ArrayList<UsuarioNino>usuarioNinos = SharedPreferencesHelper.getUsuarios();
-                        for(int j=0;j<usuarioNinos.size();j++){
-                            usuarioNinos.get(j).setIdAdulto(usuario.getIdServidor());
-                        }
-                        SharedPreferencesHelper.updateUsuario(usuarioNinos);
 
-                    }else{
-                        Log.i("Mensaje de servidor RU",obj.getString("mensaje"));
-                        addUsuario(user, new VolleyCallBack() {
-                            @Override
-                            public void onSuccess(String result) {
-
-                            }
-                        });
                     }
                     volleyCallBack.onSuccess(response);
                 } catch (JSONException e) {
@@ -336,27 +318,7 @@ public class DatabaseHelper {
                             usuarios.add(new UsuarioNino(id,nombre,apellido,edad,usuario_id,perfil));
                         }
                         SharedPreferencesHelper.updateUsuario(usuarios);
-                        ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios();
-                        for(int i=0;i<users.size();i++){
-                            if(users.get(i).getIdServidor()==0){
-                                addNino(new VolleyCallBack() {
-                                    @Override
-                                    public void onSuccess(String result) {
-
-                                    }
-                                },users.get(i));
-                            }
-                        }
-                    }else{
-                        Log.i("Mensaje de servidor RN", obj.getString("mensaje"));
-                        ArrayList<UsuarioNino> usuariosLocal = SharedPreferencesHelper.getUsuarios();
-                        for(int i=0; i<usuariosLocal.size();i++){
-                            addNino(new VolleyCallBack() {
-                                @Override
-                                public void onSuccess(String result) {
-                                }
-                            }, usuariosLocal.get(i));
-                        }
+                        SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarios.get(0));
                     }
                     volleyCallBack.onSuccess(response);
                 } catch (JSONException e) {
@@ -487,12 +449,12 @@ public class DatabaseHelper {
                         Log.i("TAM. ACTIVIDADES::",""+activities.size());
                         for(int k=0;k<activities.size();k++) {
                             Log.i("ACTIVIDAD::",""+activities.get(k).getIdLocal());
-                                addActividad(new VolleyCallBack() {
-                                    @Override
-                                    public void onSuccess(String result) {
+                            addActividad(new VolleyCallBack() {
+                                @Override
+                                public void onSuccess(String result) {
 
-                                    }
-                                }, activities.get(k), nino);
+                                }
+                            }, activities.get(k), nino);
                         }
 
                     }

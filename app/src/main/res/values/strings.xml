@@ -51,44 +51,61 @@
         para el aprendizaje de la escritura. Guayaquil. Ecuador: Universidad y Sociedad.
     </string>
 
-    <string name="informacion_item02_titulo">Test VMI</string>
+    <string name="informacion_item02_titulo">Test de Bender</string>
     <string name="informacion_item02">¿Que es el test de Bender?</string>
-    <string name="informacion_item02_text01">El VMI (Visual Motor Integration Test). Se trata de
-        un examen estandarizado de integración viso-motora, está diseñado para niños de entre 3 a 17
-        años y consiste en que el niño replique una serie de figuras geométricas dadas, es el test
-        más investigado, y considerado como más valido, de su clase. </string>
-    <string name="informacion_item02_text02">
-        Se puede utilizar para determinar la presencia y grado de dificultades visuales y
-        motrices en los niños, así como identificar a los niños que deben ser referidos a un
-        profesional de la salud para diagnóstico y tratamiento.
-    </string>
+
     <string name="informacion_item02_referencia">
         Bosque, S. G. (2011). Estudio de la Integración Visuomotora en Niños con Altas Capacidades
         Intelectuales. Alicante,España: Universidad de Alicante.
     </string>
-
-    <string name="informacion_item03_titulo">Test VMI</string>
-    <string name="informacion_item03">¿Que es el test VMI?</string>
-    <string name="informacion_item03_text01">
+    <string name="informacion_item02_text01">
         El test de Bender es un test vinculado a la psicología gestáltica usada para evaluar
         el desarrollo de la inteligencia en los niños, así como posibles trastornos y discapacidades
         que puedan presentar. Consiste en que el niño replique una serie de figuras geométricas dadas.
     </string>
-    <string name="informacion_item03_text02">
+    <string name="informacion_item02_text02">
         La Dra. Bender encontró que la percepción y la reproducción de las figuras varía en función
         del nivel de maduración y desarrollo de cada individuo y de las alteraciones o trastornos
         neurológicos, determinando que la mayoría de los niños sin alteraciones neurológicas, a los
         once años son capaces de copiar las nueve figuras propuestas en el test de Bender sin errores
     </string>
+
+    <string name="informacion_item03_titulo">Test VMI</string>
+    <string name="informacion_item03">¿Que es el test VMI?</string>
+    <string name="informacion_item03_text01">El VMI (Visual Motor Integration Test). Se trata de
+        un examen estandarizado de integración viso-motora, está diseñado para niños de entre 3 a 17
+        años y consiste en que el niño replique una serie de figuras geométricas dadas, es el test
+        más investigado, y considerado como más valido, de su clase. </string>
+    <string name="informacion_item03_text02">
+        Se puede utilizar para determinar la presencia y grado de dificultades visuales y
+        motrices en los niños, así como identificar a los niños que deben ser referidos a un
+        profesional de la salud para diagnóstico y tratamiento.
+    </string>
+
     <string name="informacion_item03_referencia">
         Merino, C. (2013). Test gestáltico bender modificado y vmi-4: comparación de la validez
         incremental. Perú: Universidad de San Martín de Porres.
     </string>
 
 
-    <string name="informacion_item04_titulo">Acerca de esta aplicación</string>
-    <string name="informacion_item04">Acerca de esta aplicación</string>
+    <string name="informacion_item04_titulo">¿Cómo se evaluan las actividades?</string>
+    <string name="informacion_item04">Evaluación de las actividades</string>
     <string name="informacion_item04_text01">
+        Las puntuaciones del test Beery VMI son esencialmente las mismas usadas en las ediciones previas
+        (un punto por cada ítem imitado o copiado, deteniéndose al obtener tres fallos consecutivos) Para
+        obtener un puntaje bruto, el número de elementos que no se han completado con éxito antes de
+        este límite máximo de tres fallos consecutivos se resta del tope. Por ejemplo, si un niño falla los
+        ítems 5, 8, y 11, su puntaje bruto es 11.
+    </string>
+    <string name="informacion_item04_text02">
+        En base al puntaje bruto, podemos determinar si está a corde con su edad biológica.
+        Estar por debajo de la edad mostrada en la tabla podría significar que hay un problema
+        con sus habilidades viso motrices.
+    </string>
+
+    <string name="informacion_item05_titulo">Acerca de esta aplicación</string>
+    <string name="informacion_item05">Acerca de esta aplicación</string>
+    <string name="informacion_item05_text01">
       Un mal desarrollo del sistema visor-motriz repercute en gran medida con el
         desempeño académico de los niños en los primeros años escolares ya que para lograr una
         escritura satisfactoria implica una serie de movimientos controlados y deliberados que

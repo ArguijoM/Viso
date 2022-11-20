@@ -124,34 +124,19 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getContext(),"Copia de seguridad generada",Toast.LENGTH_SHORT).show();
                             DatabaseHelper db = new DatabaseHelper(getContext(),progressBar);
-                            progressBar.setVisibility(View.VISIBLE);
-                            db.readUsuario(new VolleyCallBack() {
-                                @Override
-                                public void onSuccess(String result) {
-                                    UsuarioAdulto usuario = SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity);
-                                    db.readNino(new VolleyCallBack() {
-                                        @Override
-                                        public void onSuccess(String result) {
-                                            ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios();
-                                            Log.i("USUARIOS CONIFG::",""+users.size());
-                                            for(int i=0; i<users.size();i++) {
-                                                db.readActividad(new VolleyCallBack() {
-                                                    @Override
-                                                    public void onSuccess(String result) {
-                                                        progressBar.setVisibility(View.GONE);
-                                                        Toast.makeText(getContext(),"Copia de seguridad generada",Toast.LENGTH_SHORT).show();
-                                                        ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios();
-                                                        SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,users.get(0));
-
-                                                    }
-                                                },users.get(i));
-                                            }
-                                        }
-                                    }, usuario.getIdServidor());
-                                }
-                            },SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity));
+                            ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios();
+                            Log.i("USUARIOS CONIFG::",""+users.size());
+                            for(int i=0; i<users.size();i++) {
+                                db.readActividad(new VolleyCallBack() {
+                                    @Override
+                                    public void onSuccess(String result) {
+                                        progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(getContext(),"Copia de seguridad generada",Toast.LENGTH_SHORT).show();
+                                    }
+                                },users.get(i));
+                            }
+                            //Toast.makeText(getContext(),"No hay actividades para guardar",Toast.LENGTH_LONG).show();
                         }
                     })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -228,6 +213,16 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                 fragmentTransaction.commit();
                 break;
         }
+    }
+    public void generarActividades(ProgressBar progressBar,UsuarioNino user){
+        DatabaseHelper db = new DatabaseHelper(getContext(),progressBar);
+            db.readActividad(new VolleyCallBack() {
+                @Override
+                public void onSuccess(String result) {
+                    ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios();
+                    SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,users.get(0));
+                }
+            },user);
     }
     public void generatePDF(UsuarioNino usuarioActual) {
         try {

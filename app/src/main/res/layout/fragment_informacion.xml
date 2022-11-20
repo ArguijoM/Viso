@@ -97,6 +97,30 @@
             android:paddingTop="@dimen/text_03"
             android:id="@+id/info_item04"
             android:paddingRight="@dimen/text_03">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_paint" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/autour_one"
+                android:gravity="left"
+                android:paddingLeft="@dimen/text_02"
+                android:text="@string/informacion_item04"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_03" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/customborder3"
+            android:gravity="center"
+            android:paddingLeft="@dimen/text_03"
+            android:paddingTop="@dimen/text_03"
+            android:id="@+id/info_item05"
+            android:paddingRight="@dimen/text_03">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -109,7 +133,7 @@
                 android:fontFamily="@font/autour_one"
                 android:gravity="left"
                 android:paddingLeft="@dimen/text_02"
-                android:text="@string/informacion_item04"
+                android:text="@string/informacion_item05"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_03" />
         </LinearLayout>
