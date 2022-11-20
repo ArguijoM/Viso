@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Base64;
@@ -49,13 +50,21 @@ public class ActividadShow extends AppCompatActivity {
         int imageResource = getResources().getIdentifier(uri, null, this.getPackageName());
         Drawable res = getResources().getDrawable(imageResource);
         img_muestra.setImageDrawable(res);
-        Log.i("ImagenString: ",act.get(id-1).getImagen());
         img_tomada.setImageBitmap(getImagenActividad(id));
         textView = (TextView)findViewById(R.id.act_show_realizada);
         calificacion =findViewById(R.id.textView_calif);
-        calificacion.setText(""+act.get(id-1).getCalificacion());
+        boolean calif =Herramientas.getEvaluacion(id,usuarioActual.getEdad(),act.get(id-1).getCalificacion());
+        Log.i("Valor",""+calif);
+        if(calif==true){
+            //calificacion.setText(""+act.get(id-1).getCalificacion());
+            calificacion.setText("VALIDA");
+            calificacion.setTextColor(Color.parseColor("#00FF00"));
 
-        textView.setText(textView.getText()+" || "+act.get(id-1).getIdServidor());
+        }else{
+            //calificacion.setText(""+act.get(id-1).getCalificacion());
+            calificacion.setText("NO VALIDA");
+            calificacion.setTextColor(Color.parseColor("#FF0000"));
+        }
     }
     public Bitmap getImagenActividad(int id){
         if((id-1)>=0){

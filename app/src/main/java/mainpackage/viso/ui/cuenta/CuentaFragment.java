@@ -23,21 +23,21 @@ import mainpackage.viso.databinding.FragmentCuentaBinding;
 import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
 import mainpackage.viso.herramientas.objetos.Actividad;
+import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
 import mainpackage.viso.ui.cuenta.lista.CuentaListaFragment;
 
 public class CuentaFragment extends Fragment {
 
-    private CuentaViewModel cuentaViewModel;
     private FragmentCuentaBinding binding;
     private Button btn_cambiar_usuario;
     private UsuarioNino usuarioActual;
+    private UsuarioAdulto usuarioAdulto;
     private ArrayList<Actividad> actividades;
     private int id;
     private ImageView profile;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        cuentaViewModel = new ViewModelProvider(this).get(CuentaViewModel.class);
 
         binding = FragmentCuentaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -48,6 +48,7 @@ public class CuentaFragment extends Fragment {
         }
         usuarioActual = SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
         actividades =SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
+        usuarioAdulto = SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity);
         profile = (ImageView)root.findViewById(R.id.img_profile);
         int realizadas=0, faltantes=0;
         if(actividades==null){
@@ -67,11 +68,10 @@ public class CuentaFragment extends Fragment {
                 profile.setImageDrawable(drawablegirl);
             }
         }
-        ((TextView)root.findViewById(R.id.nombre_adulto)).setText(cuentaViewModel.getUsuarioAdultoNombre());
-        ((TextView)root.findViewById(R.id.apellido_adulto)).setText(cuentaViewModel.getUsuarioAdultoApellido());
+        ((TextView)root.findViewById(R.id.nombre_adulto)).setText(usuarioAdulto.getNombre()+" "+usuarioAdulto.getApellido());
+        ((TextView)root.findViewById(R.id.correo_adulto)).setText(usuarioAdulto.getEmail());
 
-
-        ((TextView)root.findViewById(R.id.nombre)).setText(usuarioActual.getIdServidor()+" Nombre: "+ usuarioActual.getNombre());
+        ((TextView)root.findViewById(R.id.nombre)).setText("Nombre: "+ usuarioActual.getNombre());
         ((TextView)root.findViewById(R.id.apellido)).setText("Apellido: "+usuarioActual.getApellido());
         ((TextView)root.findViewById(R.id.edad)).setText("Edad: "+usuarioActual.getEdad());
         ((TextView)root.findViewById(R.id.act_realizadas)).setText(""+realizadas);

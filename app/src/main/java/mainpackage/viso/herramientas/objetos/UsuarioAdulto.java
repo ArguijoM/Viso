@@ -23,6 +23,14 @@ public class UsuarioAdulto {
         this.email="";
         this.contrasena="";
     }
+    public UsuarioAdulto(int id,String email, String contrasena) {
+        this.idLocal = id;
+        this.idServidor=0;
+        this.nombre = "";
+        this.apellido = "";
+        this.email=email;
+        this.contrasena=contrasena;
+    }
 
     public UsuarioAdulto(int idServidor, String nombre, String apellido, String email, String contrasena) {
         this.idServidor = idServidor;

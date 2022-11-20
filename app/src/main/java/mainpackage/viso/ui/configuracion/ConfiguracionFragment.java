@@ -4,10 +4,12 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Color;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.fonts.Font;
@@ -35,12 +37,16 @@ import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.io.font.FontProgramFactory;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.colors.Color;
+import com.itextpdf.kernel.colors.DeviceRgb;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.borders.Border;
+import com.itextpdf.layout.borders.DashedBorder;
 import com.itextpdf.layout.element.AreaBreak;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Image;
@@ -61,30 +67,32 @@ import mainpackage.viso.R;
 import mainpackage.viso.databinding.FragmentConfiguracionBinding;
 import mainpackage.viso.herramientas.DatabaseHelper;
 import mainpackage.viso.herramientas.Herramientas;
+import mainpackage.viso.herramientas.SQLiteHelper;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
 import mainpackage.viso.herramientas.VolleyCallBack;
 import mainpackage.viso.herramientas.objetos.Actividad;
 import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
+import mainpackage.viso.herramientas.objetos.splashscreen.Bienvenido;
 import mainpackage.viso.ui.configuracion.borrar.BorrarFragment;
+import mainpackage.viso.ui.cuenta.registro.adulto.Login;
 import mainpackage.viso.ui.inicio.InicioFragment;
 
 
 public class ConfiguracionFragment extends Fragment implements View.OnClickListener {
-    private ConfiguracionViewModel configuracionViewModel;
     private FragmentConfiguracionBinding binding;
     RequestQueue requestQueue;
     TextView opcion01, opcion02,opcion03,opcion04;
+    private Context context;
     private ProgressBar progressBar;
     private static final int PERMISSION_REQUEST_CODE = 200;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        configuracionViewModel =
-                new ViewModelProvider(this).get(ConfiguracionViewModel.class);
+
         binding = FragmentConfiguracionBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         requestQueue = Volley.newRequestQueue(getContext());
-
+        context = getContext();
         opcion01 = root.findViewById(R.id.opcion_01);
         opcion02 = root.findViewById(R.id.opcion_02);
         opcion03 = root.findViewById(R.id.opcion_03);
@@ -116,6 +124,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getContext(),"Copia de seguridad generada",Toast.LENGTH_SHORT).show();
                             DatabaseHelper db = new DatabaseHelper(getContext(),progressBar);
                             progressBar.setVisibility(View.VISIBLE);
                             db.readUsuario(new VolleyCallBack() {
@@ -163,37 +172,15 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                DatabaseHelper db = new DatabaseHelper(getContext(),progressBar);
-                                progressBar.setVisibility(View.VISIBLE);
-                                db.foundUsuario((new VolleyCallBack() {
-                                    @Override
-                                    public void onSuccess(String result) {
-                                        db.foundNino(new VolleyCallBack() {
-                                            @Override
-                                            public void onSuccess(String result) {
-                                                ArrayList<UsuarioNino> usuarios= SharedPreferencesHelper.getUsuarios();
-                                                for(int i=0;i<usuarios.size();i++) {
-                                                    db.foundActividad(new VolleyCallBack() {
-                                                        @Override
-                                                        public void onSuccess(String result) {
-                                                            if(SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity)==null) {
-                                                                Toast.makeText(getContext(),"No existe el usuario",Toast.LENGTH_LONG).show();
-                                                            }else{
-                                                                progressBar.setVisibility(View.GONE);
-                                                                InicioFragment fragment = new InicioFragment();
-                                                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                                                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment);
-                                                                fragmentTransaction.addToBackStack(null);
-                                                                fragmentTransaction.commit();
-                                                            }
-                                                        }
-                                                    },usuarios.get(i).getIdServidor());
-                                                }
-                                            }
-                                        },SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity).getIdServidor());
-                                    }
-                                }),SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity));
+                                UsuarioAdulto usuarioAdulto = SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity);
+                                if(usuarioAdulto.getIdServidor()!=0) {
+                                    Intent intent = new Intent(context, Login.class);
+                                    intent.putExtra("email", usuarioAdulto.getEmail());
+                                    intent.putExtra("contrasena", usuarioAdulto.getContrasena());
+                                    startActivity(intent);
+                                }else{
+                                    Toast.makeText(getContext(),"No hay información guardada en el servidor",Toast.LENGTH_SHORT).show();
+                                }
                             }
                         })
                         .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -256,24 +243,68 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             Document documento = new Document(pdfDocument);
             pdfDocument.setDefaultPageSize(PageSize.A4);
             documento.setMargins(15,25,15,25);
-            Paragraph logo = new Paragraph("Viso\n").setBold().setFontSize(16).setTextAlignment(TextAlignment.CENTER);
-            documento.add(logo);
-            Paragraph nombre = new Paragraph("Nombre: "+usuarioActual.getNombre()).setBold().setFontSize(14);
-            documento.add(nombre);
-            Paragraph apellido = new Paragraph("Apellido: "+usuarioActual.getApellido()).setBold().setFontSize(14);
-            documento.add(apellido);
-            Paragraph edad = new Paragraph("Edad: "+usuarioActual.getEdad()).setBold().setFontSize(14);
-            documento.add(edad);
+            Table encabezado = new Table(1);
+            Cell celTitle = new Cell().add(new Paragraph("\n"+"Viso").setBold().setFontSize(16).setTextAlignment(TextAlignment.CENTER));
+            celTitle.setPaddingLeft(200);
+            celTitle.setPaddingRight(200);
+            celTitle.setBorder(null);
+            encabezado.addCell(celTitle);
+            encabezado.setHorizontalAlignment(HorizontalAlignment.CENTER);
+            documento.add(encabezado);
+            Table info = new Table(3);
+            Cell info_nombre = new Cell().add(new Paragraph("Nombre: "+usuarioActual.getNombre()).setFontSize(14).setTextAlignment(TextAlignment.CENTER));
+            info_nombre.setBorder(null);
+            info_nombre.setPaddingLeft(20);
+            info_nombre.setPaddingRight(20);
+            Cell info_apellido = new Cell().add(new Paragraph("Apellido: "+usuarioActual.getApellido()).setFontSize(14).setTextAlignment(TextAlignment.CENTER));
+            info_apellido.setBorder(null);
+            info_apellido.setPaddingLeft(20);
+            info_apellido.setPaddingRight(20);
+            Cell info_edad = new Cell().add(new Paragraph("Edad: "+usuarioActual.getEdad()).setFontSize(14).setTextAlignment(TextAlignment.CENTER));
+            info_edad.setBorder(null);
+            info_edad.setPaddingLeft(20);
+            info_edad.setPaddingRight(20);
+            info.addCell(info_nombre);
+            info.addCell(info_apellido);
+            info.addCell(info_edad);
+            info.setHorizontalAlignment(HorizontalAlignment.CENTER);
+            info.setPaddingBottom(200f);
+            documento.add(info);
+            Table acts = new Table(4);
+            ArrayList<Actividad> activities = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
+            String aciertos="",fallos="";
+            for(int j=0;j<activities.size();j++){
+                if(Herramientas.getEvaluacion((j+1),usuarioActual.getEdad(),activities.get(j).getCalificacion())==true){
+                    aciertos+=(j+1)+",";
+                }else{
+                    fallos+=(j+1)+",";
+                }
+            }
+            Cell acts_realizadas = new Cell().add(new Paragraph("Act. realizadas: "+activities.size()).setFontSize(12).setTextAlignment(TextAlignment.LEFT));
+            acts_realizadas.setBorder(null);
+            acts_realizadas.setPaddingRight(20);
+            Cell acts_norealizadas = new Cell().add(new Paragraph("Act. faltantes: "+(Herramientas.TOTAL_ACT-activities.size())).setFontSize(12).setTextAlignment(TextAlignment.LEFT));
+            acts_norealizadas.setBorder(null);
+            acts_norealizadas.setPaddingRight(20);
+            Cell acts_validas = new Cell().add(new Paragraph("Act. válidas: "+aciertos).setFontSize(12).setTextAlignment(TextAlignment.LEFT));
+            acts_validas.setPaddingRight(20);
+            acts_validas.setBorder(null);
+            acts_validas.setPaddingRight(20);
+            Cell acts_invalidas = new Cell().add(new Paragraph("Act. no válidas: "+fallos).setFontSize(12).setTextAlignment(TextAlignment.LEFT));
+            acts_invalidas.setBorder(null);
+            acts.addCell(acts_realizadas);acts.addCell(acts_norealizadas);acts.addCell(acts_validas);acts.addCell(acts_invalidas);
+            acts.setHorizontalAlignment(HorizontalAlignment.CENTER);
+            documento.add(acts);
             ArrayList<Actividad> actividades = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
             int i=0;
-            while(i<=Herramientas.TOTAL_ACT) {
+            while(i<Herramientas.TOTAL_ACT) {
                 Table tabla = new Table(2);
                 tabla.setHorizontalAlignment(HorizontalAlignment.CENTER);
                 tabla.addCell(new Cell().add(new Paragraph("Imagen de muestra").setTextAlignment(TextAlignment.CENTER)));
                 tabla.addCell(new Cell().add(new Paragraph("Imagen realizada").setTextAlignment(TextAlignment.CENTER)));
                for(int j = 0 ; j < 3; j++){
-                    String uri = "@drawable/act_" +(i+1);
-                    int imageResource = getResources().getIdentifier(uri, null, getActivity().getPackageName());
+                    String uri = "@drawable/act_"+(i+1);
+                    int imageResource = getResources().getIdentifier(uri, null, Herramientas.mainActivity.getPackageName());
                     Drawable drawable = getResources().getDrawable(imageResource);
                     Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -284,11 +315,19 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                     img.scaleAbsolute(200, 200);
                     tabla.addCell(new Cell().add(img.setAutoScale(false)));
                     if(i<actividades.size()) {
-                        byte[] actImg = Base64.decode(actividades.get(i).getImagen(), Base64.DEFAULT);
-                        ImageData act = ImageDataFactory.create(actImg);
-                        Image imgact = new Image(act);
-                        imgact.scaleAbsolute(200, 200);
-                        tabla.addCell(new Cell().add(imgact.setAutoScale(false)));
+                        if(i==16) {
+                            byte[] actImg = Base64.decode(actividades.get(i).getImagen(), Base64.DEFAULT);
+                            ImageData act = ImageDataFactory.create(actImg);
+                            Image imgact = new Image(act);
+                            imgact.scaleAbsolute(100, 200);
+                            tabla.addCell(new Cell().add(imgact.setAutoScale(false)));
+                        }else {
+                            byte[] actImg = Base64.decode(actividades.get(i).getImagen(), Base64.DEFAULT);
+                            ImageData act = ImageDataFactory.create(actImg);
+                            Image imgact = new Image(act);
+                            imgact.scaleAbsolute(200, 200);
+                            tabla.addCell(new Cell().add(imgact.setAutoScale(false)));
+                        }
                     }else{
                         Drawable draw = this.getResources().getDrawable(R.drawable.act_null);
                         Bitmap bit = ((BitmapDrawable)draw).getBitmap();
@@ -300,10 +339,10 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                         imgNull.scaleAbsolute(200,200);
                         tabla.addCell(new Cell().add(imgNull.setAutoScale(false)));
                     }
-                    i++;
+                   i++;
                 }
                 documento.add(tabla);
-               if(i<Herramientas.TOTAL_ACT) {
+               if(i<(Herramientas.TOTAL_ACT+1)) {
                    documento.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
                }
             }

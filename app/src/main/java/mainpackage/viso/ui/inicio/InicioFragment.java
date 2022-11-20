@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import mainpackage.viso.R;
 import mainpackage.viso.databinding.FragmentInicioBinding;
 import mainpackage.viso.herramientas.Herramientas;
+import mainpackage.viso.herramientas.SharedPreferencesHelper;
+import mainpackage.viso.herramientas.objetos.Actividad;
+import mainpackage.viso.herramientas.objetos.UsuarioNino;
 
 
 public class InicioFragment extends Fragment {
@@ -28,30 +31,30 @@ public class InicioFragment extends Fragment {
     ArrayList<String> valoresX = new ArrayList<>();
     ArrayList<Entry> valoresY = new ArrayList<>();
     ArrayList<Integer> colores = new ArrayList<>();
+    private UsuarioNino usuarioActual=null;
+    private ArrayList<Actividad> actividades;
 
-    private InicioViewModel InicioViewModel;
     private FragmentInicioBinding binding;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        InicioViewModel = new ViewModelProvider(this).get(InicioViewModel.class);
-
         binding = FragmentInicioBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        if(InicioViewModel.getUsuarioActual()== null){
-            InicioViewModel.setRealizadas(0);
-            ((TextView)root.findViewById(R.id.nombre_usuario)).setText("¡Hola Error!");
-        }else if(InicioViewModel.getActividades()==null){
-            InicioViewModel.setRealizadas(99);
+        usuarioActual = SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
+        if(usuarioActual != null){
+            ((TextView)root.findViewById(R.id.nombre_usuario)).setText("¡Hola "+ usuarioActual.getNombre()+"!");
+            actividades = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
+            if(actividades==null){
+                actividades = new ArrayList<>();
+            }
         }else{
-            InicioViewModel.setRealizadas(InicioViewModel.getActividades().size());
-            ((TextView)root.findViewById(R.id.nombre_usuario)).setText("¡Hola "+ InicioViewModel.getUsuarioActual().getNombre()+"! "+InicioViewModel.getUsuarioActual().getIdLocal());
-
+            actividades = new ArrayList<>();
+            ((TextView)root.findViewById(R.id.nombre_usuario)).setText("Error");
         }
+
         pieChart = (PieChart)root.findViewById(R.id.GraficaPie);
-        generarGrafica(pieChart, InicioViewModel.getRealizadas());
-        ((TextView)root.findViewById(R.id.actividades_realizadas)).setText(""+ InicioViewModel.getRealizadas());
-        ((TextView)root.findViewById(R.id.actividades_faltantes)).setText(""+(Herramientas.TOTAL_ACT-InicioViewModel.getRealizadas()));
+        generarGrafica(pieChart, actividades.size());
+        ((TextView)root.findViewById(R.id.actividades_realizadas)).setText(""+ actividades.size());
+        ((TextView)root.findViewById(R.id.actividades_faltantes)).setText(""+(Herramientas.TOTAL_ACT-actividades.size()));
         return root;
     }
 

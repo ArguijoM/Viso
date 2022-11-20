@@ -214,9 +214,137 @@ public class Herramientas {
                 }
             }
         }
-
         Log.i("CALIFICACION"," "+sum);
         return sum;
+    }
+    public static boolean getEvaluacion(int NumAct,int edad, int calificacion){
+        if(edad<=8){
+            return evaluarType3(NumAct,calificacion);
+        }else if(edad>8 && edad<=10){
+            return evaluarType3(NumAct,calificacion);
+        }else {
+            return evaluarType3(NumAct,calificacion);
+        }
+    }
+    public static boolean evaluarType1(int NumAct,int calificacion){
+        return false;
+    }
+    public static boolean evaluarType2(int NumAct,int calificacion){
+        return false;
+    }
+    public static boolean evaluarType3(int NumAct,int calificacion){
+        Log.i("TYPE 3","Act "+NumAct+" CALIFICAICON "+calificacion);
+        switch (NumAct){
+            case 1:
+                if(calificacion<268493 && calificacion>=244541){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 2:
+                if(calificacion<270500 && calificacion>=242195){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 3:
+                if(calificacion<269000 && calificacion>=255491){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 4:
+                if(calificacion<270500 && calificacion>=238542){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 5:
+                if(calificacion<267500 && calificacion>=250866){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 6:
+                if(calificacion<260500 && calificacion>=232240){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 7:
+                if(calificacion<308500 && calificacion>=273414){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 8:
+                if(calificacion<258500 && calificacion>=231554){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 9:
+                if(calificacion<251000 && calificacion>=229662){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 10:
+                if(calificacion<254000 && calificacion>=206452){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 11:
+                if(calificacion<112000 && calificacion>=98301){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 12:
+                if(calificacion<182000 && calificacion>=158333){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 13:
+                if(calificacion<228000 && calificacion>=166483){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 14:
+                if(calificacion< 265000 && calificacion>=219177){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 15:
+                if(calificacion<333000 && calificacion>=265690){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 16:
+                if(calificacion<315000 && calificacion>=246687){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 17:
+                if(calificacion<131721 && calificacion>=119451){
+                    return true;
+                }else{
+                    return false;
+                }
+            case 18:
+                if(calificacion<262000 && calificacion>=244161){
+                    return true;
+                }else{
+                    return false;
+                }
+        }
+        return false;
     }
     public static int getHeight(int id){
         switch (id){

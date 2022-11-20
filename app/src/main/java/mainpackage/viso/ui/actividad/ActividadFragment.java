@@ -3,6 +3,7 @@ package mainpackage.viso.ui.actividad;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class ActividadFragment extends Fragment implements View.OnClickListener 
 
     private ActividadViewModel actividadViewModel;
     private FragmentActividadBinding binding;
+    private ArrayList<Actividad> actividades;
     private SoundsPlayer sound;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -42,7 +44,7 @@ public class ActividadFragment extends Fragment implements View.OnClickListener 
         int total_act=0;
         int x=0; int y=0;
         UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
-        ArrayList<Actividad> actividades = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
+        actividades = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
         if(actividades==null) {
             setActividadStatus(root, 1, "Siguiente");
             for(x=2;x<=8;x++){
@@ -94,10 +96,10 @@ public class ActividadFragment extends Fragment implements View.OnClickListener 
                 @Override
                 public void onClick(View v) {
                     sound.playTapSound();
-
                     UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
                     ArrayList<Actividad> actividades = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
-                    if(actividades.size()<2){
+                    Log.i("ACTIVIDADES SIZE"," "+actividades.size());
+                    if(actividades.size()==0){
                         Intent intent = new Intent(getActivity(), Instruccion.class);
                         intent.putExtra("id",n);
                         startActivity(intent);

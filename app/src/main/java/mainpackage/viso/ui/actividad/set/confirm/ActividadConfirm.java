@@ -1,49 +1,29 @@
 package mainpackage.viso.ui.actividad.set.confirm;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
-import mainpackage.viso.MainActivity;
 import mainpackage.viso.R;
-import mainpackage.viso.herramientas.DatabaseHelper;
 import mainpackage.viso.herramientas.Herramientas;
-import mainpackage.viso.herramientas.SQLiteHelper;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
 import mainpackage.viso.herramientas.SoundsPlayer;
-import mainpackage.viso.herramientas.VolleyCallBack;
 import mainpackage.viso.herramientas.objetos.Actividad;
-import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
-import mainpackage.viso.ui.actividad.ActividadDone;
+import mainpackage.viso.herramientas.objetos.splashscreen.ActividadDone;
 import mainpackage.viso.ui.actividad.set.ActividadN;
 
 public class ActividadConfirm extends AppCompatActivity implements View.OnClickListener {
@@ -115,16 +95,15 @@ public class ActividadConfirm extends AppCompatActivity implements View.OnClickL
         Actividad act = new Actividad(id,0,usuarioActual.getIdServidor(),usuarioActual.getIdLocal(),crearImagenString(bitmap),calif, Calendar.getInstance().getTime().toString());
         SharedPreferencesHelper.addActividad(act);
         sound.playDoneSound();
-        //Intent intent = new Intent(ActividadConfirm.this, ActividadDone.class);
-        //startActivity(intent);
-        new Handler().postDelayed(new Runnable() {
+        Intent intent = new Intent(ActividadConfirm.this, ActividadDone.class);
+        startActivity(intent);
+       /* new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(ActividadConfirm.this, ActividadDone.class);
                 startActivity(intent);
-
             }
-            },5000);
+            },5000);*/
 
         /*String path = Herramientas.saveToInternalStorage(bitmap,name);
         Actividad act = new Actividad(id, path, name);

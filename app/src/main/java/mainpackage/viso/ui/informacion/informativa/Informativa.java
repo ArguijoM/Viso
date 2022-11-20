@@ -1,48 +1,52 @@
 package mainpackage.viso.ui.informacion.informativa;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.google.android.material.snackbar.Snackbar;
-import com.itextpdf.kernel.geom.Line;
 
 import mainpackage.viso.R;
-import mainpackage.viso.databinding.FragmentInformativaBinding;
 
-public class InformativaFragment extends Fragment {
-    private FragmentInformativaBinding binding;
-    private InformativaViewModel viewModel;
+public class Informativa extends AppCompatActivity {
     private TextView opcion_text,opcion_text2, opcion_title;
     private ImageView opcion_image,opcion_image2;
     private LinearLayout opcion_layout;
+    private int id;
+    private Context context;
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(InformativaViewModel.class);
-        binding = FragmentInformativaBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        opcion_text=(TextView)root.findViewById(R.id.info_item_text01);
-        opcion_text2=(TextView)root.findViewById(R.id.info_item_text02);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_informativa);
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        opcion_title = (TextView)root.findViewById(R.id.info_item_title);
-        opcion_image = (ImageView)root.findViewById(R.id.info_item_image01);
-        opcion_image2 = (ImageView)root.findViewById(R.id.info_item_image02);
+        Intent intent = getIntent();
+        if(intent!=null){
+            this.id = intent.getIntExtra("id",0);
+        }
+        context = this;
+        opcion_text=(TextView)findViewById(R.id.info_item_text01);
+        opcion_text2=(TextView)findViewById(R.id.info_item_text02);
 
-        opcion_layout = (LinearLayout)root.findViewById(R.id.info_item_layout);
+        opcion_title = (TextView)findViewById(R.id.info_item_title);
+        opcion_image = (ImageView)findViewById(R.id.info_item_image01);
+        opcion_image2 = (ImageView)findViewById(R.id.info_item_image02);
 
-        Bundle datos = this.getArguments();
-        int id=datos.getInt("id");
+        opcion_layout = (LinearLayout)findViewById(R.id.info_item_layout);
+
+        generarInformacion(id);
+
+    }
+    public void generarInformacion(int id){
         switch (id){
             case 1:
                 opcion_title.setText(R.string.informacion_item01_titulo);
@@ -51,7 +55,7 @@ public class InformativaFragment extends Fragment {
                 opcion_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setMessage(R.string.informacion_item01_referencia)
                                 .setCancelable(false)
                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -74,7 +78,7 @@ public class InformativaFragment extends Fragment {
                 opcion_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setMessage(R.string.informacion_item02_referencia)
                                 .setCancelable(false)
                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -97,7 +101,7 @@ public class InformativaFragment extends Fragment {
                 opcion_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setMessage(R.string.informacion_item03_referencia)
                                 .setCancelable(false)
                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -118,7 +122,10 @@ public class InformativaFragment extends Fragment {
                 opcion_image.setImageResource(R.drawable.ic_main_2);
                 break;
         }
-        return root;
     }
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 }

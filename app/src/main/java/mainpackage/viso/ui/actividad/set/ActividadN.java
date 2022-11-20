@@ -1,7 +1,9 @@
 package mainpackage.viso.ui.actividad.set;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -25,7 +27,7 @@ import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
 import mainpackage.viso.herramientas.SoundsPlayer;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
-import mainpackage.viso.ui.actividad.SplashScreen;
+import mainpackage.viso.herramientas.objetos.splashscreen.SplashScreen;
 
 public class ActividadN extends AppCompatActivity {
     private int id;
@@ -68,10 +70,8 @@ public class ActividadN extends AppCompatActivity {
         });
     }
     private void tomarFoto(){
-        Intent i = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(i,3);
 
-/*
+
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File photoFile = null;
         try {
@@ -87,29 +87,11 @@ public class ActividadN extends AppCompatActivity {
                     photoFile);
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             startActivityForResult(takePictureIntent, 1);
-        }*/
+        }
 
 
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK && data!=null) {
-                // Get the url of the image from data
-                Uri selectedImageUri = data.getData();
-                if (null != selectedImageUri) {
-                    Log.i("URI IMAGEN",selectedImageUri.toString());
-                    Log.i("URI IMAGEN PATH",selectedImageUri.getPath());
-                    // update the preview image in the layout
-                    Intent intent = new Intent(ActividadN.this, SplashScreen.class);
-                    intent.putExtra("id",id);
-                    intent.putExtra("img",selectedImageUri.toString());
-                    startActivity(intent);
-                    finish();
-                }
-        }
-    }
-   /* public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             Intent intent = new Intent(ActividadN.this, SplashScreen.class);
@@ -117,14 +99,8 @@ public class ActividadN extends AppCompatActivity {
             intent.putExtra("img",currentPhotoPath);
             startActivity(intent);
             finish();
-
-////            Intent intent = new Intent(this.getApplicationContext(), SplashScreen.class);
-////            intent.putExtra("id",id);
-////            intent.putExtra("img",currentPhotoPath);
-////            startActivity(intent);
-////            finish();
         }
-    }*/
+    }
 
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -147,4 +123,6 @@ public class ActividadN extends AppCompatActivity {
         Intent intent = new Intent(ActividadN.this, MainActivity.class);
         startActivity(intent);
     }
+
+
 }

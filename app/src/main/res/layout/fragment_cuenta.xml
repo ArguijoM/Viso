@@ -28,16 +28,16 @@
                 android:text="Nombre de usuario"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
-
             <TextView
-                android:id="@+id/apellido_adulto"
+                android:id="@+id/correo_adulto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/autour_one"
                 android:paddingTop="10dp"
-                android:text="apellido de usuario"
+                android:paddingBottom="@dimen/text_01"
+                android:text="Correo"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
             <LinearLayout
                 android:layout_width="@dimen/actividad_container_confirm"
                 android:layout_height="wrap_content"

@@ -18,7 +18,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="@drawable/outline"
-            android:foreground="@drawable/cross"
             android:id="@+id/img_muestra"
             android:src="@drawable/act_null">
         </ImageView>
@@ -33,7 +32,6 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:foreground="@drawable/cross"
             android:background="@drawable/outline"
             android:layout_gravity="center"
             android:src="@drawable/act_null"

@@ -363,12 +363,34 @@ public class SharedPreferencesHelper {
         shardPreferencesEditor.putString("usuarioAdulto", jsonUser).commit();
 
         SQLiteHelper myDB = new SQLiteHelper(Herramientas.mainActivity);
-        myDB.actualizarUsuario(usuarioAdulto);
+        Cursor res =  myDB.obtenerUsuario(usuarioAdulto.getNombre());
+
+        if(res.getCount()!=0){
+            Log.i("setUsuarioAdulto","res!=null");
+            myDB.actualizarUsuario(usuarioAdulto);
+        }else{
+            Log.i("setUsuarioAdulto","res=null");
+            myDB.insertarUsuario(
+                    usuarioAdulto.getIdServidor(),
+                    usuarioAdulto.getNombre(),
+                    usuarioAdulto.getApellido(),
+                    usuarioAdulto.getEmail(),
+                    usuarioAdulto.getContrasena()
+            );
+        }
+
     }
     public static void deteteUsuarioActual(Activity act){
         SharedPreferences sharedPreferences = act.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor shardPreferencesEditor = sharedPreferences.edit();
         shardPreferencesEditor.remove("usuarioActual");
+        shardPreferencesEditor.apply();
+    }
+    public static void deteteAllPreference(Activity act){
+        SharedPreferences sharedPreferences = act.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor shardPreferencesEditor = sharedPreferences.edit();
+        shardPreferencesEditor.remove("usuarioActual");
+        shardPreferencesEditor.remove("usuarioAdulto");
         shardPreferencesEditor.apply();
     }
     public static void setUsuarioAdulto(UsuarioAdulto usuarioAdulto){
@@ -418,6 +440,11 @@ public class SharedPreferencesHelper {
     public static void updateActividades(int id_nino, ArrayList<Actividad> acts) {
         SQLiteHelper myDB = new SQLiteHelper(Herramientas.mainActivity);
         myDB.actualizarActividades(id_nino,acts);
+    }
+
+    public static void addActividades(ArrayList<Actividad> acts) {
+        SQLiteHelper myDB = new SQLiteHelper(Herramientas.mainActivity);
+        myDB.insertarActividades(acts);
     }
 
     public static void addActividad(Actividad act){

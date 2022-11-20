@@ -6,19 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/fragment_registro"
-    tools:context=".ui.cuenta.registro.adulto.CuentaLoginFragment"
+    tools:context=".ui.cuenta.registro.adulto.CuentaRegistroAdultoFragment2"
     android:background="@color/primary01">
     <LinearLayout
         android:layout_width="@dimen/main_layout_width"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:paddingTop="@dimen/text_03"
+        android:gravity="center"
         android:orientation="vertical">
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/login_progressbar">
-        </ProgressBar>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,19 +22,21 @@
             android:textSize="@dimen/text_title01"
             android:textStyle="bold"
             android:fontFamily="@font/autour_one"
-            android:text="¡Inicia sessión!"/>
+            android:text="¡Registro del Adulto!"/>
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/register_logo_layout_height"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/gloves_heart_2" />
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:src="@drawable/gloves_heart" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="@dimen/edit_text_heigh"
-            android:id="@+id/correo_adulto"
+            android:id="@+id/nombre_adulto"
             android:background="@drawable/roundededittext"
-            android:hint="Ingresa tu correo"
+            android:hint="Ingresa tu nombre"
             android:paddingLeft="@dimen/edit_text_padding"/>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -47,9 +44,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="@dimen/edit_text_heigh"
-            android:id="@+id/contrasena_adulto"
+            android:id="@+id/apellido_adulto"
             android:background="@drawable/roundededittext"
-            android:hint="Ingresa la contrase{a"
+            android:hint="Ingresa tu apellido"
             android:paddingLeft="@dimen/edit_text_padding"/>
         <LinearLayout
             android:layout_width="wrap_content"

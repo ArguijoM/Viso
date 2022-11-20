@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/primary01"
-    tools:context=".ui.cuenta.registro.adulto.CuentaRegistroLoginFragment">
+    tools:context=".ui.cuenta.registro.adulto.CuentaRegistroAdultoFragment">
 
     <ProgressBar
         android:id="@+id/progress_bar_login"

@@ -38,7 +38,7 @@ public class UsuarioNino {
         this.apellido = apellido;
         this.edad = edad;
     }
-    public UsuarioNino(int id,String perfil,String nombre, String apellido, int edad, int usuarioAdulto) {
+    public UsuarioNino(int id,String nombre, String apellido, int edad, int usuarioAdulto,String perfil) {
         this.idServidor = id;
         this.profile = perfil;
         this.idLocal = 0;

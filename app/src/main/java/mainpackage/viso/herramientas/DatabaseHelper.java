@@ -33,10 +33,6 @@ public class DatabaseHelper {
     private final static String READ_USUARIO_URL= "https://enviomailprueba.000webhostapp.com/crud/readUsuario.php";
     private final static String READ_NINO_URL= "https://enviomailprueba.000webhostapp.com/crud/readNino.php";
     private final static String READ_ACTIVIDAD_URL= "https://enviomailprueba.000webhostapp.com/crud/readActividad.php";
-    private final static String DELETE_USUARIO_URL= "https://enviomailprueba.000webhostapp.com/crud/deleteUsuario.php";
-    private final static String DELETE_NINO_URL= "https://enviomailprueba.000webhostapp.com/crud/deleteNino.php";
-    private final static String DELETE_ACTIVIDAD_URL= "https://enviomailprueba.000webhostapp.com/crud/deleteActividad.php";
-
     private RequestQueue requestQueue;
     private SQLiteHelper myDB;
     private ProgressBar progressBar;
@@ -252,6 +248,7 @@ public class DatabaseHelper {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("email", user.getEmail());
+                parametros.put("contrasena", user.getContrasena());
                 return parametros;
             }
         };
@@ -283,10 +280,11 @@ public class DatabaseHelper {
                             usuarioAdulto.setIdServidor(id);
                             SharedPreferencesHelper.setUsuarioAdulto(Herramientas.mainActivity,usuarioAdulto);
                         }
-                        callBack.onSuccess(response);
+
                     }else{
-                        //Log.i("Mensaje de servidor",obj.getString("mensaje"));
+                        Log.i("Mensaje de servidor",obj.getString("mensaje"));
                     }
+                    callBack.onSuccess(response);
 
 
                 } catch (JSONException e) {
@@ -305,6 +303,7 @@ public class DatabaseHelper {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("email", user.getEmail());
+                parametros.put("contrasena", user.getContrasena());
                 return parametros;
             }
         };
@@ -334,7 +333,7 @@ public class DatabaseHelper {
                             String apellido = object.getString("apellido");
                             int edad = object.getInt("edad");
                             int usuario_id= object.getInt("usuario_id");
-                            usuarios.add(new UsuarioNino(id,perfil,nombre,apellido,edad,usuario_id));
+                            usuarios.add(new UsuarioNino(id,nombre,apellido,edad,usuario_id,perfil));
                         }
                         SharedPreferencesHelper.updateUsuario(usuarios);
                         ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios();
@@ -404,8 +403,8 @@ public class DatabaseHelper {
                             String apellido = object.getString("apellido");
                             int edad = object.getInt("edad");
                             int usuario_id= object.getInt("usuario_id");
-                            UsuarioNino aux = new UsuarioNino(id,nombre,apellido,edad,usuario_id);
-                            aux.setIdLocal(i+1);
+                            String perfil = object.getString("perfil");
+                            UsuarioNino aux = new UsuarioNino(id,nombre,apellido,edad,usuario_id,perfil);
                             usuarios.add(aux);
                         }
                         SharedPreferencesHelper.setUsuarios(usuarios);
@@ -545,28 +544,24 @@ public class DatabaseHelper {
                             int calificacion = object.getInt("calificacion");
                             int nino_id = object.getInt("nino_id");
                             int nino_id_local = object.getInt("nino_id_local");
-
-                            Actividad aux = new Actividad(local_id,id, nino_id,nino_id_local,modelo,calificacion,fecha);
-                            actividades.add(aux);
+                            actividades.add(new Actividad(local_id,id, nino_id,nino_id_local,modelo,calificacion,fecha));
                         }
-                        UsuarioNino aux = SharedPreferencesHelper.getUsuarioByIdServer(Herramientas.mainActivity,idNino);
-                        SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,aux);
-                        SharedPreferencesHelper.updateActividades(idNino,actividades);
-                        callBack.onSuccess(response);
+                        SharedPreferencesHelper.addActividades(actividades);
                     }else{
                         //Log.i("Mensaje de servidor ", obj.getString("mensaje"));
                     }
+                    callBack.onSuccess(response);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    callBack.onSuccess(response);
                 }
             }
         },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Log.i("Error de servidor",error.toString());
+                        Log.i("Error de servidor",error.toString());
+                        callBack.onSuccess(error.toString());
                     }
                 }) {
             @Override
@@ -577,7 +572,6 @@ public class DatabaseHelper {
             }
         };
         requestQueue.add(request);
-        progressBar.setVisibility(View.GONE);
     }
 
 

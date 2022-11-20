@@ -119,11 +119,32 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             return true;//exitoso
         }
     }
+    //Función para insertar un auto
+    public boolean insertarActividades(ArrayList<Actividad> actividades){
+        for(int i=0;i<actividades.size();i++) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues valoresActividad = new ContentValues();
+            valoresActividad.put(COL_ACTIVIDAD_1, actividades.get(i).getIdLocal());
+            valoresActividad.put(COL_ACTIVIDAD_2, actividades.get(i).getIdServidor());
+            valoresActividad.put(COL_ACTIVIDAD_3, actividades.get(i).getNinoId());
+            valoresActividad.put(COL_ACTIVIDAD_4, actividades.get(i).getNinoIdLocal());
+            valoresActividad.put(COL_ACTIVIDAD_5, actividades.get(i).getImagen());
+            valoresActividad.put(COL_ACTIVIDAD_6, actividades.get(i).getCalificacion());
+            valoresActividad.put(COL_ACTIVIDAD_7, actividades.get(i).getFecha());
+            //El método "insert" devuelve "-1" si ha ocurrido un error
+            long result = db.insert(TABLE_ACTIVIDAD_NAME, null, valoresActividad);
+            if (result == -1) {
+                return false;//error
+            }
+        }
+        return true;
+    }
     //Función para consultar un piloto
     public Cursor obtenerUsuario(String name){
         SQLiteDatabase db = this.getWritableDatabase();
         //Consulta SQL
         Cursor res = db.rawQuery("SELECT * FROM "+TABLE_USUARIO_NAME+" WHERE nombre= ?",new String[]{name});
+
         return res;
     }
     //Función para consultar un auto

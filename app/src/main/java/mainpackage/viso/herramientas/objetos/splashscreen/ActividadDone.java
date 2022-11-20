@@ -1,27 +1,18 @@
-package mainpackage.viso.ui.actividad;
+package mainpackage.viso.herramientas.objetos.splashscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-
 import mainpackage.viso.MainActivity;
 import mainpackage.viso.R;
-import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SoundsPlayer;
-import mainpackage.viso.ui.actividad.set.confirm.ActividadConfirm;
 
 public class ActividadDone extends AppCompatActivity {
     private ImageView done;
@@ -47,7 +38,7 @@ public class ActividadDone extends AppCompatActivity {
                 Intent intent = new Intent(ActividadDone.this, MainActivity.class);
                 startActivity(intent);
             }
-        },3000);
+        },2000);
 
     }
     @Override

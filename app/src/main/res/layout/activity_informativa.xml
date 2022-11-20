@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary01"
-    tools:context=".ui.informacion.informativa.InformativaFragment">
+    tools:context=".ui.informacion.informativa.Informativa">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/info_item_text01"
-                android:gravity="left"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:fontFamily="@font/autour_one"
                 android:paddingLeft="@dimen/text_02"
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/info_item_text02"
-                android:gravity="left"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:fontFamily="@font/autour_one"
                 android:paddingLeft="@dimen/text_02"

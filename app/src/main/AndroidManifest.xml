@@ -18,6 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Viso">
         <activity
+            android:name=".ui.cuenta.registro.adulto.Login"
+            android:exported="false" />
+        <activity
+            android:name=".herramientas.objetos.splashscreen.Bienvenido"
+            android:exported="false" />
+        <activity
+            android:name=".ui.informacion.informativa.Informativa"
+            android:exported="false" />
+        <activity
             android:name=".ui.configuracion.borrar.SplashScreenBorrado"
             android:exported="false" />
         <activity
@@ -27,19 +36,16 @@
             android:name=".ui.actividad.get.ActividadShow"
             android:exported="false" />
         <activity
-            android:name=".ui.actividad.ActividadDone"
+            android:name=".herramientas.objetos.splashscreen.ActividadDone"
             android:exported="false" />
         <activity
-            android:name=".ui.actividad.SplashScreen"
+            android:name=".herramientas.objetos.splashscreen.SplashScreen"
             android:exported="false" />
         <activity
             android:name=".ui.actividad.set.confirm.ActividadConfirm"
             android:exported="false" />
         <activity
             android:name=".ui.actividad.set.ActividadN"
-            android:exported="false" />
-        <activity
-            android:name=".ui.inicio.InicioActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

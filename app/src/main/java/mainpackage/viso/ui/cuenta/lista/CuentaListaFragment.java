@@ -29,14 +29,12 @@ import mainpackage.viso.ui.cuenta.registro.nino.CuentaRegistroNinoFragment;
 
 
 public class CuentaListaFragment extends Fragment {
-    private CuentaListaViewModel cuentaListaViewModel;
     private FragmentListaCuentasBinding binding;
     private ListView lista;
     private FloatingActionButton btn_add;
     ArrayList<UsuarioNino> usuarios;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        cuentaListaViewModel = new ViewModelProvider(this).get(CuentaListaViewModel.class);
 
         binding = mainpackage.viso.databinding.FragmentListaCuentasBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
