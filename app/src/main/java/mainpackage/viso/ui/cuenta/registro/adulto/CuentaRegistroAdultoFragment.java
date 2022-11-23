@@ -51,7 +51,6 @@ public class CuentaRegistroAdultoFragment extends Fragment {
     private ProgressBar progressBar;
     private Context context;
     private FragmentRegistroLoginBinding binding;
-    private final static String READ_USUARIO_URL= "https://enviomailprueba.000webhostapp.com/crud/verifyUsuario.php";
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentRegistroLoginBinding.inflate(inflater, container, false);
@@ -124,7 +123,6 @@ public class CuentaRegistroAdultoFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),Login.class);
                 startActivity(intent);
-
             }
         });
 
@@ -140,11 +138,12 @@ public class CuentaRegistroAdultoFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                READ_USUARIO_URL,new Response.Listener<String>() {
+                getString(R.string.VERIFY_USUARIO),new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i("Respuesta de servidor",response);
                 try {
+                    Log.i("Respuesta de servidor",response);
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray json = jsonObject.getJSONArray("estado");
                     JSONObject obj = json.getJSONObject(0);

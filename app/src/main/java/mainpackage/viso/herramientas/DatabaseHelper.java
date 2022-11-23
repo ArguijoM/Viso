@@ -23,32 +23,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import mainpackage.viso.R;
 import mainpackage.viso.herramientas.objetos.Actividad;
 import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
 
 public class DatabaseHelper {
-    private final static String ADD_USUARIO_URL= "https://enviomailprueba.000webhostapp.com/crud/addUsuario.php";
-    private final static String ADD_NINO_URL= "https://enviomailprueba.000webhostapp.com/crud/addNino.php";
-    private final static String ADD_ACTIVIDAD_URL= "https://enviomailprueba.000webhostapp.com/crud/addActividad.php";
-    private final static String READ_USUARIO_URL= "https://enviomailprueba.000webhostapp.com/crud/readUsuario.php";
-    private final static String READ_NINO_URL= "https://enviomailprueba.000webhostapp.com/crud/readNino.php";
-    private final static String READ_ACTIVIDAD_URL= "https://enviomailprueba.000webhostapp.com/crud/readActividad.php";
-
     private RequestQueue requestQueue;
     private SQLiteHelper myDB;
     private ProgressBar progressBar;
+    private Context context;
     public DatabaseHelper(Context context, ProgressBar progressBar){
         this.progressBar = progressBar;
         this.requestQueue = Volley.newRequestQueue(context);
         this.myDB = new SQLiteHelper(Herramientas.mainActivity.getBaseContext());
+        this.context = context;
     }
 
     public void addUsuario(UsuarioAdulto user, final VolleyCallBack volleyCallBack){
         progressBar.setVisibility(View.VISIBLE);
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                ADD_USUARIO_URL,
+                context.getString(R.string.ADD_USUARIO),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -92,7 +88,7 @@ public class DatabaseHelper {
         progressBar.setVisibility(View.VISIBLE);
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                ADD_NINO_URL,
+                context.getString(R.string.ADD_NINO),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -137,7 +133,7 @@ public class DatabaseHelper {
     public void addActividad(final VolleyCallBack volleyCallBack,Actividad act,UsuarioNino nino){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                ADD_ACTIVIDAD_URL,
+                context.getString(R.string.ADD_ACTIVIDAD),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -189,7 +185,7 @@ public class DatabaseHelper {
     public void readUsuario(final VolleyCallBack volleyCallBack,UsuarioAdulto user){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                READ_USUARIO_URL,new Response.Listener<String>() {
+                context.getString(R.string.READ_USUARIO),new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -240,7 +236,7 @@ public class DatabaseHelper {
     public void foundUsuario(final VolleyCallBack callBack,UsuarioAdulto user){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                READ_USUARIO_URL,new Response.Listener<String>() {
+                context.getString(R.string.READ_USUARIO),new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i("Respuesta de servidor",response);
@@ -295,7 +291,7 @@ public class DatabaseHelper {
     public  void readNino(final VolleyCallBack volleyCallBack,int idUsuario){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                READ_NINO_URL,new Response.Listener<String>() {
+                context.getString(R.string.READ_NINO),new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i("Respuest de servidor RN",response);
@@ -346,7 +342,7 @@ public class DatabaseHelper {
 
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                READ_NINO_URL,new Response.Listener<String>() {
+                context.getString(R.string.READ_NINO),new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i("Respuesta de servidor",response);
@@ -401,7 +397,7 @@ public class DatabaseHelper {
     public  void readActividad(final VolleyCallBack volleyCallBack,UsuarioNino nino){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                READ_ACTIVIDAD_URL,new Response.Listener<String>() {
+                context.getString(R.string.READ_ACTIVIDAD),new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i("Respuest de servidor RA",response);
@@ -485,7 +481,7 @@ public class DatabaseHelper {
         //Log.i("BUSCANDO ACTIVIDAD: ",""+idNino);
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                READ_ACTIVIDAD_URL,new Response.Listener<String>() {
+                context.getString(R.string.READ_ACTIVIDAD),new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i("Respuesta de servidor",response);
@@ -535,57 +531,4 @@ public class DatabaseHelper {
         };
         requestQueue.add(request);
     }
-
-
-    public void generarCopiaSeguridad(UsuarioAdulto usuarioAdulto){
-        this.progressBar.setVisibility(View.VISIBLE);
-        readUsuario(new VolleyCallBack() {
-            @Override
-            public void onSuccess(String result) {
-                UsuarioAdulto usuario = SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity);
-                readNino(new VolleyCallBack() {
-                    @Override
-                    public void onSuccess(String result) {
-                        ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios();
-                        for(int i=0; i<users.size();i++) {
-                            readActividad(new VolleyCallBack() {
-                                @Override
-                                public void onSuccess(String result) {
-                                    progressBar.setVisibility(View.GONE);
-                                }
-                            },users.get(i));
-                        }
-                    }
-                }, usuario.getIdServidor());
-            }
-        },usuarioAdulto);
-
-
-
-    }
-    public void restaurarInformacion(UsuarioAdulto usuarioAdulto){
-        this.progressBar.setVisibility(View.VISIBLE);
-        foundUsuario((new VolleyCallBack() {
-            @Override
-            public void onSuccess(String result) {
-                foundNino(new VolleyCallBack() {
-                    @Override
-                    public void onSuccess(String result) {
-                        ArrayList<UsuarioNino> usuarios= SharedPreferencesHelper.getUsuarios();
-                        for(int i=0;i<usuarios.size();i++) {
-                            foundActividad(new VolleyCallBack() {
-                                @Override
-                                public void onSuccess(String result) {
-                                    progressBar.setVisibility(View.GONE);
-                                }
-                            },usuarios.get(i).getIdServidor());
-                        }
-                    }
-                },SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity).getIdServidor());
-            }
-        }),usuarioAdulto);
-    }
-
-
-
 }

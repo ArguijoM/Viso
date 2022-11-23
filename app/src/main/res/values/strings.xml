@@ -7,6 +7,17 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <!--BASE DE DATOS-->
+    <string name="ADD_USUARIO">https://viso-upiiz.000webhostapp.com/addUsuario.php</string>
+    <string name="ADD_NINO">https://viso-upiiz.000webhostapp.com/addNino.php</string>
+    <string name="ADD_ACTIVIDAD">https://viso-upiiz.000webhostapp.com/addActividad.php</string>
+    <string name="READ_USUARIO">https://viso-upiiz.000webhostapp.com/readUsuario.php</string>
+    <string name="READ_NINO">https://viso-upiiz.000webhostapp.com/readNino.php</string>
+    <string name="READ_ACTIVIDAD">https://viso-upiiz.000webhostapp.com/readActividad.php</string>
+    <string name="VERIFY_USUARIO">"https://viso-upiiz.000webhostapp.com/verifyUsuario.php"</string>
+
+
+
     <string name="login_cuenta_exist"><u>¿Ya tienes una cuenta?</u>.</string>
     <string name="menu_inicio">Inicio</string>
     <string name="menu_actividad">Actividad</string>
