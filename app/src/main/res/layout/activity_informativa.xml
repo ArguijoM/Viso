@@ -8,15 +8,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingRight="@dimen/text_01"
-        android:paddingStart="@dimen/text_01"
-        android:paddingTop="@dimen/text_03"
+        android:paddingTop="@dimen/text_02"
         android:orientation="vertical">
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="370dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/text_03"
-            android:paddingBottom="@dimen/text_03"
             android:background="@drawable/customborder3">
             <TextView
                 android:layout_width="match_parent"
@@ -29,16 +26,14 @@
                 android:text="@string/informacion_item01_titulo">
             </TextView>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:paddingTop="@dimen/text_03"
-            android:paddingLeft="@dimen/text_03"
-            android:paddingRight="@dimen/text_03"
-            android:background="@drawable/customborder2"
             android:id="@+id/info_item_layout"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,12 +42,15 @@
                 android:textColor="@color/white"
                 android:fontFamily="@font/autour_one"
                 android:paddingLeft="@dimen/text_02"
+                android:paddingRight="@dimen/text_02"
                 android:textSize="@dimen/text_03" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/text_01"
-                android:paddingEnd="@dimen/text_01"
+                android:paddingLeft="@dimen/text_02"
+                android:paddingRight="@dimen/text_02"
+                android:paddingBottom="@dimen/text_02"
+                android:paddingTop="@dimen/text_02"
                 android:id="@+id/info_item_image01"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -62,11 +60,27 @@
                 android:textColor="@color/white"
                 android:fontFamily="@font/autour_one"
                 android:paddingLeft="@dimen/text_02"
+                android:paddingRight="@dimen/text_02"
                 android:textSize="@dimen/text_03"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/text_02"
+                android:paddingRight="@dimen/text_02"
+                android:paddingBottom="@dimen/text_02"
+                android:paddingTop="@dimen/text_02"
                 android:id="@+id/info_item_image02"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/info_item_text03"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:fontFamily="@font/autour_one"
+                android:paddingLeft="@dimen/text_02"
+                android:paddingRight="@dimen/text_02"
+                android:paddingBottom="@dimen/text_03"
+                android:textSize="@dimen/text_03"/>
         </LinearLayout>
     </LinearLayout>
 

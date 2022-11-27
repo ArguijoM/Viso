@@ -26,7 +26,6 @@ public class ActividadShow extends AppCompatActivity {
     private int id;
     private ImageView img_muestra,img_tomada;
     private FragmentActividadShowBinding binding;
-    private ActividadShowViewModel actividadShowViewModel;
     private TextView textView,calificacion;
     private  UsuarioNino usuarioActual;
     private ArrayList<Actividad> act;
@@ -56,13 +55,13 @@ public class ActividadShow extends AppCompatActivity {
         boolean calif =Herramientas.getEvaluacion(id,usuarioActual.getEdad(),act.get(id-1).getCalificacion());
         Log.i("Valor",""+calif);
         if(calif==true){
-            //calificacion.setText(""+act.get(id-1).getCalificacion());
-            calificacion.setText("VALIDA");
+            calificacion.setText(""+act.get(id-1).getCalificacion());
+            //calificacion.setText("VALIDA");
             calificacion.setTextColor(Color.parseColor("#00FF00"));
 
         }else{
-            //calificacion.setText(""+act.get(id-1).getCalificacion());
-            calificacion.setText("NO VALIDA");
+            calificacion.setText(""+act.get(id-1).getCalificacion());
+            //calificacion.setText("NO VALIDA");
             calificacion.setTextColor(Color.parseColor("#FF0000"));
         }
     }

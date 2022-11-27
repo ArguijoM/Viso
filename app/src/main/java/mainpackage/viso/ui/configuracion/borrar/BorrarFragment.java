@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,16 +15,13 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import mainpackage.viso.MainActivity;
 import mainpackage.viso.R;
-import mainpackage.viso.databinding.FragmentActividadBinding;
 import mainpackage.viso.databinding.FragmentBorrarBinding;
 import mainpackage.viso.herramientas.CuentaAdaptador;
 import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
-import mainpackage.viso.ui.cuenta.CuentaFragment;
-import mainpackage.viso.ui.inicio.InicioFragment;
+import mainpackage.viso.herramientas.splashscreen.Eliminado;
 
 public class BorrarFragment extends Fragment {
     private FragmentBorrarBinding binding;
@@ -64,7 +59,7 @@ public class BorrarFragment extends Fragment {
                                     SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarios.get(0));
                                 }
                                 if(deleteNino==true){
-                                    Intent intent = new Intent(getActivity(), SplashScreenBorrado.class);
+                                    Intent intent = new Intent(getActivity(), Eliminado.class);
                                     startActivity(intent);
                                 }
 

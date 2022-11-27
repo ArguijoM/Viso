@@ -1,4 +1,4 @@
-package mainpackage.viso.herramientas;
+package mainpackage.viso.herramientas.database;
 
 
 import android.content.Context;
@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mainpackage.viso.R;
+import mainpackage.viso.herramientas.Herramientas;
+import mainpackage.viso.herramientas.SharedPreferencesHelper;
 import mainpackage.viso.herramientas.objetos.Actividad;
 import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;

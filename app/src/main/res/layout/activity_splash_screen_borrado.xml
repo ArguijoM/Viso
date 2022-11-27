@@ -7,7 +7,7 @@
     android:background="@color/primary02"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".ui.configuracion.borrar.SplashScreenBorrado">
+    tools:context=".herramientas.splashscreen.Eliminado">
 
     <TextView
         android:layout_width="match_parent"

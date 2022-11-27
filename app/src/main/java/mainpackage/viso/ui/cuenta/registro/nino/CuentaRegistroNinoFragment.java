@@ -1,10 +1,8 @@
 package mainpackage.viso.ui.cuenta.registro.nino;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,17 +19,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
 
 import mainpackage.viso.databinding.FragmentRegistroNinoBinding;
-import mainpackage.viso.herramientas.DatabaseHelper;
+import mainpackage.viso.herramientas.database.DatabaseHelper;
 import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
-import mainpackage.viso.herramientas.VolleyCallBack;
+import mainpackage.viso.herramientas.database.VolleyCallBack;
 import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
+import mainpackage.viso.herramientas.splashscreen.Bienvenido;
 import mainpackage.viso.ui.inicio.InicioFragment;
 
 public class CuentaRegistroNinoFragment extends Fragment implements View.OnClickListener {
@@ -99,7 +97,8 @@ public class CuentaRegistroNinoFragment extends Fragment implements View.OnClick
                                     public void onSuccess(String result) {
                                         if((SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity)).getIdServidor()!=0) {
                                             progressBar.setVisibility(View.GONE);
-                                            toMain();
+                                            Intent intent = new Intent(getContext(), Bienvenido.class);
+                                            startActivity(intent);
                                         }
                                     }
                                 },SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity).getIdServidor());

@@ -18,16 +18,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Viso">
         <activity
+            android:name=".herramientas.splashscreen.Completado"
+            android:exported="false" />
+        <activity
+            android:name=".herramientas.splashscreen.Presentacion"
+            android:exported="false" />
+        <activity
             android:name=".ui.cuenta.registro.adulto.Login"
             android:exported="false" />
         <activity
-            android:name=".herramientas.objetos.splashscreen.Bienvenido"
+            android:name=".herramientas.splashscreen.Bienvenido"
             android:exported="false" />
         <activity
             android:name=".ui.informacion.informativa.Informativa"
             android:exported="false" />
         <activity
-            android:name=".ui.configuracion.borrar.SplashScreenBorrado"
+            android:name=".herramientas.splashscreen.Eliminado"
             android:exported="false" />
         <activity
             android:name=".ui.actividad.instruccion.Instruccion"
@@ -36,10 +42,10 @@
             android:name=".ui.actividad.get.ActividadShow"
             android:exported="false" />
         <activity
-            android:name=".herramientas.objetos.splashscreen.ActividadDone"
+            android:name=".herramientas.splashscreen.Realizada"
             android:exported="false" />
         <activity
-            android:name=".herramientas.objetos.splashscreen.SplashScreen"
+            android:name=".herramientas.splashscreen.Cargando"
             android:exported="false" />
         <activity
             android:name=".ui.actividad.set.confirm.ActividadConfirm"
@@ -68,6 +74,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
     </application>
 
 </manifest>

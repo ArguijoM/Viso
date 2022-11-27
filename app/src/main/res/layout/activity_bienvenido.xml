@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary01"
-    tools:context=".herramientas.objetos.splashscreen.Bienvenido">
+    tools:context=".herramientas.splashscreen.Bienvenido">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,6 +23,7 @@
         <pl.droidsonroids.gif.GifImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/text_04"
             android:src="@drawable/gif_fireworks"/>
     </LinearLayout>
 </LinearLayout>

@@ -8,7 +8,7 @@
     android:background="@color/primary02"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".herramientas.objetos.splashscreen.ActividadDone">
+    tools:context=".herramientas.splashscreen.Realizada">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

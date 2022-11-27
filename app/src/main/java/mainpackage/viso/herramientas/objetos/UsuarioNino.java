@@ -1,10 +1,5 @@
 package mainpackage.viso.herramientas.objetos;
 
-import java.util.ArrayList;
-
-import mainpackage.viso.herramientas.Herramientas;
-import mainpackage.viso.herramientas.SQLiteHelper;
-
 public class UsuarioNino {
     int idServidor;
     int idLocal;

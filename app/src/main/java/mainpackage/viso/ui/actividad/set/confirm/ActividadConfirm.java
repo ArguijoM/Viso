@@ -23,7 +23,8 @@ import mainpackage.viso.herramientas.SharedPreferencesHelper;
 import mainpackage.viso.herramientas.SoundsPlayer;
 import mainpackage.viso.herramientas.objetos.Actividad;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
-import mainpackage.viso.herramientas.objetos.splashscreen.ActividadDone;
+import mainpackage.viso.herramientas.splashscreen.Completado;
+import mainpackage.viso.herramientas.splashscreen.Realizada;
 import mainpackage.viso.ui.actividad.set.ActividadN;
 
 public class ActividadConfirm extends AppCompatActivity implements View.OnClickListener {
@@ -72,9 +73,7 @@ public class ActividadConfirm extends AppCompatActivity implements View.OnClickL
                 startActivity(intent);
                 break;
         }
-
     }
-
     private void guardarFoto(){
         UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
         Log.i("CURENT USER ACT",usuarioActual.getNombre());
@@ -85,9 +84,15 @@ public class ActividadConfirm extends AppCompatActivity implements View.OnClickL
         int calif=Herramientas.calificar(bitmap,id);
         Actividad act = new Actividad(id,0,usuarioActual.getIdServidor(),usuarioActual.getIdLocal(),crearImagenString(bitmap),calif, Calendar.getInstance().getTime().toString());
         SharedPreferencesHelper.addActividad(act);
-        sound.playDoneSound();
-        Intent intent = new Intent(ActividadConfirm.this, ActividadDone.class);
-        startActivity(intent);
+        if(id==18){
+            sound.playSuccessSound();
+            Intent intent = new Intent(ActividadConfirm.this, Completado.class);
+            startActivity(intent);
+        }else {
+            sound.playDoneSound();
+            Intent intent = new Intent(ActividadConfirm.this, Realizada.class);
+            startActivity(intent);
+        }
     }
     public static String crearImagenString(Bitmap image){
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

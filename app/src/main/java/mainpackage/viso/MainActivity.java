@@ -1,7 +1,9 @@
 package mainpackage.viso;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -19,6 +21,8 @@ import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
 import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
+import mainpackage.viso.herramientas.splashscreen.Presentacion;
+import mainpackage.viso.ui.configuracion.ConfiguracionFragment;
 import mainpackage.viso.ui.cuenta.registro.adulto.CuentaRegistroAdultoFragment;
 import mainpackage.viso.ui.cuenta.registro.nino.CuentaRegistroNinoFragment;
 
@@ -49,21 +53,32 @@ public class MainActivity extends AppCompatActivity {
         Herramientas.mainActivity = this;
         UsuarioAdulto usuarioAdulto = SharedPreferencesHelper.getUsuarioAdulto(this);
         UsuarioNino usuarioActual=null;
-        //SharedPreferencesHelper.deteteAllPreference(this);
-        if(usuarioAdulto==null){
-            CuentaRegistroAdultoFragment fragment = new CuentaRegistroAdultoFragment();
-            FragmentManager fragmentManager = this.getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.nav_host_fragment_content_main,fragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-        }else if((usuarioActual= SharedPreferencesHelper.getUsuarioActual(this))==null){
-            CuentaRegistroNinoFragment fragment= new CuentaRegistroNinoFragment();
-            FragmentManager fragmentManager = this.getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.nav_host_fragment_content_main,fragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+
+        Intent intent = getIntent();
+        if(intent.getExtras()!=null) {
+            int id = intent.getIntExtra("case",0);
+            if(id==1) {
+                if (usuarioAdulto == null) {
+                    CuentaRegistroAdultoFragment fragment = new CuentaRegistroAdultoFragment();
+                    FragmentManager fragmentManager = this.getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            }
+        }else {
+            if (usuarioAdulto == null) {
+                Intent intent2 = new Intent(MainActivity.this, Presentacion.class);
+                startActivity(intent2);
+            } else if ((usuarioActual = SharedPreferencesHelper.getUsuarioActual(this)) == null) {
+                CuentaRegistroNinoFragment fragment = new CuentaRegistroNinoFragment();
+                FragmentManager fragmentManager = this.getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
         }
 
         //usuarioActual.setActividades(new ArrayList<>());
@@ -87,5 +102,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            ConfiguracionFragment fragment = new ConfiguracionFragment();
+            FragmentManager fragmentManager = this.getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.nav_host_fragment_content_main,fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -5,9 +5,11 @@
     <string name="nav_header_title">Viso</string>
     <string name="nav_header_subtitle">Mejora tus habilidades viso-motrices</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configuración</string>
+    <string name="btn_entendido">Entendido</string>
+    <string name="main_email">viso.ipn@gmail.com</string>
 
-    <!--BASE DE DATOS-->
+    <!--************************************ BASE DE DATOS **************************************-->
     <string name="ADD_USUARIO">https://viso-upiiz.000webhostapp.com/addUsuario.php</string>
     <string name="ADD_NINO">https://viso-upiiz.000webhostapp.com/addNino.php</string>
     <string name="ADD_ACTIVIDAD">https://viso-upiiz.000webhostapp.com/addActividad.php</string>
@@ -15,9 +17,21 @@
     <string name="READ_NINO">https://viso-upiiz.000webhostapp.com/readNino.php</string>
     <string name="READ_ACTIVIDAD">https://viso-upiiz.000webhostapp.com/readActividad.php</string>
     <string name="VERIFY_USUARIO">"https://viso-upiiz.000webhostapp.com/verifyUsuario.php"</string>
+    <!--*****************************************************************************************-->
 
-
-
+    <string name="presentacion_titulo">Antes de empezar</string>
+    <string name="presentacion_1">
+        Viso es una herramienta que tiene como objetivo el apoyar a los niños con el desarrollo de sus
+        habilidades viso-motrices.
+    </string>
+    <string name="presentacion_2">
+        Esto mediante la réplica de una serie de figuras geométricas basadas en la teoría de los test
+        VMI y Bender.
+    </string>
+    <string name="presentacion_3">
+        Podrás encontrar mas información acerca de las habilidades viso-motrices y los test en la
+        seccion "Información".
+    </string>
     <string name="login_cuenta_exist"><u>¿Ya tienes una cuenta?</u>.</string>
     <string name="menu_inicio">Inicio</string>
     <string name="menu_actividad">Actividad</string>
@@ -37,6 +51,10 @@
     <string name="actividad_calificacion">Tu calificación</string>
     <string name="actividad_muestra">Imagen de muestra</string>
     <string name="actividad_realizadan">Imagen realizada</string>
+    <string name="felicidades">¡Felicidades!</string>
+    <string name="feliciaddes_2">Has Realizado todas las actividades</string>
+    <string name="feliciaddes_3">Puedes generar la documentación de tus actividades en la sección "Configuración"</string>
+
     <string name="configuracion_descripcion01">Genera una copia de seguridad en una base de datos remota
     desde la cuál podrás restaurar la información almacenada desde otro dispositivo o en caso de perder
     la información almacenada en este dispositivo</string>
@@ -123,6 +141,10 @@
         requieren de mucha precisión, conjuntamente trabajando visión con las manos, muñecas y
         dedos para rasgar, cortar, pintar, escribir entre otras muchas actividades. De esta forma
         un desarrollo viso-motriz correcto es clave para un correcto desarrollo académico.
+    </string>
+    <string name="informacion_item05_text02">
+        Para cualquier duda acerca de la aplicación, asi como reportar un error o "bug" contactar
+        por el siguiente correo:
     </string>
 
     <string name="instruccion">Asegúrate que la habitación esté bien iluminada</string>

@@ -16,7 +16,7 @@ import android.widget.TextView;
 import mainpackage.viso.R;
 
 public class Informativa extends AppCompatActivity {
-    private TextView opcion_text,opcion_text2, opcion_title;
+    private TextView opcion_text,opcion_text2,opcion_text3, opcion_title;
     private ImageView opcion_image,opcion_image2;
     private LinearLayout opcion_layout;
     private int id;
@@ -36,6 +36,7 @@ public class Informativa extends AppCompatActivity {
         context = this;
         opcion_text=(TextView)findViewById(R.id.info_item_text01);
         opcion_text2=(TextView)findViewById(R.id.info_item_text02);
+        opcion_text3=(TextView)findViewById(R.id.info_item_text03);
 
         opcion_title = (TextView)findViewById(R.id.info_item_title);
         opcion_image = (ImageView)findViewById(R.id.info_item_image01);
@@ -126,6 +127,8 @@ public class Informativa extends AppCompatActivity {
                 opcion_title.setText(R.string.informacion_item05_titulo);
                 opcion_text.setText(R.string.informacion_item05_text01);
                 opcion_image.setImageResource(R.drawable.ic_main_2);
+                opcion_text2.setText(R.string.informacion_item05_text02);
+                opcion_text3.setText(R.string.main_email);
                 break;
         }
     }

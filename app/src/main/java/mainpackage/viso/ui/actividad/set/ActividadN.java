@@ -27,7 +27,7 @@ import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
 import mainpackage.viso.herramientas.SoundsPlayer;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
-import mainpackage.viso.herramientas.objetos.splashscreen.SplashScreen;
+import mainpackage.viso.herramientas.splashscreen.Cargando;
 
 public class ActividadN extends AppCompatActivity {
     private int id;
@@ -90,7 +90,7 @@ public class ActividadN extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            Intent intent = new Intent(ActividadN.this, SplashScreen.class);
+            Intent intent = new Intent(ActividadN.this, Cargando.class);
             intent.putExtra("id",id);
             intent.putExtra("img",currentPhotoPath);
             startActivity(intent);

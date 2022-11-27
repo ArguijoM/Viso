@@ -9,10 +9,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.fonts.Font;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -29,24 +27,15 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.itextpdf.io.font.FontConstants;
-import com.itextpdf.io.font.FontProgramFactory;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
-import com.itextpdf.kernel.colors.Color;
-import com.itextpdf.kernel.colors.DeviceRgb;
-import com.itextpdf.kernel.font.PdfFont;
-import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.borders.Border;
-import com.itextpdf.layout.borders.DashedBorder;
 import com.itextpdf.layout.element.AreaBreak;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Image;
@@ -60,23 +49,19 @@ import com.itextpdf.layout.property.TextAlignment;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import mainpackage.viso.R;
 import mainpackage.viso.databinding.FragmentConfiguracionBinding;
-import mainpackage.viso.herramientas.DatabaseHelper;
+import mainpackage.viso.herramientas.database.DatabaseHelper;
 import mainpackage.viso.herramientas.Herramientas;
-import mainpackage.viso.herramientas.SQLiteHelper;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
-import mainpackage.viso.herramientas.VolleyCallBack;
+import mainpackage.viso.herramientas.database.VolleyCallBack;
 import mainpackage.viso.herramientas.objetos.Actividad;
 import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
-import mainpackage.viso.herramientas.objetos.splashscreen.Bienvenido;
 import mainpackage.viso.ui.configuracion.borrar.BorrarFragment;
 import mainpackage.viso.ui.cuenta.registro.adulto.Login;
-import mainpackage.viso.ui.inicio.InicioFragment;
 
 
 public class ConfiguracionFragment extends Fragment implements View.OnClickListener {
@@ -214,16 +199,6 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                 break;
         }
     }
-    public void generarActividades(ProgressBar progressBar,UsuarioNino user){
-        DatabaseHelper db = new DatabaseHelper(getContext(),progressBar);
-            db.readActividad(new VolleyCallBack() {
-                @Override
-                public void onSuccess(String result) {
-                    ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios();
-                    SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,users.get(0));
-                }
-            },user);
-    }
     public void generatePDF(UsuarioNino usuarioActual) {
         try {
             File root = android.os.Environment.getExternalStorageDirectory();
@@ -247,24 +222,32 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             encabezado.setHorizontalAlignment(HorizontalAlignment.CENTER);
             documento.add(encabezado);
             Table info = new Table(3);
-            Cell info_nombre = new Cell().add(new Paragraph("Nombre: "+usuarioActual.getNombre()).setFontSize(14).setTextAlignment(TextAlignment.CENTER));
+            Cell info_nombre = new Cell().add(new Paragraph("Nombre: "+usuarioActual.getNombre()+" "+usuarioActual.getApellido()).setFontSize(12).setTextAlignment(TextAlignment.CENTER));
             info_nombre.setBorder(null);
             info_nombre.setPaddingLeft(20);
             info_nombre.setPaddingRight(20);
-            Cell info_apellido = new Cell().add(new Paragraph("Apellido: "+usuarioActual.getApellido()).setFontSize(14).setTextAlignment(TextAlignment.CENTER));
-            info_apellido.setBorder(null);
-            info_apellido.setPaddingLeft(20);
-            info_apellido.setPaddingRight(20);
-            Cell info_edad = new Cell().add(new Paragraph("Edad: "+usuarioActual.getEdad()).setFontSize(14).setTextAlignment(TextAlignment.CENTER));
+
+            Cell info_edad = new Cell().add(new Paragraph("Edad: "+usuarioActual.getEdad()).setFontSize(12).setTextAlignment(TextAlignment.CENTER));
             info_edad.setBorder(null);
             info_edad.setPaddingLeft(20);
             info_edad.setPaddingRight(20);
+            String[] aux=usuarioActual.getProfile().split(" Y ");
+            Cell info_sexo;
+            if((aux[0]).equals("H")){
+                info_sexo= new Cell().add(new Paragraph("Sexo: Masculino").setFontSize(12).setTextAlignment(TextAlignment.CENTER));
+            }else{
+                info_sexo= new Cell().add(new Paragraph("Sexo: Femenino"+usuarioActual.getProfile()).setFontSize(12).setTextAlignment(TextAlignment.CENTER));
+            }
+            info_sexo.setBorder(null);
+            info_sexo.setPaddingLeft(20);
+            info_sexo.setPaddingRight(20);
             info.addCell(info_nombre);
-            info.addCell(info_apellido);
             info.addCell(info_edad);
+            info.addCell(info_sexo);
             info.setHorizontalAlignment(HorizontalAlignment.CENTER);
             info.setPaddingBottom(200f);
             documento.add(info);
+
             Table acts = new Table(4);
             ArrayList<Actividad> activities = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
             String aciertos="",fallos="";

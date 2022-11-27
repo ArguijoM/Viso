@@ -7,7 +7,7 @@
     android:background="@color/primary02"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".herramientas.objetos.splashscreen.SplashScreen">
+    tools:context=".herramientas.splashscreen.Cargando">
 
     <TextView
         android:layout_width="match_parent"

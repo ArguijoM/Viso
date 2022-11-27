@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "436426075888",
+    "project_id": "viso-73aa8",
+    "storage_bucket": "viso-73aa8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436426075888:android:2c5f13c9044ee2b3d49c35",
+        "android_client_info": {
+          "package_name": "mainpackage.viso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "436426075888-dc00fnu20bohfdrnre5qegioak8j81iu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvGi2HGYnyZTw8S9HQ9OnzQbzTj3nKs8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "436426075888-dc00fnu20bohfdrnre5qegioak8j81iu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

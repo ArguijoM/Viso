@@ -3,7 +3,6 @@ package mainpackage.viso.ui.cuenta.registro.adulto;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,31 +14,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import mainpackage.viso.R;
 import mainpackage.viso.databinding.FragmentRegistroAdultoBinding;
-import mainpackage.viso.herramientas.DatabaseHelper;
+import mainpackage.viso.herramientas.database.DatabaseHelper;
 import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
-import mainpackage.viso.herramientas.VolleyCallBack;
+import mainpackage.viso.herramientas.database.VolleyCallBack;
 import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
-import mainpackage.viso.herramientas.objetos.splashscreen.Bienvenido;
+import mainpackage.viso.herramientas.splashscreen.Bienvenido;
 
 public class CuentaLoginFragment extends Fragment {
 

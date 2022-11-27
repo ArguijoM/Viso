@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,14 +15,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import mainpackage.viso.R;
-import mainpackage.viso.herramientas.DatabaseHelper;
+import mainpackage.viso.herramientas.database.DatabaseHelper;
 import mainpackage.viso.herramientas.Herramientas;
-import mainpackage.viso.herramientas.SQLiteHelper;
+import mainpackage.viso.herramientas.database.SQLiteHelper;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
-import mainpackage.viso.herramientas.VolleyCallBack;
+import mainpackage.viso.herramientas.database.VolleyCallBack;
 import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
-import mainpackage.viso.herramientas.objetos.splashscreen.Bienvenido;
+import mainpackage.viso.herramientas.splashscreen.Bienvenido;
 
 public class Login extends AppCompatActivity {
     private Button btn_siguiente;

@@ -27,16 +27,14 @@ import mainpackage.viso.ui.actividad.get.ActividadShow;
 import mainpackage.viso.ui.actividad.instruccion.Instruccion;
 import mainpackage.viso.ui.actividad.set.ActividadN;
 
-public class ActividadFragment extends Fragment implements View.OnClickListener {
+public class ActividadFragment extends Fragment {
 
-    private ActividadViewModel actividadViewModel;
     private FragmentActividadBinding binding;
     private ArrayList<Actividad> actividades;
     private SoundsPlayer sound;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        actividadViewModel = new ViewModelProvider(this).get(ActividadViewModel.class);
 
         binding = FragmentActividadBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -108,27 +106,8 @@ public class ActividadFragment extends Fragment implements View.OnClickListener 
                         intent.putExtra("id", n);
                         startActivity(intent);
                     }
-
-
-                    /*Bundle bundle = new Bundle();
-                    bundle.putInt("id",n);
-                    ActividadNFragment fragment = new ActividadNFragment();
-                    fragment.setArguments(bundle);
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.nav_host_fragment_content_main,fragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();*/
                 }
             });
         }
-    }
-
-    @Override
-    public void onClick(View v) {
-        //Intent intent = new Intent(this,Informativa.class);
-        //intent.putExtra("idPiloto",pilotos.get(position).getId());
-        //intent.putExtra("idAuto",pilotos.get(position).getAuto());
-        //startActivity(intent);
     }
 }

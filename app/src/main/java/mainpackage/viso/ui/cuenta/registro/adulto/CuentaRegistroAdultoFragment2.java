@@ -2,8 +2,6 @@ package mainpackage.viso.ui.cuenta.registro.adulto;
 
 import android.os.Bundle;
 
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import mainpackage.viso.R;
 import mainpackage.viso.databinding.FragmentCuentaRegistroAdulto2Binding;
-import mainpackage.viso.databinding.FragmentRegistroAdultoBinding;
-import mainpackage.viso.herramientas.DatabaseHelper;
+import mainpackage.viso.herramientas.database.DatabaseHelper;
 import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
-import mainpackage.viso.herramientas.VolleyCallBack;
+import mainpackage.viso.herramientas.database.VolleyCallBack;
 import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
 import mainpackage.viso.ui.cuenta.registro.nino.CuentaRegistroNinoFragment;
 

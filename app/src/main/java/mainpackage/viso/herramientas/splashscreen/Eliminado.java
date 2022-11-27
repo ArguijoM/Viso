@@ -1,4 +1,4 @@
-package mainpackage.viso.herramientas.objetos.splashscreen;
+package mainpackage.viso.herramientas.splashscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,36 +14,33 @@ import mainpackage.viso.MainActivity;
 import mainpackage.viso.R;
 import mainpackage.viso.herramientas.SoundsPlayer;
 
-public class ActividadDone extends AppCompatActivity {
-    private ImageView done;
-    private TextView text_done;
+public class Eliminado extends AppCompatActivity {
+    private ImageView loading;
+    private TextView generando;
     private SoundsPlayer sound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_actividad_done);
+        setContentView(R.layout.activity_splash_screen_borrado);
         getSupportActionBar().hide();
-        //done = findViewById(R.id.done_circle);
-        text_done = findViewById(R.id.done_text);
-        Animation animation=AnimationUtils.loadAnimation(this,R.anim.bounce);
-        Animation animation2=AnimationUtils.loadAnimation(this,R.anim.bounce);
-        //done.startAnimation(animation);
-        text_done.startAnimation(animation2);
+
+        generando = findViewById(R.id.generando_textview);
+        loading = findViewById(R.id.iv_borrado);
+        Animation animation= AnimationUtils.loadAnimation(this,R.anim.bounce);
+        generando.startAnimation(animation);
         sound =new SoundsPlayer(this);
         sound.playDoneSound();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(ActividadDone.this, MainActivity.class);
+                Intent intent = new Intent(Eliminado.this, MainActivity.class);
                 startActivity(intent);
             }
-        },2000);
-
+        },3000);
     }
     @Override
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
     }
-
 }

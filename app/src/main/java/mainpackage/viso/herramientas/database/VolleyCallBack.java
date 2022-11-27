@@ -1,4 +1,4 @@
-package mainpackage.viso.herramientas;
+package mainpackage.viso.herramientas.database;
 
 import org.json.JSONObject;
 

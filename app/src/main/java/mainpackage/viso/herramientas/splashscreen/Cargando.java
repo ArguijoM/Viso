@@ -1,4 +1,4 @@
-package mainpackage.viso.herramientas.objetos.splashscreen;
+package mainpackage.viso.herramientas.splashscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +20,7 @@ import mainpackage.viso.R;
 import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.ui.actividad.set.confirm.ActividadConfirm;
 
-public class SplashScreen extends AppCompatActivity {
+public class Cargando extends AppCompatActivity {
     private int id;
     private String currentPhotoPath;
     private TextView generando;
@@ -59,14 +59,14 @@ public class SplashScreen extends AppCompatActivity {
                     btm_new.compress(Bitmap.CompressFormat.PNG, 100, stream);
                     byte[] byteArray = stream.toByteArray();
 
-                    Intent intent2 = new Intent(SplashScreen.this, ActividadConfirm.class);
+                    Intent intent2 = new Intent(Cargando.this, ActividadConfirm.class);
                     intent2.putExtra("id", id);
                     intent2.putExtra("img", byteArray);
                     startActivity(intent2);
                 }catch (Exception e){
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(),"Ha ocurrido un error, inténtelo de nuevo", Toast.LENGTH_LONG).show();
-                    Intent intent2 = new Intent(SplashScreen.this, MainActivity.class);
+                    Intent intent2 = new Intent(Cargando.this, MainActivity.class);
                     startActivity(intent2);
                 }
 

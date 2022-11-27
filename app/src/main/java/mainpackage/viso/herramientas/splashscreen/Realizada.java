@@ -1,4 +1,4 @@
-package mainpackage.viso.ui.configuracion.borrar;
+package mainpackage.viso.herramientas.splashscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,33 +14,35 @@ import mainpackage.viso.MainActivity;
 import mainpackage.viso.R;
 import mainpackage.viso.herramientas.SoundsPlayer;
 
-public class SplashScreenBorrado extends AppCompatActivity {
-    private ImageView loading;
-    private TextView generando;
+public class Realizada extends AppCompatActivity {
+    private ImageView done;
+    private TextView text_done;
     private SoundsPlayer sound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen_borrado);
+        setContentView(R.layout.activity_actividad_done);
         getSupportActionBar().hide();
-
-        generando = findViewById(R.id.generando_textview);
-        loading = findViewById(R.id.iv_borrado);
-        Animation animation= AnimationUtils.loadAnimation(this,R.anim.bounce);
-        generando.startAnimation(animation);
+        //done = findViewById(R.id.done_circle);
+        text_done = findViewById(R.id.done_text);
+        Animation animation=AnimationUtils.loadAnimation(this,R.anim.bounce);
+        //done.startAnimation(animation);
+        text_done.startAnimation(animation);
         sound =new SoundsPlayer(this);
         sound.playDoneSound();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreenBorrado.this, MainActivity.class);
+                Intent intent = new Intent(Realizada.this, MainActivity.class);
                 startActivity(intent);
             }
-        },3000);
+        },2000);
+
     }
     @Override
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
     }
+
 }

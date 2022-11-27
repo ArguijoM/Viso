@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -40,9 +39,8 @@ import mainpackage.viso.R;
 import mainpackage.viso.databinding.FragmentRegistroLoginBinding;
 import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
-import mainpackage.viso.herramientas.VolleyCallBack;
+import mainpackage.viso.herramientas.database.VolleyCallBack;
 import mainpackage.viso.herramientas.objetos.UsuarioAdulto;
-import mainpackage.viso.ui.cuenta.registro.nino.CuentaRegistroNinoFragment;
 
 public class CuentaRegistroAdultoFragment extends Fragment {
     private EditText email,contrasena,contrasena2;
@@ -70,47 +68,52 @@ public class CuentaRegistroAdultoFragment extends Fragment {
                 Log.i("Contrasena 1",contrasena.getText().toString());
                 Log.i("Contrasena 2",contrasena2.getText().toString());
                 if(!email.getText().toString().equals("") && !contrasena.getText().toString().equals("") &&!contrasena2.getText().toString().equals("")) {
-                    if (contrasena.getText().toString().equals(contrasena2.getText().toString())) {
-                        progressBar.setVisibility(View.VISIBLE);
-                        verifyUsuario(new VolleyCallBack() {
-                            @Override
-                            public void onSuccess(String result) {
-                                UsuarioAdulto usuarioAdulto = SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity);
-                                if(usuarioAdulto!=null){
-                                    progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(context, "Ya existe un usuario con este correo", Toast.LENGTH_SHORT).show();
-                                    SharedPreferencesHelper.deteteAllPreference(Herramientas.mainActivity);
-                                }else{
-                                    progressBar.setVisibility(View.GONE);
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("email", String.valueOf(email.getText()));
-                                    bundle.putString("contrasena", String.valueOf(contrasena.getText()));
-                                    CuentaRegistroAdultoFragment2 fragment = new CuentaRegistroAdultoFragment2();                                    fragment.setArguments(bundle);
-                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment);
-                                    fragmentTransaction.addToBackStack(null);
-                                    fragmentTransaction.commit();
-                                }
-                            }
-                        },email.getText().toString());
-
-
-                    } else {
-                        //Alert Dialog
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setMessage("Las contraseñas no coinciden")
-                                .setCancelable(false)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
+                    if(contrasena.getText().toString().length()>=5) {
+                        if (contrasena.getText().toString().equals(contrasena2.getText().toString())) {
+                            progressBar.setVisibility(View.VISIBLE);
+                            verifyUsuario(new VolleyCallBack() {
+                                @Override
+                                public void onSuccess(String result) {
+                                    UsuarioAdulto usuarioAdulto = SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity);
+                                    if (usuarioAdulto != null) {
+                                        progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(context, "Ya existe un usuario con este correo", Toast.LENGTH_SHORT).show();
+                                        SharedPreferencesHelper.deteteAllPreference(Herramientas.mainActivity);
+                                    } else {
+                                        progressBar.setVisibility(View.GONE);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("email", String.valueOf(email.getText()));
+                                        bundle.putString("contrasena", String.valueOf(contrasena.getText()));
+                                        CuentaRegistroAdultoFragment2 fragment = new CuentaRegistroAdultoFragment2();
+                                        fragment.setArguments(bundle);
+                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment);
+                                        fragmentTransaction.addToBackStack(null);
+                                        fragmentTransaction.commit();
                                     }
-                                });
-                        AlertDialog alerta = builder.create();
-                        alerta.setTitle("Alerta");
-                        alerta.show();
-                        contrasena.setText("");
-                        contrasena2.setText("");
+                                }
+                            }, email.getText().toString());
+
+
+                        } else {
+                            //Alert Dialog
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setMessage("Las contraseñas no coinciden")
+                                    .setCancelable(false)
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    });
+                            AlertDialog alerta = builder.create();
+                            alerta.setTitle("Alerta");
+                            alerta.show();
+                            contrasena.setText("");
+                            contrasena2.setText("");
+                        }
+                    }else{
+                        Toast.makeText(getContext(),"La contraseña debe ser igual o mayor a 5 dígitos",Toast.LENGTH_LONG).show();
                     }
                 }else{
                     Toast.makeText(getContext(),"Ingrese la información solicitada",Toast.LENGTH_LONG).show();
@@ -134,6 +137,7 @@ public class CuentaRegistroAdultoFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
     public void verifyUsuario(final VolleyCallBack callBack, String emailUser){
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest request = new StringRequest(

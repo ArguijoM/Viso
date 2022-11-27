@@ -10,6 +10,7 @@
     <dimen name="edit_text_padding">10dp</dimen>
     <dimen name="edit_text_padding_button">40dp</dimen>
     <dimen name="main_layout_width">350dp</dimen>
+    <dimen name="btn_size">70dp</dimen>
 
     <dimen name="text_title01">30dp</dimen>
     <dimen name="text_01">10dp</dimen>
