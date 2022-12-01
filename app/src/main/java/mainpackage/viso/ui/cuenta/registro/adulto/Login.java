@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +36,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         progressBar = (ProgressBar)findViewById(R.id.login_progressbar);
+        progressBar.getIndeterminateDrawable()
+                .setColorFilter(getResources().getColor(R.color.primary02), PorterDuff.Mode.SRC_IN);
         progressBar.setVisibility(View.GONE);
         Intent intent = getIntent();
         if(intent.getExtras()!=null){
@@ -41,9 +45,7 @@ public class Login extends AppCompatActivity {
             this.contrasena=intent.getStringExtra("contrasena");
             ((TextView)findViewById(R.id.login_head)).setText("Restaura tu información");
             ((EditText)findViewById(R.id.correo_adulto)).setText(email);
-            ((EditText)findViewById(R.id.correo_adulto)).setEnabled(false);
             ((EditText)findViewById(R.id.contrasena_adulto)).setText(contrasena);
-            ((EditText)findViewById(R.id.contrasena_adulto)).setEnabled(false);
             SQLiteHelper myDB = new SQLiteHelper(Herramientas.mainActivity);
             myDB.onUpgrade(myDB.getWritableDatabase(),1,2);
         }

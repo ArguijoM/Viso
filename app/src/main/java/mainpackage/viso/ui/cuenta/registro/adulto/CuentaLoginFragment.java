@@ -2,6 +2,8 @@ package mainpackage.viso.ui.cuenta.registro.adulto;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +42,8 @@ public class CuentaLoginFragment extends Fragment {
         getActivity().onBackPressed();
 
         progressBar = (ProgressBar)root.findViewById(R.id.login_progressbar);
+        progressBar.getIndeterminateDrawable()
+                .setColorFilter(getResources().getColor(R.color.primary02), PorterDuff.Mode.SRC_IN);
         progressBar.setVisibility(View.GONE);
         btn_siguiente= (Button)root.findViewById(R.id.btn_siguiente);
         context = getContext();

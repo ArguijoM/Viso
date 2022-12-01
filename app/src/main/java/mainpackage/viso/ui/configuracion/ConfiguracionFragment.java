@@ -9,9 +9,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +34,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.colors.Color;
+import com.itextpdf.kernel.colors.DeviceRgb;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -83,6 +87,8 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
         opcion03 = root.findViewById(R.id.opcion_03);
         opcion04 = root.findViewById(R.id.opcion_04);
         progressBar = root.findViewById(R.id.progress_bar_config);
+        progressBar.getIndeterminateDrawable()
+                .setColorFilter(getResources().getColor(R.color.primary02), PorterDuff.Mode.SRC_IN);
         progressBar.setVisibility(View.GONE);
 
         opcion01.setOnClickListener(this);
@@ -109,15 +115,14 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            progressBar.setVisibility(View.VISIBLE);
                             DatabaseHelper db = new DatabaseHelper(getContext(),progressBar);
                             ArrayList<UsuarioNino> users = SharedPreferencesHelper.getUsuarios();
-                            Log.i("USUARIOS CONIFG::",""+users.size());
                             for(int i=0; i<users.size();i++) {
                                 db.readActividad(new VolleyCallBack() {
                                     @Override
                                     public void onSuccess(String result) {
-                                        progressBar.setVisibility(View.GONE);
-                                        Toast.makeText(getContext(),"Copia de seguridad generada",Toast.LENGTH_SHORT).show();
+
                                     }
                                 },users.get(i));
                             }
@@ -171,12 +176,13 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                progressBar.setVisibility(View.VISIBLE);
                                 if (checkPermission()) {
-                                        generatePDF(user);
+                                    progressBar.setVisibility(View.VISIBLE);
+                                    generatePDF(user);
                                 } else {
                                     requestPermission();
                                 }
+                                progressBar.setVisibility(View.GONE);
                             }
                         })
                         .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -252,12 +258,13 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             ArrayList<Actividad> activities = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
             String aciertos="",fallos="";
             for(int j=0;j<activities.size();j++){
-                if(Herramientas.getEvaluacion((j+1),usuarioActual.getEdad(),activities.get(j).getCalificacion())==true){
-                    aciertos+=(j+1)+",";
+                if(Herramientas.getEvaluacion((j+1),activities.get(j).getCalificacion())==true){
+                    aciertos+=(j+1)+";";
                 }else{
-                    fallos+=(j+1)+",";
+                    fallos+=(j+1)+";";
                 }
             }
+
             Cell acts_realizadas = new Cell().add(new Paragraph("Act. realizadas: "+activities.size()).setFontSize(12).setTextAlignment(TextAlignment.LEFT));
             acts_realizadas.setBorder(null);
             acts_realizadas.setPaddingRight(20);
@@ -273,7 +280,36 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             acts.addCell(acts_realizadas);acts.addCell(acts_norealizadas);acts.addCell(acts_validas);acts.addCell(acts_invalidas);
             acts.setHorizontalAlignment(HorizontalAlignment.CENTER);
             documento.add(acts);
+            Table datos = new Table(2);
+            int puntaje_bruto = Herramientas.puntajeBruto(activities,usuarioActual);
+            Cell bruto = new Cell().add(new Paragraph("Puntaje bruto: "+puntaje_bruto).setFontSize(12).setTextAlignment(TextAlignment.LEFT));
+            bruto.setBorder(null);
+            bruto.setPaddingRight(20);
+            boolean estado = Herramientas.getClasificacion(puntaje_bruto,usuarioActual.getEdad());
+            Cell clasificacion;
+            if(puntaje_bruto==0){
+                clasificacion = new Cell().add(new Paragraph("Estado: Sin calificar").setFontSize(12).setTextAlignment(TextAlignment.LEFT));
+                clasificacion.setBorder(null);
+                clasificacion.setPaddingRight(20);
+            }else {
+                if (estado) {
+                    com.itextpdf.kernel.colors.Color myColor = new DeviceRgb(0, 255, 0);
+                    clasificacion = new Cell().add(new Paragraph("Estado: En rango").setFontSize(12).setTextAlignment(TextAlignment.LEFT).setFontColor(myColor));
+                    clasificacion.setBorder(null);
+                    clasificacion.setPaddingRight(20);
+                } else {
+                    com.itextpdf.kernel.colors.Color myColor = new DeviceRgb(0, 255, 0);
+                    clasificacion = new Cell().add(new Paragraph("Estado: Fuera de rango").setFontSize(12).setTextAlignment(TextAlignment.LEFT).setFontColor(myColor));
+                    clasificacion.setBorder(null);
+                    clasificacion.setPaddingRight(20);
+                }
+            }
+            datos.addCell(bruto);
+            datos.addCell(clasificacion);
+            datos.setHorizontalAlignment(HorizontalAlignment.CENTER);
+            documento.add(datos);
             ArrayList<Actividad> actividades = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
+
             int i=0;
             while(i<Herramientas.TOTAL_ACT) {
                 Table tabla = new Table(2);
@@ -290,22 +326,23 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                     byte[] bitmapImage = byteArrayOutputStream.toByteArray();
                     ImageData data = ImageDataFactory.create(bitmapImage);
                     Image img = new Image(data);
-                    img.scaleAbsolute(200, 200);
-                    tabla.addCell(new Cell().add(img.setAutoScale(false)));
+                    if((i+1)==11 && (i+1)==17){
+                        img.scaleAbsolute(200, 50);
+                    }else{
+                        img.scaleAbsolute(200,200);
+                    }
+                    tabla.addCell(new Cell().add(img.setAutoScale(true)));
                     if(i<actividades.size()) {
-                        if(i==16) {
-                            byte[] actImg = Base64.decode(actividades.get(i).getImagen(), Base64.DEFAULT);
-                            ImageData act = ImageDataFactory.create(actImg);
-                            Image imgact = new Image(act);
-                            imgact.scaleAbsolute(100, 200);
-                            tabla.addCell(new Cell().add(imgact.setAutoScale(false)));
-                        }else {
-                            byte[] actImg = Base64.decode(actividades.get(i).getImagen(), Base64.DEFAULT);
-                            ImageData act = ImageDataFactory.create(actImg);
-                            Image imgact = new Image(act);
+                        byte[] actImg = Base64.decode(actividades.get(i).getImagen(), Base64.DEFAULT);
+                        ImageData act = ImageDataFactory.create(actImg);
+                        Image imgact = new Image(act);
+                        if((i+1)==11 && (i+1)==17){
+                            imgact.scaleAbsolute(200, 50);
+                        }else{
                             imgact.scaleAbsolute(200, 200);
-                            tabla.addCell(new Cell().add(imgact.setAutoScale(false)));
                         }
+                        tabla.addCell(new Cell().add(imgact.setAutoScale(true)));
+
                     }else{
                         Drawable draw = this.getResources().getDrawable(R.drawable.act_null);
                         Bitmap bit = ((BitmapDrawable)draw).getBitmap();
@@ -314,18 +351,21 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                         byte[] bitImage = stream.toByteArray();
                         ImageData dataImg = ImageDataFactory.create(bitImage);
                         Image imgNull = new Image(dataImg);
-                        imgNull.scaleAbsolute(200,200);
-                        tabla.addCell(new Cell().add(imgNull.setAutoScale(false)));
+                        if((i+1)==11 && (i+1)==17){
+                            imgNull.scaleAbsolute(200, 50);
+                        }else{
+                            imgNull.scaleAbsolute(200, 200);
+                        }
+                        tabla.addCell(new Cell().add(imgNull.setAutoScale(true)));
                     }
                    i++;
                 }
                 documento.add(tabla);
-               if(i<(Herramientas.TOTAL_ACT+1)) {
+               if(i<(Herramientas.TOTAL_ACT)) {
                    documento.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
                }
             }
             documento.close();
-            progressBar.setVisibility(View.GONE);
             Toast.makeText(getContext(),"Documento generado en "+file.getAbsolutePath(),Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

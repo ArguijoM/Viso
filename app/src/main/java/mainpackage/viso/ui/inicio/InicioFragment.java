@@ -1,5 +1,6 @@
 package mainpackage.viso.ui.inicio;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -17,12 +20,15 @@ import com.github.mikephil.charting.data.PieDataSet;
 
 import java.util.ArrayList;
 
+import mainpackage.viso.MainActivity;
 import mainpackage.viso.R;
 import mainpackage.viso.databinding.FragmentInicioBinding;
 import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
 import mainpackage.viso.herramientas.objetos.Actividad;
 import mainpackage.viso.herramientas.objetos.UsuarioNino;
+import mainpackage.viso.herramientas.splashscreen.Presentacion;
+import mainpackage.viso.ui.cuenta.registro.adulto.CuentaRegistroAdultoFragment;
 
 
 public class InicioFragment extends Fragment {
@@ -39,12 +45,22 @@ public class InicioFragment extends Fragment {
 
         binding = FragmentInicioBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        if((SharedPreferencesHelper.getUsuarioAdulto(Herramientas.mainActivity))==null){
+            CuentaRegistroAdultoFragment fragment = new CuentaRegistroAdultoFragment();
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
         usuarioActual = SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
         if(usuarioActual != null){
-            ((TextView)root.findViewById(R.id.nombre_usuario)).setText("¡Hola "+ usuarioActual.getNombre()+"!");
             actividades = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
-            if(actividades==null){
+            if(SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal())==null){
                 actividades = new ArrayList<>();
+            }else{
+                actividades = SharedPreferencesHelper.getActividades(usuarioActual.getIdLocal());
+                ((TextView)root.findViewById(R.id.nombre_usuario)).setText("¡Hola "+ usuarioActual.getNombre()+"!");
             }
         }else{
             actividades = new ArrayList<>();

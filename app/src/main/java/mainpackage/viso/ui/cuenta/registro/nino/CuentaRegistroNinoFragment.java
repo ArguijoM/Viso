@@ -1,6 +1,8 @@
 package mainpackage.viso.ui.cuenta.registro.nino;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ import androidx.fragment.app.FragmentTransaction;
 import java.util.ArrayList;
 
 import mainpackage.viso.databinding.FragmentRegistroNinoBinding;
+import mainpackage.viso.herramientas.SoundsPlayer;
 import mainpackage.viso.herramientas.database.DatabaseHelper;
 import mainpackage.viso.herramientas.Herramientas;
 import mainpackage.viso.herramientas.SharedPreferencesHelper;
@@ -40,6 +43,7 @@ public class CuentaRegistroNinoFragment extends Fragment implements View.OnClick
     private ProgressBar progressBar;
     private ArrayList<UsuarioNino> usuarios;
     private int auxboy=0,auxgirl=0;
+    private SoundsPlayer soundsPlayer;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,7 +54,10 @@ public class CuentaRegistroNinoFragment extends Fragment implements View.OnClick
         (layoutgirl = (LinearLayout) root.findViewById(R.id.layout_girl)).setBackground(getResources().getDrawable(R.drawable.customborder2));
         (imageViewBoy = (ImageView)root.findViewById(R.id.user_image_boy)).setOnClickListener(this);
         (imageViewGirl=(ImageView)root.findViewById(R.id.user_image_girl)).setOnClickListener(this);
+        soundsPlayer = new SoundsPlayer(getContext());
         progressBar = (ProgressBar)root.findViewById(R.id.registro_nino_progessbar);
+        progressBar.getIndeterminateDrawable()
+                .setColorFilter(getResources().getColor(R.color.primary02), PorterDuff.Mode.SRC_IN);
         progressBar.setVisibility(View.GONE);
         this.usuarios = SharedPreferencesHelper.getUsuarios();
         if(usuarios!=null) {
@@ -97,6 +104,7 @@ public class CuentaRegistroNinoFragment extends Fragment implements View.OnClick
                                     public void onSuccess(String result) {
                                         if((SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity)).getIdServidor()!=0) {
                                             progressBar.setVisibility(View.GONE);
+                                            soundsPlayer.playSuccessSound();
                                             Intent intent = new Intent(getContext(), Bienvenido.class);
                                             startActivity(intent);
                                         }

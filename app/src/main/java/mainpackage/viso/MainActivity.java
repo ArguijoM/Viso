@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent.getExtras()!=null) {
             int id = intent.getIntExtra("case",0);
-            if(id==1) {
+            if(id==8) {
                 if (usuarioAdulto == null) {
                     CuentaRegistroAdultoFragment fragment = new CuentaRegistroAdultoFragment();
                     FragmentManager fragmentManager = this.getSupportFragmentManager();

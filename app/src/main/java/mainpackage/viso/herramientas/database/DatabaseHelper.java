@@ -132,7 +132,7 @@ public class DatabaseHelper {
         };
         requestQueue.add(request);
     }
-    public void addActividad(final VolleyCallBack volleyCallBack,Actividad act,UsuarioNino nino){
+    public void addActividad(VolleyCallBack callBack,Actividad act,UsuarioNino nino){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 context.getString(R.string.ADD_ACTIVIDAD),
@@ -158,14 +158,14 @@ public class DatabaseHelper {
                         }else{
                             Log.i("Respuesta de servidor","No hay respuesta"+response.toString());
                         }
-                        volleyCallBack.onSuccess(response);
+                        callBack.onSuccess(response);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        callBack.onSuccess(error.toString());
                         Log.i("ERROR: Respuesta AA: ",error.toString());
-                        volleyCallBack.onSuccess(error.toString());
                     }
                 }){
             @Override
@@ -316,7 +316,7 @@ public class DatabaseHelper {
                             usuarios.add(new UsuarioNino(id,nombre,apellido,edad,usuario_id,perfil));
                         }
                         SharedPreferencesHelper.updateUsuario(usuarios);
-                        SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarios.get(0));
+                        SharedPreferencesHelper.setUsuarioActual(Herramientas.mainActivity,usuarios.get((usuarios.size())-1));
                     }
                     volleyCallBack.onSuccess(response);
                 } catch (JSONException e) {
@@ -422,7 +422,6 @@ public class DatabaseHelper {
                             actividades.add(new Actividad(local_id,id, nino_id,nino_id_local,modelo,calificacion,fecha));
                         }
                         ArrayList<Actividad> acts = SharedPreferencesHelper.getActividades(nino.getIdLocal());
-                        Log.i("ACTS EN READACT",""+acts.size());
                         for(int i=0;i<actividades.size();i++){
                             for(int j=0;j<acts.size();j++) {
                                 if (actividades.get(i).getIdLocal()==acts.get(j).getIdLocal()){
@@ -431,32 +430,33 @@ public class DatabaseHelper {
                             }
                         }
                         SharedPreferencesHelper.updateActividades(nino.getIdLocal(),acts);
-
                         ArrayList<Actividad> activities = SharedPreferencesHelper.getActividades(nino.getIdLocal());
                         for(int x=0;x<activities.size();x++){
                             if(activities.get(x).getIdServidor()==0){
                                 addActividad(new VolleyCallBack() {
                                     @Override
                                     public void onSuccess(String result) {
+
                                     }
-                                },activities.get(x),nino);
+                                }, activities.get(x), nino);
                             }
                         }
                     }else{
                         ArrayList<Actividad> activities = SharedPreferencesHelper.getActividades(nino.getIdLocal());
-                        Log.i("TAM. ACTIVIDADES::",""+activities.size());
                         for(int k=0;k<activities.size();k++) {
-                            Log.i("ACTIVIDAD::",""+activities.get(k).getIdLocal());
+                            int finalK = k;
                             addActividad(new VolleyCallBack() {
                                 @Override
                                 public void onSuccess(String result) {
-
+                                    if(finalK ==activities.size()-1){
+                                        progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(context,"Copia de seguridad generada",Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }, activities.get(k), nino);
+                            },activities.get(k), nino);
                         }
-
                     }
-                    volleyCallBack.onSuccess(response);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -477,7 +477,6 @@ public class DatabaseHelper {
             }
         };
         requestQueue.add(request);
-        progressBar.setVisibility(View.GONE);
     }
     public  void foundActividad(final VolleyCallBack callBack,int idNino){
         //Log.i("BUSCANDO ACTIVIDAD: ",""+idNino);

@@ -62,7 +62,7 @@
     actividades realizadas desde una base de datos remota. Es necesario haber generado una copia de
     seguridad con anterioridad</string>
     <string name="configuracion_descripcion03">Genera un documento PDF con la información del usuario
-    elegido y todas las actividades que éste ha realizado</string>
+    elegido y todas las actividades que éste ha realizado (Se recomienda realizarlo al finalizar el total de actividades)</string>
     <string name="configuracion_descripcion04">Elimina la información de uno de los usuarios niños asi
     como de las actividades realizadas por éste. Una vez eliminado el usuario y su información no será
     posible recuperarla a menos que exista una copia de seguridad y se restaure la información</string>

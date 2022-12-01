@@ -52,16 +52,16 @@ public class ActividadShow extends AppCompatActivity {
         img_tomada.setImageBitmap(getImagenActividad(id));
         textView = (TextView)findViewById(R.id.act_show_realizada);
         calificacion =findViewById(R.id.textView_calif);
-        boolean calif =Herramientas.getEvaluacion(id,usuarioActual.getEdad(),act.get(id-1).getCalificacion());
+        boolean calif =Herramientas.getEvaluacion(id,act.get(id-1).getCalificacion());
         Log.i("Valor",""+calif);
         if(calif==true){
-            calificacion.setText(""+act.get(id-1).getCalificacion());
-            //calificacion.setText("VALIDA");
+            //calificacion.setText(""+act.get(id-1).getCalificacion());
+            calificacion.setText("VALIDA");
             calificacion.setTextColor(Color.parseColor("#00FF00"));
 
         }else{
-            calificacion.setText(""+act.get(id-1).getCalificacion());
-            //calificacion.setText("NO VALIDA");
+            //calificacion.setText(""+act.get(id-1).getCalificacion());
+            calificacion.setText("NO VALIDA");
             calificacion.setTextColor(Color.parseColor("#FF0000"));
         }
     }

@@ -76,7 +76,7 @@ public class ActividadConfirm extends AppCompatActivity implements View.OnClickL
     }
     private void guardarFoto(){
         UsuarioNino usuarioActual = SharedPreferencesHelper.getUsuarioActual(Herramientas.mainActivity);
-        Log.i("CURENT USER ACT",usuarioActual.getNombre());
+        //Log.i("CURENT USER ACT",usuarioActual.getNombre());
         BitmapDrawable drawable = (BitmapDrawable) img_tomada.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         bitmap = Bitmap.createScaledBitmap(bitmap,500,Herramientas.getHeight(id),false);

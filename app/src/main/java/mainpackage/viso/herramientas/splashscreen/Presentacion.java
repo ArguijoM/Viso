@@ -77,7 +77,7 @@ public class Presentacion extends AppCompatActivity {
                         break;
                     case 3:
                         Intent intent = new Intent(Presentacion.this, MainActivity.class);
-                        intent.putExtra("case",1);
+                        intent.putExtra("case",8);
                         startActivity(intent);
                 }
 

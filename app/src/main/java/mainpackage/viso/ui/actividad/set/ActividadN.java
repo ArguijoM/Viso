@@ -42,8 +42,8 @@ public class ActividadN extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_n);
 
-        //assert getSupportActionBar() != null;   //null check
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         sound = new SoundsPlayer(this);
          Intent intent = getIntent();
@@ -118,6 +118,11 @@ public class ActividadN extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(ActividadN.this, MainActivity.class);
         startActivity(intent);
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
 

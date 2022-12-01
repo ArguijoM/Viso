@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,6 +63,8 @@ public class CuentaRegistroAdultoFragment extends Fragment {
         btn_login = (Button) root.findViewById(R.id.btn_login);
         cuenta_exist = (TextView)root.findViewById(R.id.cuenta_exist);
         progressBar = (ProgressBar)root.findViewById(R.id.progress_bar_login);
+        progressBar.getIndeterminateDrawable()
+                .setColorFilter(getResources().getColor(R.color.primary02), PorterDuff.Mode.SRC_IN);
         progressBar.setVisibility(View.GONE);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override

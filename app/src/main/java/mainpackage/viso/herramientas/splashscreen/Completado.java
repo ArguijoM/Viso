@@ -49,7 +49,7 @@ public class Completado extends AppCompatActivity {
         tv01.startAnimation(animation);
         tv02.startAnimation(animation);
         iv01.startAnimation(animation);
-        bruto = puntajeBruto(actividades);
+        bruto = Herramientas.puntajeBruto(actividades,usuarioActual);
         btn.setEnabled(false);
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -92,17 +92,5 @@ public class Completado extends AppCompatActivity {
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
     }
-    public int puntajeBruto(ArrayList<Actividad>activities){
-        int act=0,fallos=0;
-        for(int j=0;j<activities.size();j++){
-            if(fallos==3){
-                return act;
-            }
-            if(Herramientas.getEvaluacion((j+1),usuarioActual.getEdad(),activities.get(j).getCalificacion())==false){
-                fallos++;
-                act = j+1;
-            }
-        }
-        return 18;
-    }
+
 }

@@ -217,23 +217,7 @@ public class Herramientas {
         Log.i("CALIFICACION"," "+sum);
         return sum;
     }
-    public static boolean getEvaluacion(int NumAct,int edad, int calificacion){
-        if(edad<=8){
-            return evaluarType3(NumAct,calificacion);
-        }else if(edad>8 && edad<=10){
-            return evaluarType3(NumAct,calificacion);
-        }else {
-            return evaluarType3(NumAct,calificacion);
-        }
-    }
-    public static boolean evaluarType1(int NumAct,int calificacion){
-        return false;
-    }
-    public static boolean evaluarType2(int NumAct,int calificacion){
-        return false;
-    }
-    public static boolean evaluarType3(int NumAct,int calificacion){
-        Log.i("TYPE 3","Act "+NumAct+" CALIFICAICON "+calificacion);
+    public static boolean getEvaluacion(int NumAct,int calificacion){
         switch (NumAct){
             case 1:
                 if(calificacion<268493 && calificacion>=244541){
@@ -386,6 +370,79 @@ public class Herramientas {
                 return 524;
         }
         return 0;
+    }
+    public static int puntajeBruto(ArrayList<Actividad>activities,UsuarioNino usuarioActual){
+        int act=0,fallos=0;
+        for(int j=0;j<activities.size();j++){
+            if(fallos==3){
+                return act;
+            }
+            if(Herramientas.getEvaluacion((j+1),activities.get(j).getCalificacion())==false){
+                fallos++;
+                act = j+1;
+            }
+        }
+        return 0;
+    }
+    public static boolean getClasificacion(int bruto,int edad){
+        switch (bruto){
+            case 1:
+                if(edad<=5)
+                    return true;
+            case 2:
+                if(edad<=5)
+                    return true;
+            case 3:
+                if(edad<=6)
+                    return true;
+            case 4:
+                if(edad<=6)
+                    return true;
+            case 5:
+                if(edad<=6)
+                    return true;
+            case 6:
+                if(edad<=7)
+                    return true;
+            case 7:
+                if(edad<=7)
+                    return true;
+            case 8:
+                if(edad<=8)
+                    return true;
+            case 9:
+                if(edad<=10)
+                    return true;
+            case 10:
+                if(edad<=10)
+                    return true;
+            case 11:
+                if(edad<=11)
+                    return true;
+            case 12:
+                if(edad<=12)
+                    return true;
+            case 13:
+                if(edad<=13)
+                    return true;
+            case 14:
+                if(edad<=13)
+                    return true;
+            case 15:
+                if(edad<=13)
+                    return true;
+            case 16:
+                if(edad<=15)
+                    return true;
+            case 17:
+                if(edad<=15)
+                    return true;
+            case 18:
+                if(edad<=15)
+                    return true;
+
+        }
+    return false;
     }
 
 }
